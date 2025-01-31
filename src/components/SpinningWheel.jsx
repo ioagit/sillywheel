@@ -2,6 +2,7 @@ import React from "react";
 import siteConfig from "../config/siteConfig";
 import SpinningAudio from "../utils/audio";
 import WinnerModal from "./WinnerModal";
+import { winSoundPlayer } from "../utils/winSounds";
 
 export default function SpinningWheel() {
   const [names, setNames] = React.useState(siteConfig.defaultParticipants);
@@ -13,6 +14,8 @@ export default function SpinningWheel() {
   const [audioType, setAudioType] = React.useState(siteConfig.audio.type);
   const [spinningAudio] = React.useState(() => new SpinningAudio(audioType));
   const [showWinnerModal, setShowWinnerModal] = React.useState(false);
+  const [selectedWinSound, setSelectedWinSound] = React.useState(0);
+  const winSounds = winSoundPlayer.getSoundsList();
 
   const translations = siteConfig.translations[siteConfig.language];
 
@@ -79,6 +82,7 @@ export default function SpinningWheel() {
       setWinner(names[winningIndex % names.length]);
       setIsSpinning(false);
       spinningAudio.stop();
+      winSoundPlayer.playWinSound(selectedWinSound);
       setShowWinnerModal(true);
     }, siteConfig.spinDuration);
   };
@@ -243,6 +247,28 @@ export default function SpinningWheel() {
               {type.label}
             </button>
           ))}
+        </div>
+
+        <div className="mt-8">
+          <h3 className="text-xl font-bold text-center text-white mb-4">
+            🏆 Victory Sound
+          </h3>
+          <div className="flex flex-wrap justify-center gap-2 max-w-2xl mx-auto">
+            {winSounds.map((sound) => (
+              <button
+                key={sound.id}
+                onClick={() => setSelectedWinSound(sound.id)}
+                className={`px-4 py-2 rounded-lg flex items-center gap-2 ${
+                  selectedWinSound === sound.id
+                    ? "bg-purple-600 text-white"
+                    : "bg-white text-gray-700"
+                }`}
+              >
+                <span>{sound.emoji}</span>
+                <span>{sound.name}</span>
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
