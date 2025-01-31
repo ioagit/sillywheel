@@ -19,10 +19,12 @@ export default function PresetSelector({ onSelect, onClose }) {
             <button
               key={key}
               onClick={() => {
-                onSelect(preset.items);
+                onSelect(preset.items, key);
                 onClose();
               }}
-              className="p-4 rounded-xl border-2 border-purple-200 hover:border-purple-500 transition-colors flex flex-col items-center gap-2 group"
+              className={`p-4 rounded-xl border-2 border-purple-200 hover:border-purple-500 transition-colors flex flex-col items-center gap-2 group ${
+                key === 'farts' ? 'bg-purple-50' : ''
+              }`}
             >
               <span className="text-4xl group-hover:scale-110 transition-transform">
                 {preset.emoji}

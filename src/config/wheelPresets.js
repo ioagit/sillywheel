@@ -70,6 +70,23 @@ const wheelPresets = {
       "⭐ Star",
       "🎯 Winner"
     ]
+  },
+  farts: {
+    name: "Funny Farts",
+    emoji: "💨",
+    items: [
+      "💨 Squeaky Surprise",
+      "🌪️ Thunderous Blast",
+      "💦 Wet Willie",
+      "🎵 Musical Toot",
+      "💣 Bass Bomber",
+      "🎺 Trumpet Blast",
+      "🫧 Bubble Trouble",
+      "⚡ Thunder Clap",
+      "🌬️ Silent but Deadly",
+      "🎆 Grand Finale"
+    ],
+    soundIndices: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
   }
 };
 

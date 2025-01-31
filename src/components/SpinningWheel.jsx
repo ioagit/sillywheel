@@ -4,6 +4,7 @@ import SpinningAudio from "../utils/audio";
 import WinnerModal from "./WinnerModal";
 import { winSoundPlayer } from "../utils/winSounds";
 import PresetSelector from "./PresetSelector";
+import wheelPresets from "../config/wheelPresets";
 
 export default function SpinningWheel() {
   const [names, setNames] = React.useState(siteConfig.defaultParticipants);
@@ -18,6 +19,7 @@ export default function SpinningWheel() {
   const [selectedWinSound, setSelectedWinSound] = React.useState(0);
   const winSounds = winSoundPlayer.getSoundsList();
   const [showPresetSelector, setShowPresetSelector] = React.useState(false);
+  const [currentPreset, setCurrentPreset] = React.useState(null);
 
   const translations = siteConfig.translations[siteConfig.language];
 
@@ -84,7 +86,15 @@ export default function SpinningWheel() {
       setWinner(names[winningIndex % names.length]);
       setIsSpinning(false);
       spinningAudio.stop();
-      winSoundPlayer.playWinSound(selectedWinSound);
+
+      if (currentPreset === "farts") {
+        const soundIndex =
+          wheelPresets.farts.soundIndices[winningIndex % names.length];
+        winSoundPlayer.playWinSound(soundIndex);
+      } else {
+        winSoundPlayer.playWinSound(selectedWinSound);
+      }
+
       setShowWinnerModal(true);
     }, siteConfig.spinDuration);
   };
@@ -108,8 +118,13 @@ export default function SpinningWheel() {
     { id: "toy", label: "🎪 Toy" },
   ];
 
-  const handlePresetSelect = (presetItems) => {
+  const handlePresetSelect = (presetItems, presetKey) => {
     setNames(presetItems);
+    setCurrentPreset(presetKey);
+
+    if (presetKey === "farts") {
+      setSelectedWinSound(0);
+    }
   };
 
   return (
@@ -152,14 +167,17 @@ export default function SpinningWheel() {
                           strokeWidth="2"
                         />
                         <text
-                          x={textPos.x}
-                          y={textPos.y}
+                          x={0}
+                          y={0}
                           fill="white"
-                          fontSize="16"
+                          fontSize="14"
                           fontWeight="bold"
                           textAnchor="middle"
-                          alignmentBaseline="middle"
-                          transform={`rotate(${midAngle}, ${textPos.x}, ${textPos.y})`}
+                          dominantBaseline="middle"
+                          transform={`
+                            rotate(${midAngle - 90})
+                            translate(${radius * 0.5}, 0)
+                          `}
                         >
                           {name}
                         </text>
@@ -296,7 +314,7 @@ export default function SpinningWheel() {
 
       {showPresetSelector && (
         <PresetSelector
-          onSelect={handlePresetSelect}
+          onSelect={(items, key) => handlePresetSelect(items, key)}
           onClose={() => setShowPresetSelector(false)}
         />
       )}
