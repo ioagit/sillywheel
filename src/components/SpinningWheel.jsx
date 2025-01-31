@@ -1,28 +1,26 @@
 import React from "react";
 import siteConfig from "../config/siteConfig";
 import SpinningAudio from "../utils/audio";
-import WinnerModal from "./WinnerModal";
 import { winSoundPlayer } from "../utils/winSounds";
 import PresetSelector from "./PresetSelector";
 import wheelPresets from "../config/wheelPresets";
-import Confetti from "./Confetti";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import Confetti from "./Confetti";
 
 export default function SpinningWheel() {
   const [names, setNames] = React.useState(siteConfig.defaultParticipants);
   const [rotation, setRotation] = React.useState(0);
   const [isSpinning, setIsSpinning] = React.useState(false);
-  const [winner, setWinner] = React.useState("");
   const [newName, setNewName] = React.useState("");
   const wheelRef = React.useRef(null);
   const [audioType, setAudioType] = React.useState(siteConfig.audio.type);
   const [spinningAudio] = React.useState(() => new SpinningAudio(audioType));
-  const [showWinnerModal, setShowWinnerModal] = React.useState(false);
   const [selectedWinSound, setSelectedWinSound] = React.useState(0);
   const winSounds = winSoundPlayer.getSoundsList();
   const [showPresetSelector, setShowPresetSelector] = React.useState(false);
   const [currentPreset, setCurrentPreset] = React.useState(null);
+  const [showConfetti, setShowConfetti] = React.useState(false);
 
   const translations = siteConfig.translations[siteConfig.language];
 
@@ -66,8 +64,7 @@ export default function SpinningWheel() {
     if (isSpinning) return;
 
     setIsSpinning(true);
-    setWinner("");
-    setShowWinnerModal(false);
+    setShowConfetti(false);
 
     const extraSpins =
       siteConfig.minExtraSpins +
@@ -83,27 +80,22 @@ export default function SpinningWheel() {
     setRotation((prev) => prev + totalRotation);
 
     setTimeout(() => {
-      // Calculate the winning index based on where the wheel stops
-      const finalRotation = (rotation + totalRotation) % 360;
-      const segmentAngle = 360 / names.length;
-      const winningIndex = Math.floor(finalRotation / segmentAngle);
-      const actualWinner = names[(names.length - winningIndex) % names.length];
-
-      setWinner(actualWinner);
       setIsSpinning(false);
       spinningAudio.stop();
+      setShowConfetti(true);
+
+      const finalRotation = (rotation + totalRotation) % 360;
+      const segmentAngle = 360 / names.length;
+      const winningIndex = Math.floor(
+        ((finalRotation + 270) % 360) / segmentAngle
+      );
 
       if (currentPreset === "farts") {
-        const soundIndex =
-          wheelPresets.farts.soundIndices[
-            (names.length - winningIndex) % names.length
-          ];
+        const soundIndex = wheelPresets.farts.soundIndices[winningIndex];
         winSoundPlayer.playWinSound(soundIndex);
       } else {
         winSoundPlayer.playWinSound(selectedWinSound);
       }
-
-      setShowWinnerModal(true);
     }, siteConfig.spinDuration);
   };
 
@@ -201,7 +193,7 @@ export default function SpinningWheel() {
                     <circle cx="0" cy="0" r="15" fill="#333" />
                   </svg>
 
-                  <div className="absolute -right-6 top-1/2 -translate-y-1/2 z-10">
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
                     <div
                       className={`w-14 h-14 flex items-center justify-center transition-transform duration-75 ${
                         isSpinning ? "animate-picker-bounce" : ""
@@ -209,9 +201,9 @@ export default function SpinningWheel() {
                     >
                       <div
                         className="w-0 h-0 
-                          border-t-[24px] border-t-transparent 
-                          border-b-[24px] border-b-transparent 
-                          border-r-[48px] border-r-yellow-400 
+                          border-l-[24px] border-l-transparent 
+                          border-r-[24px] border-r-transparent 
+                          border-t-[48px] border-t-yellow-400 
                           filter drop-shadow-lg"
                       />
                     </div>
@@ -366,13 +358,6 @@ export default function SpinningWheel() {
 
       <Footer />
 
-      <WinnerModal
-        winner={winner}
-        onClose={() => setShowWinnerModal(false)}
-        translations={translations}
-        show={showWinnerModal}
-      />
-
       {showPresetSelector && (
         <PresetSelector
           onSelect={(items, key) => handlePresetSelect(items, key)}
@@ -380,7 +365,7 @@ export default function SpinningWheel() {
         />
       )}
 
-      {showWinnerModal && <Confetti />}
+      {showConfetti && <Confetti />}
     </div>
   );
 }
