@@ -74,11 +74,19 @@ class SpinningAudio {
     this.audioContext = new (window.AudioContext ||
       window.webkitAudioContext)();
     this.oscillator = null;
-    this.gainNode = null;
+    this.gainNode = this.audioContext.createGain(); // Main gain node
+    this.gainNode.connect(this.audioContext.destination);
+    this.gainNode.gain.value = 0.5; // Default volume
     this.type = type;
     this.tickInterval = null;
     this.startTime = 0;
-    this.duration = 5000; // Match wheel duration
+    this.duration = 5000;
+  }
+
+  setVolume(value) {
+    if (this.gainNode) {
+      this.gainNode.gain.value = value;
+    }
   }
 
   getTickRate(progress) {
@@ -125,14 +133,15 @@ class SpinningAudio {
 
   createTickSound(frequency, duration = 0.05) {
     const osc = this.audioContext.createOscillator();
-    const gain = this.audioContext.createGain();
+    const soundGain = this.audioContext.createGain();
 
-    osc.connect(gain);
-    gain.connect(this.audioContext.destination);
+    // Connect through main gain node for volume control
+    osc.connect(soundGain);
+    soundGain.connect(this.gainNode);
 
     osc.frequency.setValueAtTime(frequency, this.audioContext.currentTime);
-    gain.gain.setValueAtTime(0.2, this.audioContext.currentTime);
-    gain.gain.exponentialRampToValueAtTime(
+    soundGain.gain.setValueAtTime(0.2, this.audioContext.currentTime);
+    soundGain.gain.exponentialRampToValueAtTime(
       0.01,
       this.audioContext.currentTime + duration
     );
@@ -179,7 +188,7 @@ class SpinningAudio {
       const freq = this.getFrequency(progress, startFreq, endFreq);
 
       const osc = this.audioContext.createOscillator();
-      const gain = this.audioContext.createGain();
+      const soundGain = this.audioContext.createGain();
       const filter = this.audioContext.createBiquadFilter();
 
       filter.type = "bandpass";
@@ -192,11 +201,11 @@ class SpinningAudio {
       osc.frequency.setValueAtTime(freq, this.audioContext.currentTime);
 
       osc.connect(filter);
-      filter.connect(gain);
-      gain.connect(this.audioContext.destination);
+      filter.connect(soundGain);
+      soundGain.connect(this.gainNode);
 
-      gain.gain.setValueAtTime(0.15, this.audioContext.currentTime);
-      gain.gain.exponentialRampToValueAtTime(
+      soundGain.gain.setValueAtTime(0.15, this.audioContext.currentTime);
+      soundGain.gain.exponentialRampToValueAtTime(
         0.01,
         this.audioContext.currentTime + 0.1
       );
@@ -235,7 +244,7 @@ class SpinningAudio {
       }
 
       const noise = this.audioContext.createBufferSource();
-      const gain = this.audioContext.createGain();
+      const soundGain = this.audioContext.createGain();
       const filter = this.audioContext.createBiquadFilter();
 
       noise.buffer = buffer;
@@ -244,14 +253,14 @@ class SpinningAudio {
       filter.Q.value = 5;
 
       noise.connect(filter);
-      filter.connect(gain);
-      gain.connect(this.audioContext.destination);
+      filter.connect(soundGain);
+      soundGain.connect(this.gainNode);
 
-      gain.gain.setValueAtTime(
+      soundGain.gain.setValueAtTime(
         0.15 * (1 - progress * 0.5),
         this.audioContext.currentTime
       );
-      gain.gain.exponentialRampToValueAtTime(
+      soundGain.gain.exponentialRampToValueAtTime(
         0.01,
         this.audioContext.currentTime + 0.03
       );
@@ -278,7 +287,7 @@ class SpinningAudio {
       const interval = this.getTickRate(progress);
 
       const osc = this.audioContext.createOscillator();
-      const gain = this.audioContext.createGain();
+      const soundGain = this.audioContext.createGain();
 
       osc.type = "sine";
       osc.frequency.setValueAtTime(
@@ -286,14 +295,14 @@ class SpinningAudio {
         this.audioContext.currentTime
       );
 
-      osc.connect(gain);
-      gain.connect(this.audioContext.destination);
+      osc.connect(soundGain);
+      soundGain.connect(this.gainNode);
 
-      gain.gain.setValueAtTime(
+      soundGain.gain.setValueAtTime(
         0.2 * (1 - progress * 0.5),
         this.audioContext.currentTime
       );
-      gain.gain.exponentialRampToValueAtTime(
+      soundGain.gain.exponentialRampToValueAtTime(
         0.01,
         this.audioContext.currentTime + 0.2
       );
@@ -316,4 +325,8 @@ class SpinningAudio {
   }
 }
 
+// Create a single instance to share across components
+export const spinningAudio = new SpinningAudio();
+
+// Export the class for new instances if needed
 export default SpinningAudio;

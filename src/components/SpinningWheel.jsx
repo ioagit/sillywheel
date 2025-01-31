@@ -25,6 +25,7 @@ export default function SpinningWheel() {
   const [showConfetti, setShowConfetti] = React.useState(false);
   const [currentTheme, setCurrentTheme] = React.useState(themes[0]);
   const [showThemeSelector, setShowThemeSelector] = React.useState(false);
+  const [wheelSize, setWheelSize] = React.useState(384);
 
   const translations = siteConfig.translations[siteConfig.language];
 
@@ -150,11 +151,14 @@ export default function SpinningWheel() {
                 <div className="absolute -top-3 -left-3 w-6 h-6 bg-pink-500 rounded-full animate-ping-slow opacity-75"></div>
                 <div className="absolute -bottom-3 -right-3 w-6 h-6 bg-purple-500 rounded-full animate-ping-slow opacity-75 delay-300"></div>
 
-                <div className="relative w-96 h-96 flex items-center justify-center">
+                <div
+                  className="relative"
+                  style={{ width: wheelSize, height: wheelSize }}
+                >
                   <svg
                     ref={wheelRef}
                     viewBox="-150 -150 300 300"
-                    className="w-96 h-96"
+                    className="w-full h-full"
                     style={{
                       transform: `rotate(${rotation}deg)`,
                       transition: isSpinning
@@ -365,7 +369,17 @@ export default function SpinningWheel() {
         </div>
       </main>
 
-      <Footer />
+      <Footer
+        audioType={audioType}
+        onAudioTypeChange={(type) => {
+          setAudioType(type);
+          spinningAudio.type = type;
+        }}
+        selectedWinSound={selectedWinSound}
+        onWinSoundChange={setSelectedWinSound}
+        wheelSize={wheelSize}
+        onWheelSizeChange={setWheelSize}
+      />
 
       {showPresetSelector && (
         <PresetSelector
