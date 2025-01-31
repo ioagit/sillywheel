@@ -9,6 +9,7 @@ import AnimationSpeedModal from './AnimationSpeedModal';
 import PresetListModal from './PresetListModal';
 import HowToUseModal from './HowToUseModal';
 import UpdatesModal from './UpdatesModal';
+import ComingSoonModal from './ComingSoonModal';
 
 export default function Footer({ 
   audioType, 
@@ -31,6 +32,9 @@ export default function Footer({
   const [showPresetList, setShowPresetList] = React.useState(false);
   const [showHowToUse, setShowHowToUse] = React.useState(false);
   const [showUpdates, setShowUpdates] = React.useState(false);
+  const [showSaveCurrent, setShowSaveCurrent] = React.useState(false);
+  const [showExportList, setShowExportList] = React.useState(false);
+  const [showContact, setShowContact] = React.useState(false);
 
   return (
     <>
@@ -161,10 +165,16 @@ export default function Footer({
                 >
                   <span className="text-lg mr-2">✨</span>Magic Lists
                 </button>
-                <button className="footer-button">
+                <button 
+                  onClick={() => setShowSaveCurrent(true)}
+                  className="footer-button"
+                >
                   <span className="text-lg mr-2">💾</span>Save Current
                 </button>
-                <button className="footer-button">
+                <button 
+                  onClick={() => setShowExportList(true)}
+                  className="footer-button"
+                >
                   <span className="text-lg mr-2">📤</span>Export List
                 </button>
               </div>
@@ -187,7 +197,10 @@ export default function Footer({
                 >
                   <span className="text-lg mr-2">🔄</span>Updates
                 </button>
-                <button className="footer-button">
+                <button 
+                  onClick={() => setShowContact(true)}
+                  className="footer-button"
+                >
                   <span className="text-lg mr-2">📧</span>Contact
                 </button>
               </div>
@@ -257,6 +270,27 @@ export default function Footer({
       {showUpdates && (
         <UpdatesModal
           onClose={() => setShowUpdates(false)}
+        />
+      )}
+
+      {showSaveCurrent && (
+        <ComingSoonModal
+          type="save"
+          onClose={() => setShowSaveCurrent(false)}
+        />
+      )}
+
+      {showExportList && (
+        <ComingSoonModal
+          type="export"
+          onClose={() => setShowExportList(false)}
+        />
+      )}
+
+      {showContact && (
+        <ComingSoonModal
+          type="contact"
+          onClose={() => setShowContact(false)}
         />
       )}
     </>
