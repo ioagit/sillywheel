@@ -140,14 +140,17 @@ export default function SpinningWheel() {
       <Navbar />
 
       <main className="flex-grow p-8">
-        <div className="max-w-7xl mx-auto bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl p-8 hover:shadow-3xl transition-shadow duration-300">
-          <h1 className="text-5xl font-bold text-center mb-8 bg-gradient-to-r from-purple-600 to-pink-600 text-transparent bg-clip-text animate-pulse">
-            {translations.title}
-          </h1>
-
+        <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12">
             <div className="flex flex-col items-center justify-center space-y-8">
-              <div className="relative">
+              <div
+                className="relative bg-white/10 backdrop-blur-md p-8 rounded-2xl shadow-[0_0_40px_rgba(192,38,211,0.3)] 
+                hover:shadow-[0_0_60px_rgba(192,38,211,0.5)] transition-all duration-500 
+                animate-float group"
+              >
+                <div className="absolute -top-3 -left-3 w-6 h-6 bg-pink-500 rounded-full animate-ping-slow opacity-75"></div>
+                <div className="absolute -bottom-3 -right-3 w-6 h-6 bg-purple-500 rounded-full animate-ping-slow opacity-75 delay-300"></div>
+
                 <div className="relative w-96 h-96 flex items-center justify-center">
                   <svg
                     ref={wheelRef}
@@ -156,7 +159,7 @@ export default function SpinningWheel() {
                     style={{
                       transform: `rotate(${rotation}deg)`,
                       transition: isSpinning
-                        ? "transform 5s cubic-bezier(0.32, 0, 0.23, 1)"
+                        ? "transform 5s cubic-bezier(0.2, 0, 0.1, 1)"
                         : "none",
                     }}
                   >
@@ -219,37 +222,47 @@ export default function SpinningWheel() {
               <button
                 onClick={spinWheel}
                 disabled={isSpinning || names.length < 2}
-                className="bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xl font-bold py-4 px-12 rounded-full shadow-lg 
+                className="bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xl font-bold 
+                  py-4 px-12 rounded-full shadow-lg 
                   transform hover:scale-105 hover:rotate-1 active:scale-95
                   disabled:opacity-50 transition-all duration-300
                   animate-bounce-subtle
-                  relative overflow-hidden
-                  before:absolute before:inset-0 before:bg-white/20 before:transform before:-skew-x-12 before:-translate-x-full
-                  hover:before:translate-x-full before:transition-transform before:duration-700"
+                  relative overflow-hidden group
+                  before:absolute before:inset-0 before:bg-white/20 before:transform before:-skew-x-12 
+                  before:-translate-x-full hover:before:translate-x-full before:transition-transform before:duration-700"
               >
-                <span className="relative z-10">
+                <span className="relative z-10 group-hover:animate-pulse">
                   {isSpinning
-                    ? translations.spinningText
-                    : translations.spinButton}
+                    ? "🎡 " + translations.spinningText
+                    : "✨ " + translations.spinButton}
                 </span>
               </button>
             </div>
 
-            <div className="bg-purple-50 rounded-xl p-6">
+            <div
+              className="bg-white/10 backdrop-blur-md rounded-2xl p-6 
+              shadow-[0_0_40px_rgba(168,85,247,0.3)] 
+              hover:shadow-[0_0_60px_rgba(168,85,247,0.5)] 
+              transition-all duration-500 
+              group animate-float-delayed"
+            >
               <div className="space-y-6">
-                <div className="bg-white rounded-lg p-4">
+                <div className="bg-white/20 backdrop-blur-md rounded-lg p-4 group-hover:scale-[1.01] transition-transform">
                   <div className="flex justify-between items-center mb-4">
-                    <h3 className="text-xl font-bold text-purple-700">
-                      {translations.addParticipantsTitle}
+                    <h3 className="text-xl font-bold text-white">
+                      ✨ {translations.addParticipantsTitle}
                     </h3>
                     <button
                       onClick={() => setShowPresetSelector(true)}
-                      className="bg-purple-100 text-purple-600 px-4 py-2 rounded-lg hover:bg-purple-200 transition-colors flex items-center gap-2"
+                      className="bg-white/20 text-white px-4 py-2 rounded-lg 
+                        hover:bg-white/30 transition-colors flex items-center gap-2
+                        hover:scale-105 transform"
                     >
-                      <span>📋</span>
+                      <span className="animate-bounce-subtle">📋</span>
                       <span>Load Preset</span>
                     </button>
                   </div>
+
                   <form onSubmit={addName} className="space-y-4">
                     <div className="flex gap-2">
                       <input
@@ -257,11 +270,15 @@ export default function SpinningWheel() {
                         value={newName}
                         onChange={(e) => setNewName(e.target.value)}
                         placeholder={translations.inputPlaceholder}
-                        className="flex-1 px-4 py-2 border-2 border-purple-200 rounded-lg focus:outline-none focus:border-purple-500"
+                        className="flex-1 px-4 py-2 bg-white/10 border-2 border-white/20 rounded-lg 
+                          focus:outline-none focus:border-white/40 text-white placeholder-white/50
+                          transition-colors"
                       />
                       <button
                         type="submit"
-                        className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-lg"
+                        className="bg-gradient-to-r from-green-400 to-emerald-500 text-white 
+                          font-bold py-2 px-6 rounded-lg hover:scale-105 transform transition-all
+                          hover:shadow-lg hover:shadow-green-500/30"
                       >
                         {translations.addButtonText}
                       </button>
@@ -269,26 +286,28 @@ export default function SpinningWheel() {
                   </form>
                 </div>
 
-                <div className="max-h-96 overflow-y-auto">
-                  <h3 className="text-xl font-bold text-purple-700 mb-4">
-                    {translations.participantsListTitle}
+                <div className="max-h-96 overflow-y-auto overflow-x-hidden pr-2 custom-scrollbar">
+                  <h3 className="text-xl font-bold text-white mb-4 sticky top-0 bg-white/10 backdrop-blur-md p-2 rounded-lg z-10">
+                    👥 {translations.participantsListTitle}
                   </h3>
                   <div className="space-y-2">
                     {names.map((name, index) => (
                       <div
                         key={index}
-                        className="flex items-center justify-between bg-white p-3 rounded-lg
-                          transform hover:scale-102 hover:shadow-md transition-all duration-200
-                          group relative overflow-hidden"
+                        className="flex items-center justify-between bg-white/10 p-3 rounded-lg
+                          backdrop-blur-sm border border-white/10
+                          transform hover:scale-[1.02] hover:shadow-lg transition-all duration-200
+                          group/item relative overflow-hidden
+                          w-full"
                       >
-                        <span className="font-medium text-gray-700 group-hover:text-purple-600 transition-colors">
+                        <span className="font-medium text-white group-hover/item:text-white/90 transition-colors truncate mr-2">
                           {name}
                         </span>
                         <button
                           onClick={() => removeName(index)}
-                          className="text-red-400 hover:text-red-600 font-bold text-xl w-8 h-8 rounded-full
-                            hover:bg-red-100 hover:rotate-90 transition-all duration-300
-                            flex items-center justify-center"
+                          className="text-white/70 hover:text-red-400 font-bold text-xl w-8 h-8 
+                            rounded-full hover:bg-white/10 hover:rotate-90 transition-all duration-300
+                            flex items-center justify-center flex-shrink-0"
                         >
                           ×
                         </button>
@@ -300,44 +319,46 @@ export default function SpinningWheel() {
             </div>
           </div>
 
-          <div className="mt-4 flex justify-center gap-2">
-            {audioTypes.map((type) => (
-              <button
-                key={type.id}
-                onClick={() => {
-                  setAudioType(type.id);
-                  spinningAudio.type = type.id;
-                }}
-                className={`px-4 py-2 rounded-lg ${
-                  audioType === type.id
-                    ? "bg-purple-600 text-white"
-                    : "bg-gray-200 text-gray-700"
-                }`}
-              >
-                {type.label}
-              </button>
-            ))}
-          </div>
-
-          <div className="mt-8">
-            <h3 className="text-xl font-bold text-center text-white mb-4">
-              🏆 Victory Sound
-            </h3>
-            <div className="flex flex-wrap justify-center gap-2 max-w-2xl mx-auto">
-              {winSounds.map((sound) => (
+          <div className="mt-8 bg-white/10 backdrop-blur-md rounded-2xl p-6 shadow-2xl">
+            <div className="mt-4 flex justify-center gap-2">
+              {audioTypes.map((type) => (
                 <button
-                  key={sound.id}
-                  onClick={() => setSelectedWinSound(sound.id)}
-                  className={`px-4 py-2 rounded-lg flex items-center gap-2 ${
-                    selectedWinSound === sound.id
+                  key={type.id}
+                  onClick={() => {
+                    setAudioType(type.id);
+                    spinningAudio.type = type.id;
+                  }}
+                  className={`px-4 py-2 rounded-lg ${
+                    audioType === type.id
                       ? "bg-purple-600 text-white"
-                      : "bg-white text-gray-700"
+                      : "bg-gray-200 text-gray-700"
                   }`}
                 >
-                  <span>{sound.emoji}</span>
-                  <span>{sound.name}</span>
+                  {type.label}
                 </button>
               ))}
+            </div>
+
+            <div className="mt-8">
+              <h3 className="text-xl font-bold text-center text-white mb-4">
+                🏆 Victory Sound
+              </h3>
+              <div className="flex flex-wrap justify-center gap-2 max-w-2xl mx-auto">
+                {winSounds.map((sound) => (
+                  <button
+                    key={sound.id}
+                    onClick={() => setSelectedWinSound(sound.id)}
+                    className={`px-4 py-2 rounded-lg flex items-center gap-2 ${
+                      selectedWinSound === sound.id
+                        ? "bg-purple-600 text-white"
+                        : "bg-white text-gray-700"
+                    }`}
+                  >
+                    <span>{sound.emoji}</span>
+                    <span>{sound.name}</span>
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </div>

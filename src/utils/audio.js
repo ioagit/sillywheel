@@ -82,17 +82,22 @@ class SpinningAudio {
   }
 
   getTickRate(progress) {
-    const startRate = 30; // Fastest tick rate (ms)
-    const endRate = 300; // Slowest tick rate (ms)
+    const startRate = 5; // Keep fast start
+    const endRate = 200; // Reduced end rate for better sync
 
-    // Adjusted curve to slow down more gradually
-    return startRate + (endRate - startRate) * Math.pow(progress, 0.6);
+    // Adjusted curve to match wheel deceleration
+    const p = Math.pow(progress, 1.2); // Steeper curve at the end
+    return startRate + (endRate - startRate) * p;
   }
 
   calculateProgress(currentTime) {
-    // Match the wheel's cubic-bezier curve more closely
     const t = currentTime / this.duration;
-    return Math.pow(t, 0.7); // Adjusted power for smoother deceleration
+    // Match the wheel's new cubic-bezier curve
+    const p1 = 0.2,
+      p2 = 0.1; // Match the wheel's control points
+
+    // Adjusted curve for better end sync
+    return t * (p1 + t * (1 - p1 - p2 + t * (1 + p2 - p1)));
   }
 
   getFrequency(progress, startFreq, endFreq) {

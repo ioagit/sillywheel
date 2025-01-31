@@ -23,11 +23,67 @@ body {
     @apply px-4 py-2 rounded-lg text-gray-700 hover:bg-purple-100 hover:text-purple-700 transition-colors duration-200 flex items-center gap-2;
   }
 
+  .nav-button-glass {
+    @apply px-4 py-2 rounded-lg 
+      bg-white/10 hover:bg-white/20 
+      backdrop-blur-md
+      border border-white/20
+      transition-all duration-200 
+      flex items-center gap-2
+      hover:scale-105 hover:shadow-lg;
+  }
+
   .footer-heading {
-    @apply text-lg font-semibold text-gray-900 mb-4;
+    @apply text-lg font-semibold text-white mb-4;
   }
 
   .footer-button {
-    @apply block w-full text-left px-3 py-2 text-gray-600 hover:text-purple-700 hover:bg-purple-50 rounded-lg transition-colors duration-200;
+    @apply block w-full text-left px-3 py-2 
+      text-white/80 hover:text-white 
+      hover:bg-white/10 rounded-lg 
+      transition-colors duration-200;
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 3s linear infinite;
+}
+
+/* Add these custom scrollbar styles */
+@layer utilities {
+  .custom-scrollbar {
+    /* For Webkit browsers like Chrome/Safari */
+    &::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 4px;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.5);
+      }
+    }
+
+    /* For Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.1);
   }
 }
