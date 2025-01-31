@@ -11,10 +11,19 @@ export default function Navbar({ onThemeClick }) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
-              <span className="text-2xl">🎡</span>
-              <span className="ml-2 text-xl font-bold text-white">
-                {siteConfig.siteName}
-              </span>
+              <div className="flex items-center gap-3 hover:scale-105 transition-transform">
+                <span className="text-3xl animate-spin-slow">🎡</span>
+                <div>
+                  <span className="text-2xl font-bold bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 
+                    bg-clip-text text-transparent animate-gradient">
+                    Pick
+                  </span>
+                  <span className="text-2xl font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 
+                    bg-clip-text text-transparent animate-gradient ml-2">
+                    Spin
+                  </span>
+                </div>
+              </div>
             </div>
             <div className="flex items-center gap-2">
               <button
