@@ -7,6 +7,8 @@ import VolumeControlModal from './VolumeControlModal';
 import WheelSizeModal from './WheelSizeModal';
 import AnimationSpeedModal from './AnimationSpeedModal';
 import PresetListModal from './PresetListModal';
+import HowToUseModal from './HowToUseModal';
+import UpdatesModal from './UpdatesModal';
 
 export default function Footer({ 
   audioType, 
@@ -27,6 +29,8 @@ export default function Footer({
   const [showWheelSize, setShowWheelSize] = React.useState(false);
   const [showAnimationSpeed, setShowAnimationSpeed] = React.useState(false);
   const [showPresetList, setShowPresetList] = React.useState(false);
+  const [showHowToUse, setShowHowToUse] = React.useState(false);
+  const [showUpdates, setShowUpdates] = React.useState(false);
 
   return (
     <>
@@ -155,7 +159,7 @@ export default function Footer({
                   onClick={() => setShowPresetList(true)}
                   className="footer-button"
                 >
-                  <span className="text-lg mr-2">📥</span>Load Preset
+                  <span className="text-lg mr-2">✨</span>Magic Lists
                 </button>
                 <button className="footer-button">
                   <span className="text-lg mr-2">💾</span>Save Current
@@ -171,10 +175,16 @@ export default function Footer({
                 <span className="text-xl mr-2">ℹ️</span>About
               </h3>
               <div className="space-y-2">
-                <button className="footer-button">
+                <button 
+                  onClick={() => setShowHowToUse(true)}
+                  className="footer-button"
+                >
                   <span className="text-lg mr-2">📖</span>How to Use
                 </button>
-                <button className="footer-button">
+                <button 
+                  onClick={() => setShowUpdates(true)}
+                  className="footer-button"
+                >
                   <span className="text-lg mr-2">🔄</span>Updates
                 </button>
                 <button className="footer-button">
@@ -235,6 +245,18 @@ export default function Footer({
           currentPreset={currentPreset}
           onSelect={onPresetSelect}
           onClose={() => setShowPresetList(false)}
+        />
+      )}
+
+      {showHowToUse && (
+        <HowToUseModal
+          onClose={() => setShowHowToUse(false)}
+        />
+      )}
+
+      {showUpdates && (
+        <UpdatesModal
+          onClose={() => setShowUpdates(false)}
         />
       )}
     </>

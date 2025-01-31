@@ -2,13 +2,13 @@ import React from "react";
 import siteConfig from "../config/siteConfig";
 import SpinningAudio from "../utils/audio";
 import { winSoundPlayer } from "../utils/winSounds";
-import PresetSelector from "./PresetSelector";
 import wheelPresets from "../config/wheelPresets";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Confetti from "./Confetti";
 import { themes } from "../config/themes";
 import ThemeSelector from "./ThemeSelector";
+import PresetListModal from "./PresetListModal";
 
 export default function SpinningWheel() {
   const [names, setNames] = React.useState(siteConfig.defaultParticipants);
@@ -20,7 +20,7 @@ export default function SpinningWheel() {
   const [spinningAudio] = React.useState(() => new SpinningAudio(audioType));
   const [selectedWinSound, setSelectedWinSound] = React.useState(0);
   const winSounds = winSoundPlayer.getSoundsList();
-  const [showPresetSelector, setShowPresetSelector] = React.useState(false);
+  const [showPresetList, setShowPresetList] = React.useState(false);
   const [currentPreset, setCurrentPreset] = React.useState(null);
   const [showConfetti, setShowConfetti] = React.useState(false);
   const [currentTheme, setCurrentTheme] = React.useState(themes[0]);
@@ -287,13 +287,13 @@ export default function SpinningWheel() {
                       ✨ {translations.addParticipantsTitle}
                     </h3>
                     <button
-                      onClick={() => setShowPresetSelector(true)}
+                      onClick={() => setShowPresetList(true)}
                       className="bg-white/20 text-white px-4 py-2 rounded-lg 
                         hover:bg-white/30 transition-colors flex items-center gap-2
                         hover:scale-105 transform"
                     >
-                      <span className="animate-bounce-subtle">📋</span>
-                      <span>Load Preset</span>
+                      <span className="animate-bounce-subtle">✨</span>
+                      <span>Magic Lists</span>
                     </button>
                   </div>
 
@@ -416,10 +416,11 @@ export default function SpinningWheel() {
         onPresetSelect={(items, key) => handlePresetSelect(items, key)}
       />
 
-      {showPresetSelector && (
-        <PresetSelector
+      {showPresetList && (
+        <PresetListModal
+          currentPreset={currentPreset}
           onSelect={(items, key) => handlePresetSelect(items, key)}
-          onClose={() => setShowPresetSelector(false)}
+          onClose={() => setShowPresetList(false)}
         />
       )}
 
