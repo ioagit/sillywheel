@@ -1,6 +1,7 @@
 import React from "react";
 import siteConfig from "../config/siteConfig";
 import SpinningAudio from "../utils/audio";
+import WinnerModal from "./WinnerModal";
 
 export default function SpinningWheel() {
   const [names, setNames] = React.useState(siteConfig.defaultParticipants);
@@ -11,6 +12,7 @@ export default function SpinningWheel() {
   const wheelRef = React.useRef(null);
   const [audioType, setAudioType] = React.useState(siteConfig.audio.type);
   const [spinningAudio] = React.useState(() => new SpinningAudio(audioType));
+  const [showWinnerModal, setShowWinnerModal] = React.useState(false);
 
   const translations = siteConfig.translations[siteConfig.language];
 
@@ -55,8 +57,7 @@ export default function SpinningWheel() {
 
     setIsSpinning(true);
     setWinner("");
-
-    spinningAudio.start();
+    setShowWinnerModal(false);
 
     const extraSpins =
       siteConfig.minExtraSpins +
@@ -67,6 +68,8 @@ export default function SpinningWheel() {
     const randomAngle = Math.random() * 360;
     const totalRotation = baseRotation + randomAngle;
 
+    spinningAudio.start(names.length, totalRotation);
+
     setRotation((prev) => prev + totalRotation);
 
     setTimeout(() => {
@@ -75,8 +78,8 @@ export default function SpinningWheel() {
       );
       setWinner(names[winningIndex % names.length]);
       setIsSpinning(false);
-
       spinningAudio.stop();
+      setShowWinnerModal(true);
     }, siteConfig.spinDuration);
   };
 
@@ -109,11 +112,11 @@ export default function SpinningWheel() {
         <div className="grid md:grid-cols-2 gap-12">
           <div className="flex flex-col items-center justify-center space-y-8">
             <div className="relative">
-              <div className="relative w-80 h-80 flex items-center justify-center">
+              <div className="relative w-96 h-96 flex items-center justify-center">
                 <svg
                   ref={wheelRef}
                   viewBox="-150 -150 300 300"
-                  className="w-72 h-72"
+                  className="w-96 h-96"
                   style={{
                     transform: `rotate(${rotation}deg)`,
                     transition: isSpinning
@@ -156,9 +159,9 @@ export default function SpinningWheel() {
                   <circle cx="0" cy="0" r="15" fill="#333" />
                 </svg>
 
-                <div className="absolute -right-4 top-1/2 -translate-y-1/2">
-                  <div className="w-8 h-8">
-                    <div className="w-0 h-0 border-r-[16px] border-r-transparent border-l-[16px] border-l-transparent border-b-[32px] border-b-yellow-400 animate-bounce" />
+                <div className="absolute -right-6 top-1/2 -translate-y-1/2 z-10">
+                  <div className="w-14 h-14 flex items-center justify-center">
+                    <div className="w-0 h-0 border-r-[24px] border-r-transparent border-l-[24px] border-l-transparent border-b-[48px] border-b-yellow-400 filter drop-shadow-lg" />
                   </div>
                 </div>
               </div>
@@ -171,17 +174,6 @@ export default function SpinningWheel() {
             >
               {isSpinning ? translations.spinningText : translations.spinButton}
             </button>
-
-            {winner && (
-              <div className="text-center p-6 bg-gradient-to-r from-purple-100 to-pink-100 rounded-xl">
-                <h2 className="text-2xl font-bold text-purple-600">
-                  {translations.winnerTitle}
-                </h2>
-                <p className="text-4xl font-bold text-pink-600 animate-bounce mt-2">
-                  {winner}
-                </p>
-              </div>
-            )}
           </div>
 
           <div className="bg-purple-50 rounded-xl p-6">
@@ -253,6 +245,13 @@ export default function SpinningWheel() {
           ))}
         </div>
       </div>
+
+      <WinnerModal
+        winner={winner}
+        onClose={() => setShowWinnerModal(false)}
+        translations={translations}
+        show={showWinnerModal}
+      />
     </div>
   );
 }

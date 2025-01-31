@@ -77,10 +77,36 @@ class SpinningAudio {
     this.gainNode = null;
     this.type = type;
     this.tickInterval = null;
+    this.startTime = 0;
+    this.duration = 5100; // Slightly longer than wheel animation to match end
   }
 
-  start() {
-    // Apply different sound profiles based on type
+  // Helper to calculate timing based on the wheel's cubic-bezier
+  calculateProgress(currentTime) {
+    // Cubic bezier values matching the wheel animation: cubic-bezier(0.17, 0.67, 0.12, 0.99)
+    const x1 = 0.17,
+      y1 = 0.67,
+      x2 = 0.12,
+      y2 = 0.99;
+    const t = currentTime / this.duration;
+
+    // Approximate the cubic-bezier timing
+    const progress = 1 - Math.pow(1 - t, 3);
+    return Math.min(1, Math.max(0, progress));
+  }
+
+  getTickRate(progress) {
+    const startRate = 30; // Fastest tick rate (ms)
+    const endRate = 300; // Reduced max interval for more ticks at end
+    // Adjusted curve to slow down more gradually
+    return startRate + (endRate - startRate) * Math.pow(progress, 0.7);
+  }
+
+  getFrequency(progress, startFreq, endFreq) {
+    return startFreq + (endFreq - startFreq) * progress;
+  }
+
+  start(segmentCount, totalRotation) {
     switch (this.type) {
       case "mechanical":
         this.playMechanicalTicks();
@@ -118,14 +144,21 @@ class SpinningAudio {
   }
 
   playMechanicalTicks() {
-    let tickRate = 50; // Start with fast ticks
-    let baseFreq = 2000;
+    this.startTime = Date.now();
+    const startFreq = 2000;
+    const endFreq = 200;
 
     const tick = () => {
-      this.createTickSound(baseFreq + Math.random() * 200);
-      tickRate = Math.min(300, tickRate * 1.05); // Gradually slow down
-      baseFreq = Math.max(200, baseFreq * 0.95); // Lower pitch over time
+      const currentTime = Date.now() - this.startTime;
+      if (currentTime >= this.duration) {
+        return;
+      }
 
+      const progress = this.calculateProgress(currentTime);
+      const tickRate = this.getTickRate(progress);
+      const baseFreq = this.getFrequency(progress, startFreq, endFreq);
+
+      this.createTickSound(baseFreq + Math.random() * 100);
       this.tickInterval = setTimeout(tick, tickRate);
     };
 
@@ -133,10 +166,20 @@ class SpinningAudio {
   }
 
   playElectronicBeeps() {
-    let interval = 100; // Start with rapid beeps
-    let freq = 1500;
+    this.startTime = Date.now();
+    const startFreq = 1500;
+    const endFreq = 200;
 
     const beep = () => {
+      const currentTime = Date.now() - this.startTime;
+      if (currentTime >= this.duration) {
+        return;
+      }
+
+      const progress = this.calculateProgress(currentTime);
+      const interval = this.getTickRate(progress);
+      const freq = this.getFrequency(progress, startFreq, endFreq);
+
       const osc = this.audioContext.createOscillator();
       const gain = this.audioContext.createGain();
       const filter = this.audioContext.createBiquadFilter();
@@ -163,9 +206,6 @@ class SpinningAudio {
       osc.start();
       osc.stop(this.audioContext.currentTime + 0.1);
 
-      interval = Math.min(500, interval * 1.1); // Slow down beeps
-      freq = Math.max(200, freq * 0.93); // Lower pitch
-
       this.tickInterval = setTimeout(beep, interval);
     };
 
@@ -173,10 +213,17 @@ class SpinningAudio {
   }
 
   playRatchetSound() {
-    let clickRate = 40; // Start with rapid clicks
+    this.startTime = Date.now();
 
     const click = () => {
-      // Create a short noise burst for clicking sound
+      const currentTime = Date.now() - this.startTime;
+      if (currentTime >= this.duration) {
+        return;
+      }
+
+      const progress = this.calculateProgress(currentTime);
+      const clickRate = this.getTickRate(progress);
+
       const bufferSize = this.audioContext.sampleRate * 0.03;
       const buffer = this.audioContext.createBuffer(
         1,
@@ -185,7 +232,6 @@ class SpinningAudio {
       );
       const data = buffer.getChannelData(0);
 
-      // Generate noise
       for (let i = 0; i < bufferSize; i++) {
         data[i] = Math.random() * 2 - 1;
       }
@@ -196,22 +242,23 @@ class SpinningAudio {
 
       noise.buffer = buffer;
       filter.type = "bandpass";
-      filter.frequency.value = 2000;
+      filter.frequency.value = 2000 - progress * 1000;
       filter.Q.value = 5;
 
       noise.connect(filter);
       filter.connect(gain);
       gain.connect(this.audioContext.destination);
 
-      gain.gain.setValueAtTime(0.15, this.audioContext.currentTime);
+      gain.gain.setValueAtTime(
+        0.15 * (1 - progress * 0.5),
+        this.audioContext.currentTime
+      );
       gain.gain.exponentialRampToValueAtTime(
         0.01,
         this.audioContext.currentTime + 0.03
       );
 
       noise.start();
-      clickRate = Math.min(400, clickRate * 1.08); // Gradually slow down
-
       this.tickInterval = setTimeout(click, clickRate);
     };
 
@@ -219,11 +266,19 @@ class SpinningAudio {
   }
 
   playMusicalTones() {
-    const notes = [1320, 1188, 990, 880, 660, 440]; // Musical scale
+    this.startTime = Date.now();
+    const notes = [1320, 1188, 990, 880, 660, 440];
     let noteIndex = 0;
-    let interval = 200;
 
     const playNote = () => {
+      const currentTime = Date.now() - this.startTime;
+      if (currentTime >= this.duration) {
+        return;
+      }
+
+      const progress = this.calculateProgress(currentTime);
+      const interval = this.getTickRate(progress);
+
       const osc = this.audioContext.createOscillator();
       const gain = this.audioContext.createGain();
 
@@ -236,7 +291,10 @@ class SpinningAudio {
       osc.connect(gain);
       gain.connect(this.audioContext.destination);
 
-      gain.gain.setValueAtTime(0.2, this.audioContext.currentTime);
+      gain.gain.setValueAtTime(
+        0.2 * (1 - progress * 0.5),
+        this.audioContext.currentTime
+      );
       gain.gain.exponentialRampToValueAtTime(
         0.01,
         this.audioContext.currentTime + 0.2
@@ -246,8 +304,6 @@ class SpinningAudio {
       osc.stop(this.audioContext.currentTime + 0.2);
 
       noteIndex = (noteIndex + 1) % notes.length;
-      interval = Math.min(500, interval * 1.15); // Slow down the melody
-
       this.tickInterval = setTimeout(playNote, interval);
     };
 
