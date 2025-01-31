@@ -5,6 +5,8 @@ import WheelSoundsModal from './WheelSoundsModal';
 import VictorySoundModal from './VictorySoundModal';
 import VolumeControlModal from './VolumeControlModal';
 import WheelSizeModal from './WheelSizeModal';
+import AnimationSpeedModal from './AnimationSpeedModal';
+import PresetListModal from './PresetListModal';
 
 export default function Footer({ 
   audioType, 
@@ -12,13 +14,19 @@ export default function Footer({
   selectedWinSound,
   onWinSoundChange,
   wheelSize,
-  onWheelSizeChange
+  onWheelSizeChange,
+  currentSpeed,
+  onSpeedChange,
+  currentPreset,
+  onPresetSelect
 }) {
   const currentYear = new Date().getFullYear();
   const [showWheelSoundsModal, setShowWheelSoundsModal] = React.useState(false);
   const [showVictorySoundModal, setShowVictorySoundModal] = React.useState(false);
   const [showVolumeControl, setShowVolumeControl] = React.useState(false);
   const [showWheelSize, setShowWheelSize] = React.useState(false);
+  const [showAnimationSpeed, setShowAnimationSpeed] = React.useState(false);
+  const [showPresetList, setShowPresetList] = React.useState(false);
 
   return (
     <>
@@ -129,7 +137,10 @@ export default function Footer({
                 >
                   <span className="text-lg mr-2">📏</span>Wheel Size
                 </button>
-                <button className="footer-button">
+                <button 
+                  onClick={() => setShowAnimationSpeed(true)}
+                  className="footer-button"
+                >
                   <span className="text-lg mr-2">⚡</span>Animation Speed
                 </button>
               </div>
@@ -140,7 +151,10 @@ export default function Footer({
                 <span className="text-xl mr-2">📋</span>Presets
               </h3>
               <div className="space-y-2">
-                <button className="footer-button">
+                <button 
+                  onClick={() => setShowPresetList(true)}
+                  className="footer-button"
+                >
                   <span className="text-lg mr-2">📥</span>Load Preset
                 </button>
                 <button className="footer-button">
@@ -205,6 +219,22 @@ export default function Footer({
           currentSize={wheelSize}
           onSizeChange={onWheelSizeChange}
           onClose={() => setShowWheelSize(false)}
+        />
+      )}
+
+      {showAnimationSpeed && (
+        <AnimationSpeedModal
+          currentSpeed={currentSpeed}
+          onSpeedChange={onSpeedChange}
+          onClose={() => setShowAnimationSpeed(false)}
+        />
+      )}
+
+      {showPresetList && (
+        <PresetListModal
+          currentPreset={currentPreset}
+          onSelect={onPresetSelect}
+          onClose={() => setShowPresetList(false)}
         />
       )}
     </>

@@ -26,6 +26,10 @@ export default function SpinningWheel() {
   const [currentTheme, setCurrentTheme] = React.useState(themes[0]);
   const [showThemeSelector, setShowThemeSelector] = React.useState(false);
   const [wheelSize, setWheelSize] = React.useState(384);
+  const [spinAnimation, setSpinAnimation] = React.useState({
+    duration: 5000,
+    curve: "cubic-bezier(0.2, 0, 0.1, 1)",
+  });
 
   const translations = siteConfig.translations[siteConfig.language];
 
@@ -101,7 +105,7 @@ export default function SpinningWheel() {
       } else {
         winSoundPlayer.playWinSound(selectedWinSound);
       }
-    }, siteConfig.spinDuration);
+    }, spinAnimation.duration);
   };
 
   const addName = (e) => {
@@ -132,6 +136,26 @@ export default function SpinningWheel() {
     }
   };
 
+  const getResponsiveSize = () => {
+    const width = window.innerWidth;
+    if (width < 640) return 280; // Mobile
+    if (width < 768) return 340; // Tablet
+    if (width < 1024) return 400; // Small desktop
+    if (width < 1280) return 480; // Large desktop
+    return 560; // Extra large screens
+  };
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      if (wheelSize === "auto") {
+        setWheelSize(getResponsiveSize());
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [wheelSize]);
+
   return (
     <div
       className={`min-h-screen flex flex-col bg-gradient-to-br ${currentTheme.background} animate-gradient-shift`}
@@ -153,7 +177,12 @@ export default function SpinningWheel() {
 
                 <div
                   className="relative"
-                  style={{ width: wheelSize, height: wheelSize }}
+                  style={{
+                    width:
+                      wheelSize === "auto" ? getResponsiveSize() : wheelSize,
+                    height:
+                      wheelSize === "auto" ? getResponsiveSize() : wheelSize,
+                  }}
                 >
                   <svg
                     ref={wheelRef}
@@ -162,7 +191,9 @@ export default function SpinningWheel() {
                     style={{
                       transform: `rotate(${rotation}deg)`,
                       transition: isSpinning
-                        ? "transform 5s cubic-bezier(0.2, 0, 0.1, 1)"
+                        ? `transform ${spinAnimation.duration / 1000}s ${
+                            spinAnimation.curve
+                          }`
                         : "none",
                     }}
                   >
@@ -379,6 +410,10 @@ export default function SpinningWheel() {
         onWinSoundChange={setSelectedWinSound}
         wheelSize={wheelSize}
         onWheelSizeChange={setWheelSize}
+        currentSpeed={spinAnimation.duration}
+        onSpeedChange={setSpinAnimation}
+        currentPreset={currentPreset}
+        onPresetSelect={(items, key) => handlePresetSelect(items, key)}
       />
 
       {showPresetSelector && (
