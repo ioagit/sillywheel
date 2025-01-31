@@ -286,32 +286,34 @@ export default function SpinningWheel() {
                 </div>
 
                 <div className="max-h-96 overflow-y-auto overflow-x-hidden pr-2 custom-scrollbar">
-                  <h3 className="text-xl font-bold text-white mb-4 sticky top-0 bg-white/10 backdrop-blur-md p-2 rounded-lg z-10">
-                    👥 {translations.participantsListTitle}
-                  </h3>
-                  <div className="space-y-2">
-                    {names.map((name, index) => (
-                      <div
-                        key={index}
-                        className="flex items-center justify-between bg-white/10 p-3 rounded-lg
-                          backdrop-blur-sm border border-white/10
-                          transform hover:scale-[1.02] hover:shadow-lg transition-all duration-200
-                          group/item relative overflow-hidden
-                          w-full"
-                      >
-                        <span className="font-medium text-white group-hover/item:text-white/90 transition-colors truncate mr-2">
-                          {name}
-                        </span>
-                        <button
-                          onClick={() => removeName(index)}
-                          className="text-white/70 hover:text-red-400 font-bold text-xl w-8 h-8 
-                            rounded-full hover:bg-white/10 hover:rotate-90 transition-all duration-300
-                            flex items-center justify-center flex-shrink-0"
+                  <div className="pt-2">
+                    <h3 className="text-xl font-bold text-white mb-4 sticky top-0 bg-white/10 backdrop-blur-md p-2 rounded-lg z-10">
+                      👥 {translations.participantsListTitle}
+                    </h3>
+                    <div className="space-y-2 mt-2">
+                      {names.map((name, index) => (
+                        <div
+                          key={index}
+                          className="flex items-center justify-between bg-white/10 p-3 rounded-lg
+                            backdrop-blur-sm border border-white/10
+                            transform hover:scale-[1.02] hover:shadow-lg transition-all duration-200
+                            group/item relative overflow-hidden
+                            w-full"
                         >
-                          ×
-                        </button>
-                      </div>
-                    ))}
+                          <span className="font-medium text-white group-hover/item:text-white/90 transition-colors truncate mr-2">
+                            {name}
+                          </span>
+                          <button
+                            onClick={() => removeName(index)}
+                            className="text-white/70 hover:text-red-400 font-bold text-xl w-8 h-8 
+                              rounded-full hover:bg-white/10 hover:rotate-90 transition-all duration-300
+                              flex items-center justify-center flex-shrink-0"
+                          >
+                            ×
+                          </button>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
