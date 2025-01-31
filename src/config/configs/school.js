@@ -32,6 +32,10 @@ const config = {
   spinDuration: 3000,
   minExtraSpins: 4,
   maxExtraSpins: 7,
+  audio: {
+    type: "toy",
+    volume: 0.25,
+  },
 };
 
 export default config;

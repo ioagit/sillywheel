@@ -32,6 +32,10 @@ const config = {
   spinDuration: 4000,
   minExtraSpins: 3,
   maxExtraSpins: 8,
+  audio: {
+    type: "electronic",
+    volume: 0.2,
+  },
 };
 
 export default config;

@@ -39,6 +39,10 @@ const config = {
   spinDuration: 5000,
   minExtraSpins: 5,
   maxExtraSpins: 10,
+  audio: {
+    type: 'mechanical', // can be 'mechanical', 'electronic', 'casino', or 'toy'
+    volume: 0.3,
+  },
 };
 
 export default config; 
