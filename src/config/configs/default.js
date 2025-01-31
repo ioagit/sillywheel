@@ -11,6 +11,8 @@ const config = {
       participantsListTitle: "📝 Participants List",
       addButtonText: "Add ✨",
       inputPlaceholder: "Enter a name",
+      presetButton: "📋 Load Preset",
+      presetTitle: "Choose a Wheel Preset",
     },
     es: {
       title: "✨ Ruleta de Nombres ✨",
@@ -21,6 +23,8 @@ const config = {
       participantsListTitle: "📝 Lista de Participantes",
       addButtonText: "Agregar ✨",
       inputPlaceholder: "Ingrese un nombre",
+      presetButton: "📋 Cargar Preset",
+      presetTitle: "Elegir un Preset",
     },
   },
   defaultParticipants: [

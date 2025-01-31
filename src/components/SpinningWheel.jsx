@@ -3,6 +3,7 @@ import siteConfig from "../config/siteConfig";
 import SpinningAudio from "../utils/audio";
 import WinnerModal from "./WinnerModal";
 import { winSoundPlayer } from "../utils/winSounds";
+import PresetSelector from "./PresetSelector";
 
 export default function SpinningWheel() {
   const [names, setNames] = React.useState(siteConfig.defaultParticipants);
@@ -16,6 +17,7 @@ export default function SpinningWheel() {
   const [showWinnerModal, setShowWinnerModal] = React.useState(false);
   const [selectedWinSound, setSelectedWinSound] = React.useState(0);
   const winSounds = winSoundPlayer.getSoundsList();
+  const [showPresetSelector, setShowPresetSelector] = React.useState(false);
 
   const translations = siteConfig.translations[siteConfig.language];
 
@@ -106,6 +108,10 @@ export default function SpinningWheel() {
     { id: "toy", label: "🎪 Toy" },
   ];
 
+  const handlePresetSelect = (presetItems) => {
+    setNames(presetItems);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 p-8">
       <div className="max-w-7xl mx-auto bg-white rounded-2xl shadow-2xl p-8">
@@ -183,9 +189,18 @@ export default function SpinningWheel() {
           <div className="bg-purple-50 rounded-xl p-6">
             <div className="space-y-6">
               <div className="bg-white rounded-lg p-4">
-                <h3 className="text-xl font-bold text-purple-700 mb-4">
-                  {translations.addParticipantsTitle}
-                </h3>
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="text-xl font-bold text-purple-700">
+                    {translations.addParticipantsTitle}
+                  </h3>
+                  <button
+                    onClick={() => setShowPresetSelector(true)}
+                    className="bg-purple-100 text-purple-600 px-4 py-2 rounded-lg hover:bg-purple-200 transition-colors flex items-center gap-2"
+                  >
+                    <span>📋</span>
+                    <span>Load Preset</span>
+                  </button>
+                </div>
                 <form onSubmit={addName} className="space-y-4">
                   <div className="flex gap-2">
                     <input
@@ -278,6 +293,13 @@ export default function SpinningWheel() {
         translations={translations}
         show={showWinnerModal}
       />
+
+      {showPresetSelector && (
+        <PresetSelector
+          onSelect={handlePresetSelect}
+          onClose={() => setShowPresetSelector(false)}
+        />
+      )}
     </div>
   );
 }
