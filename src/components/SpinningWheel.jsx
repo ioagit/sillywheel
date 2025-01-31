@@ -156,7 +156,7 @@ export default function SpinningWheel() {
                     style={{
                       transform: `rotate(${rotation}deg)`,
                       transition: isSpinning
-                        ? "transform 5s cubic-bezier(0.17, 0.67, 0.12, 0.99)"
+                        ? "transform 5s cubic-bezier(0.32, 0, 0.23, 1)"
                         : "none",
                     }}
                   >
@@ -204,7 +204,13 @@ export default function SpinningWheel() {
                         isSpinning ? "animate-picker-bounce" : ""
                       }`}
                     >
-                      <div className="w-0 h-0 border-r-[24px] border-r-transparent border-l-[24px] border-l-transparent border-b-[48px] border-b-yellow-400 filter drop-shadow-lg" />
+                      <div
+                        className="w-0 h-0 
+                          border-t-[24px] border-t-transparent 
+                          border-b-[24px] border-b-transparent 
+                          border-r-[48px] border-r-yellow-400 
+                          filter drop-shadow-lg"
+                      />
                     </div>
                   </div>
                 </div>

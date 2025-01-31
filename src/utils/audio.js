@@ -78,28 +78,21 @@ class SpinningAudio {
     this.type = type;
     this.tickInterval = null;
     this.startTime = 0;
-    this.duration = 5100; // Slightly longer than wheel animation to match end
-  }
-
-  // Helper to calculate timing based on the wheel's cubic-bezier
-  calculateProgress(currentTime) {
-    // Cubic bezier values matching the wheel animation: cubic-bezier(0.17, 0.67, 0.12, 0.99)
-    const x1 = 0.17,
-      y1 = 0.67,
-      x2 = 0.12,
-      y2 = 0.99;
-    const t = currentTime / this.duration;
-
-    // Approximate the cubic-bezier timing
-    const progress = 1 - Math.pow(1 - t, 3);
-    return Math.min(1, Math.max(0, progress));
+    this.duration = 5000; // Match wheel duration
   }
 
   getTickRate(progress) {
     const startRate = 30; // Fastest tick rate (ms)
-    const endRate = 300; // Reduced max interval for more ticks at end
+    const endRate = 300; // Slowest tick rate (ms)
+
     // Adjusted curve to slow down more gradually
-    return startRate + (endRate - startRate) * Math.pow(progress, 0.7);
+    return startRate + (endRate - startRate) * Math.pow(progress, 0.6);
+  }
+
+  calculateProgress(currentTime) {
+    // Match the wheel's cubic-bezier curve more closely
+    const t = currentTime / this.duration;
+    return Math.pow(t, 0.7); // Adjusted power for smoother deceleration
   }
 
   getFrequency(progress, startFreq, endFreq) {
