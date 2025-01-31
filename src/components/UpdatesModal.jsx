@@ -5,7 +5,7 @@ export default function UpdatesModal({ onClose }) {
   const updates = [
     {
       version: "2.0.0",
-      date: "March 2024",
+      date: "November 2024",
       type: "major",
       icon: "🚀",
       title: "Major Design Overhaul",
@@ -25,7 +25,7 @@ export default function UpdatesModal({ onClose }) {
     },
     {
       version: "1.5.0",
-      date: "February 2024",
+      date: "December 2024",
       type: "feature",
       icon: "✨",
       title: "Feature Update",
@@ -43,7 +43,7 @@ export default function UpdatesModal({ onClose }) {
     },
     {
       version: "1.2.0",
-      date: "January 2024",
+      date: "January 2025",
       type: "enhancement",
       icon: "⚡",
       title: "Performance Update",
