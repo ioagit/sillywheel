@@ -7,6 +7,8 @@ import wheelPresets from "../config/wheelPresets";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Confetti from "./Confetti";
+import { themes } from "../config/themes";
+import ThemeSelector from "./ThemeSelector";
 
 export default function SpinningWheel() {
   const [names, setNames] = React.useState(siteConfig.defaultParticipants);
@@ -21,6 +23,8 @@ export default function SpinningWheel() {
   const [showPresetSelector, setShowPresetSelector] = React.useState(false);
   const [currentPreset, setCurrentPreset] = React.useState(null);
   const [showConfetti, setShowConfetti] = React.useState(false);
+  const [currentTheme, setCurrentTheme] = React.useState(themes[0]);
+  const [showThemeSelector, setShowThemeSelector] = React.useState(false);
 
   const translations = siteConfig.translations[siteConfig.language];
 
@@ -128,17 +132,20 @@ export default function SpinningWheel() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 animate-gradient-shift">
-      <Navbar />
+    <div
+      className={`min-h-screen flex flex-col bg-gradient-to-br ${currentTheme.background} animate-gradient-shift`}
+    >
+      <Navbar onThemeClick={() => setShowThemeSelector(true)} />
 
       <main className="flex-grow p-8">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12">
             <div className="flex flex-col items-center justify-center space-y-8">
               <div
-                className="relative bg-white/10 backdrop-blur-md p-8 rounded-2xl shadow-[0_0_40px_rgba(192,38,211,0.3)] 
-                hover:shadow-[0_0_60px_rgba(192,38,211,0.5)] transition-all duration-500 
-                animate-float group"
+                className={`relative bg-white/10 backdrop-blur-md p-8 rounded-2xl 
+                  ${currentTheme.wheelShadow}
+                  hover:${currentTheme.wheelShadowHover} transition-all duration-500 
+                  animate-float group`}
               >
                 <div className="absolute -top-3 -left-3 w-6 h-6 bg-pink-500 rounded-full animate-ping-slow opacity-75"></div>
                 <div className="absolute -bottom-3 -right-3 w-6 h-6 bg-purple-500 rounded-full animate-ping-slow opacity-75 delay-300"></div>
@@ -232,11 +239,11 @@ export default function SpinningWheel() {
             </div>
 
             <div
-              className="bg-white/10 backdrop-blur-md rounded-2xl p-6 
-              shadow-[0_0_40px_rgba(168,85,247,0.3)] 
-              hover:shadow-[0_0_60px_rgba(168,85,247,0.5)] 
-              transition-all duration-500 
-              group animate-float-delayed"
+              className={`bg-white/10 backdrop-blur-md rounded-2xl p-6 
+                ${currentTheme.panelShadow}
+                hover:${currentTheme.panelShadowHover}
+                transition-all duration-500 
+                group animate-float-delayed`}
             >
               <div className="space-y-6">
                 <div className="bg-white/20 backdrop-blur-md rounded-lg p-4 group-hover:scale-[1.01] transition-transform">
@@ -366,6 +373,13 @@ export default function SpinningWheel() {
       )}
 
       {showConfetti && <Confetti />}
+
+      {showThemeSelector && (
+        <ThemeSelector
+          onSelect={setCurrentTheme}
+          onClose={() => setShowThemeSelector(false)}
+        />
+      )}
     </div>
   );
 }

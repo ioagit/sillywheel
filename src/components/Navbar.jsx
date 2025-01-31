@@ -1,7 +1,7 @@
 import React from 'react';
 import siteConfig from "../config/siteConfig";
 
-export default function Navbar() {
+export default function Navbar({ onThemeClick }) {
   return (
     <nav className="bg-white/10 backdrop-blur-md border-b border-white/20 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -16,7 +16,10 @@ export default function Navbar() {
           </div>
           
           <div className="flex items-center space-x-4">
-            <button className="nav-button-glass">
+            <button 
+              onClick={onThemeClick}
+              className="nav-button-glass"
+            >
               <span className="text-xl">🎨</span>
               <span className="text-white">Themes</span>
             </button>
