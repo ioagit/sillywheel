@@ -340,12 +340,15 @@ export default function SpinningWheel() {
                         <span className="animate-bounce-subtle">✨</span>
                         <span>Magic Lists</span>
                       </button>
-                      {/* New Clear List button */}
+                      {/* Replace the existing clear button */}
                       <button
                         onClick={() => setNames([])}
-                        className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors"
+                        className="bg-gradient-to-r from-blue-400 to-purple-400 text-white px-4 py-2 
+                          rounded-full hover:shadow-lg transition-all duration-300 transform 
+                          hover:scale-105 flex items-center gap-2"
                       >
-                        Clear List
+                        <span>🌟</span>
+                        <span>Start Fresh!</span>
                       </button>
                     </div>
                   </div>
@@ -486,18 +489,32 @@ export default function SpinningWheel() {
         />
       )}
 
-      {/* Winner Announcement Overlay */}
+      {/* Update the winner announcement overlay */}
       {winner && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-white rounded-2xl p-8 text-center shadow-xl">
             <h2 className="text-3xl font-bold text-purple-600 mb-4">Hooray!</h2>
             <p className="text-xl mb-6">Congratulations, {winner}! You're our lucky winner!</p>
-            <button
-              onClick={handleWinnerClose}
-              className="bg-gradient-to-r from-green-400 to-emerald-500 text-white px-6 py-3 rounded-full font-bold hover:scale-105 transition-transform"
-            >
-              Yay!
-            </button>
+            <div className="flex items-center gap-4 justify-center">
+              <button
+                onClick={handleWinnerClose}
+                className="bg-gradient-to-r from-green-400 to-emerald-500 text-white 
+                  px-6 py-3 rounded-full font-bold hover:scale-105 transition-transform"
+              >
+                Yay!
+              </button>
+              <button
+                onClick={() => setShowShare(true)}
+                className="bg-gradient-to-r from-purple-400 to-pink-400 p-3 rounded-full
+                  hover:shadow-lg transition-all duration-300 transform hover:scale-105"
+              >
+                <svg viewBox="0 0 24 24" className="w-5 h-5 text-white" fill="none" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
+                    d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"
+                  />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       )}
