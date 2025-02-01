@@ -9,6 +9,7 @@ import Confetti from "./Confetti";
 import { themes } from "../config/themes";
 import ThemeSelector from "./ThemeSelector";
 import PresetListModal from "./PresetListModal";
+import ScoreBoard from './ScoreBoard';
 
 export default function SpinningWheel() {
   const [names, setNames] = React.useState(siteConfig.defaultParticipants);
@@ -34,6 +35,9 @@ export default function SpinningWheel() {
   const [winningIndex, setWinningIndex] = React.useState(null); // New state for winning index
   const [autoRemoveWinner, setAutoRemoveWinner] = React.useState(false); // Winner Gobbler toggle
   const [wheelRenderKey, setWheelRenderKey] = React.useState(0); // New state for forcing re-render of the wheel
+  const [keepScores, setKeepScores] = React.useState(false);
+  const [scores, setScores] = React.useState({});
+  const [showScoreBoard, setShowScoreBoard] = React.useState(false);
 
   const translations = siteConfig.translations[siteConfig.language];
 
@@ -112,6 +116,13 @@ export default function SpinningWheel() {
 
   // Updated handleWinnerClose to align rotation with n-1 segments covering entire wheel
   const handleWinnerClose = () => {
+    if (keepScores && winner) {
+      setScores(prev => ({
+        ...prev,
+        [winner]: (prev[winner] || 0) + 1
+      }));
+    }
+    
     if (autoRemoveWinner && winningIndex !== null) {
       const segmentEl = document.getElementById(`wheel-segment-${winningIndex}`);
       if (segmentEl) {
@@ -305,15 +316,40 @@ export default function SpinningWheel() {
                   </span>
                 </button>
                 {/* Fun toggle for Winner Gobbler 🍽 */}
-                <label className="flex items-center space-x-2 mt-4">
-                  <input 
-                    type="checkbox" 
-                    checked={autoRemoveWinner} 
-                    onChange={() => setAutoRemoveWinner(prev => !prev)} 
-                    className="form-checkbox h-5 w-5 text-purple-600" 
-                  />
-                  <span className="text-white">Winner Gobbler 🍽</span>
-                </label>
+                <div className="flex items-center space-x-4 mt-4">
+                  <label className="flex items-center space-x-2">
+                    <input 
+                      type="checkbox" 
+                      checked={autoRemoveWinner} 
+                      onChange={() => setAutoRemoveWinner(prev => !prev)} 
+                      disabled={keepScores}
+                      className="form-checkbox h-5 w-5 text-purple-600" 
+                    />
+                    <span className="text-white">Winner Gobbler 🍽</span>
+                  </label>
+                  <label className="flex items-center space-x-2">
+                    <input 
+                      type="checkbox" 
+                      checked={keepScores} 
+                      onChange={() => {
+                        setKeepScores(prev => !prev);
+                        if (!keepScores) setAutoRemoveWinner(false);
+                      }} 
+                      className="form-checkbox h-5 w-5 text-yellow-400" 
+                    />
+                    <span className="text-white">Keep Score 🏆</span>
+                  </label>
+                  {keepScores && Object.keys(scores).length > 0 && (
+                    <button
+                      onClick={() => setShowScoreBoard(prev => !prev)}
+                      className="bg-gradient-to-r from-yellow-400 to-orange-400 
+                        text-white px-3 py-1 rounded-full text-sm
+                        hover:shadow-lg transition-all duration-300 transform hover:scale-105"
+                    >
+                      View Scores 🏆
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
 
@@ -328,7 +364,7 @@ export default function SpinningWheel() {
                 <div className="bg-white/20 backdrop-blur-md rounded-lg p-4 group-hover:scale-[1.01] transition-transform">
                   <div className="flex justify-between items-center mb-4">
                     <h3 className="text-xl font-bold text-white">
-                      ✨ Welcome to the Fun Wheel!
+                      ✨ The Fun Wheel!
                     </h3>
                     <div className="flex gap-2">
                       <button
@@ -517,6 +553,13 @@ export default function SpinningWheel() {
             </div>
           </div>
         </div>
+      )}
+
+      {showScoreBoard && keepScores && (
+        <ScoreBoard 
+          scores={scores} 
+          onClose={() => setShowScoreBoard(false)} 
+        />
       )}
     </div>
   );
