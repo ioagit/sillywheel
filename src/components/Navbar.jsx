@@ -4,6 +4,7 @@ import ShareModal from './ShareModal';
 
 export default function Navbar({ onThemeClick }) {
   const [showShare, setShowShare] = React.useState(false);
+  const translations = siteConfig.translations[siteConfig.language];
 
   return (
     <>
@@ -16,11 +17,11 @@ export default function Navbar({ onThemeClick }) {
                 <div>
                   <span className="text-2xl font-bold bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 
                     bg-clip-text text-transparent animate-gradient">
-                    Pick
+                    {siteConfig.siteName.split(' ')[0]}
                   </span>
                   <span className="text-2xl font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 
                     bg-clip-text text-transparent animate-gradient ml-2">
-                    Spin
+                    {siteConfig.siteName.split(' ')[1]}
                   </span>
                 </div>
               </div>
@@ -32,7 +33,7 @@ export default function Navbar({ onThemeClick }) {
                   transition-colors flex items-center gap-2"
               >
                 <span>🔗</span>
-                Share
+                {translations.shareButton}
               </button>
               <button
                 onClick={onThemeClick}
@@ -40,7 +41,7 @@ export default function Navbar({ onThemeClick }) {
                   transition-colors flex items-center gap-2"
               >
                 <span>🎨</span>
-                Theme
+                {translations.themeButton}
               </button>
             </div>
           </div>

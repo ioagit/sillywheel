@@ -1,6 +1,6 @@
 const config = {
-  siteName: "Pick Spin",
-  language: "en",
+  siteName: "Rueda Loca",
+  language: "es",
   translations: {
     en: {
       title: "✨ Pick Spin ✨",
@@ -62,7 +62,7 @@ const config = {
       email: "Email",
     },
     es: {
-      title: "✨ Pick Spin ✨",
+      title: "✨ Rueda Loca ✨",
       spinButton: "🎯 ¡GIRAR!",
       spinningText: "🎡 Girando...",
       winnerTitle: "🎉 ¡Ganador!",
