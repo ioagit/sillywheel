@@ -30,6 +30,7 @@ export default function SpinningWheel() {
     duration: 5000,
     curve: "cubic-bezier(0.2, 0, 0.1, 1)",
   });
+  const [winner, setWinner] = React.useState(null); // New state for winner announcement
 
   const translations = siteConfig.translations[siteConfig.language];
 
@@ -86,20 +87,22 @@ export default function SpinningWheel() {
 
     spinningAudio.start(names.length, totalRotation);
 
-    setRotation((prev) => prev + totalRotation);
+    const newRotation = rotation + totalRotation; // Capture new rotation value
+    setRotation(newRotation);
 
     setTimeout(() => {
       setIsSpinning(false);
       spinningAudio.stop();
       setShowConfetti(true);
 
-      const finalRotation = (rotation + totalRotation) % 360;
+      const finalRotation = newRotation % 360; // Use the newRotation here
       const segmentAngle = 360 / names.length;
-      const winningIndex = Math.floor(
-        ((finalRotation + 270) % 360) / segmentAngle
-      );
-
+      // Calculate effective pointer angle (pointer is at top, i.e. 0° in global frame)
+      const effectiveAngle = (360 - finalRotation) % 360;
+      const winningIndex = Math.floor(effectiveAngle / segmentAngle);
+      const winningName = names[winningIndex];
       winSoundPlayer.playWinSound(selectedWinSound);
+      setWinner(winningName); // Set winner to trigger the announcement overlay
     }, spinAnimation.duration);
   };
 
@@ -422,6 +425,22 @@ export default function SpinningWheel() {
           onSelect={setCurrentTheme}
           onClose={() => setShowThemeSelector(false)}
         />
+      )}
+
+      {/* New Winner Announcement Overlay */}
+      {winner && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-2xl p-8 text-center shadow-xl">
+            <h2 className="text-3xl font-bold text-purple-600 mb-4">Hooray!</h2>
+            <p className="text-xl mb-6">Congratulations, {winner}! You're our lucky winner!</p>
+            <button
+              onClick={() => setWinner(null)}
+              className="bg-gradient-to-r from-green-400 to-emerald-500 text-white px-6 py-3 rounded-full font-bold hover:scale-105 transition-transform"
+            >
+              Yay!
+            </button>
+          </div>
+        </div>
       )}
     </div>
   );
