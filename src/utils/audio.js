@@ -21,15 +21,15 @@ class WheelAudio {
     oscillator.connect(gainNode);
     gainNode.connect(this.audioContext.destination);
 
-    // Configure oscillator
-    oscillator.type = "square";
+    // Configure oscillator for a playful tone
+    oscillator.type = "sine"; // Modified: changed from "square"
     oscillator.frequency.setValueAtTime(
       frequency,
       this.audioContext.currentTime
     );
 
-    // Configure gain (volume)
-    gainNode.gain.setValueAtTime(0.15, this.audioContext.currentTime);
+    // Configure gain for a more pronounced playful sound
+    gainNode.gain.setValueAtTime(0.25, this.audioContext.currentTime); // Modified: increased volume
     gainNode.gain.exponentialRampToValueAtTime(
       0.01,
       this.audioContext.currentTime + duration
@@ -76,7 +76,7 @@ class SpinningAudio {
     this.oscillator = null;
     this.gainNode = this.audioContext.createGain(); // Main gain node
     this.gainNode.connect(this.audioContext.destination);
-    this.gainNode.gain.value = 0.5; // Default volume
+    this.gainNode.gain.value = 0.7; // Modified: increased gain for a fun sound
     this.type = type;
     this.tickInterval = null;
     this.startTime = 0;
@@ -135,6 +135,9 @@ class SpinningAudio {
     const osc = this.audioContext.createOscillator();
     const soundGain = this.audioContext.createGain();
 
+    // Set playful oscillator type
+    osc.type = "triangle"; // Modified: changed to triangle for a fun tone
+
     // Connect through main gain node for volume control
     osc.connect(soundGain);
     soundGain.connect(this.gainNode);
@@ -188,6 +191,8 @@ class SpinningAudio {
       const freq = this.getFrequency(progress, startFreq, endFreq);
 
       const osc = this.audioContext.createOscillator();
+      // Set playful oscillator type
+      osc.type = "triangle"; // Modified: changed from default for a fun sound
       const soundGain = this.audioContext.createGain();
       const filter = this.audioContext.createBiquadFilter();
 
@@ -197,7 +202,6 @@ class SpinningAudio {
         this.audioContext.currentTime
       );
 
-      osc.type = "square";
       osc.frequency.setValueAtTime(freq, this.audioContext.currentTime);
 
       osc.connect(filter);
@@ -274,7 +278,8 @@ class SpinningAudio {
 
   playMusicalTones() {
     this.startTime = Date.now();
-    const notes = [1320, 1188, 990, 880, 660, 440];
+    // Modified: updated notes to a playful, kid-friendly scale (C5, D5, E5, F5, G5, A5)
+    const notes = [523.25, 587.33, 659.25, 698.46, 783.99, 880.00];
     let noteIndex = 0;
 
     const playNote = () => {

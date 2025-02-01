@@ -209,7 +209,7 @@ export default function Footer({
           
           <div className="mt-8 pt-8 border-t border-white/10 text-center">
             <p className="text-white/60 hover:text-white/80 transition-colors">
-              © {currentYear} Wheel of Names. All rights reserved.
+              © {currentYear} PickerWheelKids.com. All rights reserved.
             </p>
           </div>
         </div>

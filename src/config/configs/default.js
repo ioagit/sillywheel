@@ -1,9 +1,9 @@
 const config = {
-  siteName: "Pick Spin",
+  siteName: "Picker Wheel Kids",
   language: "en",
   translations: {
     en: {
-      title: "✨ Pick Spin ✨",
+      title: "✨ Picker Wheel Kids ✨",
       spinButton: "🎯 SPIN!",
       spinningText: "🎡 Spinning...",
       winnerTitle: "🎉 Winner!",
@@ -39,7 +39,7 @@ const config = {
         "We're working hard to bring you these features soon! Stay tuned for updates.",
       howToUseTitle: "How to Use",
       howToUseWelcome:
-        "Welcome to Pick Spin! Learn how to make the most of our random picker wheel.",
+        "Welcome to Picker Wheel Kids! Learn how to make the most of our random picker wheel.",
       gettingStartedTitle: "🎯 Getting Started",
       featuresTitle: "✨ Special Features",
       proTipsTitle: "💡 Pro Tips",
@@ -48,7 +48,7 @@ const config = {
       updatesTitle: "Latest Updates",
       updatesDescription:
         "Stay up to date with our latest features and improvements",
-      copyrightText: "© {year} Pick Spin. All rights reserved.",
+      copyrightText: "© {year} Picker Wheel Kids. All rights reserved.",
       shareTitle: "Random Name Picker Wheel - Free Online Tool",
       shareDescription:
         "Check out this awesome random name picker wheel! Perfect for classroom activities, team building, and decision making.",
@@ -62,7 +62,7 @@ const config = {
       email: "Email",
     },
     es: {
-      title: "✨ Pick Spin ✨",
+      title: "✨ Picker Wheel Kids ✨",
       spinButton: "🎯 ¡GIRAR!",
       spinningText: "🎡 Girando...",
       winnerTitle: "🎉 ¡Ganador!",
@@ -97,7 +97,7 @@ const config = {
         "¡Estamos trabajando para traerte estas funciones pronto! Mantente atento a las actualizaciones.",
       howToUseTitle: "Cómo Usar",
       howToUseWelcome:
-        "¡Bienvenido a Pick Spin! Aprende a sacar el máximo provecho de nuestra rueda de selección aleatoria.",
+        "¡Bienvenido a Picker Wheel Kids! Aprende a sacar el máximo provecho de nuestra rueda de selección aleatoria.",
       gettingStartedTitle: "🎯 Primeros Pasos",
       featuresTitle: "✨ Características Especiales",
       proTipsTitle: "💡 Consejos Pro",
@@ -106,7 +106,8 @@ const config = {
       updatesTitle: "Últimas Actualizaciones",
       updatesDescription:
         "Mantente al día con nuestras últimas funciones y mejoras",
-      copyrightText: "© {year} Pick Spin. Todos los derechos reservados.",
+      copyrightText:
+        "© {year} Picker Wheel Kids. Todos los derechos reservados.",
       shareTitle: "Rueda de Selección Aleatoria - Herramienta Gratuita",
       shareDescription:
         "¡Descubre esta increíble rueda de selección aleatoria! Perfecta para actividades en clase, construcción de equipos y toma de decisiones.",

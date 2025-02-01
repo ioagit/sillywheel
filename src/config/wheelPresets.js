@@ -1,18 +1,18 @@
 const wheelPresets = {
   yesNo: {
-    name: "Yes/No",
+    name: "Yes or No Fun",
     emoji: "❓",
     items: [
-      "✅ Yes",
-      "❌ No",
-      "✅ Yes",
-      "❌ No",
-      "🤔 Maybe",
-      "💫 Try Again"
+      "✅ Yes, for sure!",
+      "❌ No way!",
+      "✅ Yes, please!",
+      "❌ No thank you!",
+      "🤔 Not sure yet",
+      "💫 Try one more time!"
     ]
   },
   numbers: {
-    name: "Numbers",
+    name: "Magic Numbers",
     emoji: "🔢",
     items: [
       "1️⃣ One",
@@ -24,134 +24,134 @@ const wheelPresets = {
     ]
   },
   animals: {
-    name: "Animals",
+    name: "Cute Animals",
     emoji: "🦁",
     items: [
-      "🦁 Lion",
-      "🐘 Elephant",
-      "🦒 Giraffe",
-      "🦊 Fox",
-      "🐼 Panda",
-      "🦄 Unicorn"
+      "🦁 Lion King",
+      "🐘 Big Elephant",
+      "🦒 Tall Giraffe",
+      "🦊 Sneaky Fox",
+      "🐼 Panda Bear",
+      "🦄 Magical Unicorn"
     ]
   },
   food: {
-    name: "Food",
+    name: "Yummy Foods",
     emoji: "🍕",
     items: [
-      "🍕 Pizza",
-      "🍔 Burger",
-      "🌮 Taco",
-      "🍜 Noodles",
-      "🍣 Sushi",
-      "🥗 Salad"
+      "🍕 Pizza Party",
+      "🍔 Tasty Burger",
+      "🌮 Taco Time",
+      "🍜 Noodle Fun",
+      "🍣 Sushi Surprise",
+      "🥗 Healthy Salad"
     ]
   },
   activities: {
-    name: "Activities",
+    name: "Fun Activities",
     emoji: "🎮",
     items: [
-      "🎮 Gaming",
-      "🎨 Drawing",
-      "📚 Reading",
-      "🎵 Music",
-      "🎬 Movies",
-      "🏃 Sports"
+      "🎮 Video Games",
+      "🎨 Arts & Crafts",
+      "📚 Story Time",
+      "🎵 Sing-Along",
+      "🎬 Movie Time",
+      "🏃 Outdoor Play"
     ]
   },
   custom: {
-    name: "Custom List",
+    name: "My Fun List",
     emoji: "✨",
     items: [
-      "🎮 Player 1",
-      "🎨 Artist",
-      "🎵 Musician",
-      "🎪 Performer",
-      "⭐ Star",
-      "🎯 Winner"
+      "🎮 Game On",
+      "🎨 Little Artist",
+      "🎵 Music Maker",
+      "🎪 Star Performer",
+      "⭐ Shining Star",
+      "🎯 Champion"
     ]
   },
   farts: {
-    name: "Funny Farts",
+    name: "Silly Giggles",
     emoji: "💨",
     items: [
-      "💨 Squeaky Surprise",
-      "🌪️ Thunderous Blast",
-      "💦 Wet Willie",
-      "🎵 Musical Toot",
-      "💣 Bass Bomber",
-      "🎺 Trumpet Blast",
-      "🫧 Bubble Trouble",
-      "⚡ Thunder Clap",
-      "🌬️ Silent but Deadly",
-      "🎆 Grand Finale"
+      "💨 Giggle Puff",
+      "🌪️ Whirlwind Whoopee",
+      "💦 Silly Spritz",
+      "🎵 Toot Tunes",
+      "💣 Boom Bubble",
+      "🎺 Tooty Trumpet",
+      "🫧 Bubbly Burst",
+      "⚡ Lightning Laugh",
+      "🌬️ Silent Giggle",
+      "🎆 Sparkle Surprise"
     ],
     soundIndices: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
   },
   teams: {
-    name: "Team Names",
+    name: "Classroom Teams",
     icon: "👥",
-    description: "Common team names for group activities",
+    description: "Fun team names for school projects",
     items: [
-      "Red Dragons",
-      "Blue Phoenix",
-      "Green Tigers",
-      "Yellow Lions",
-      "Purple Knights",
-      "Orange Warriors",
+      "Red Rockets",
+      "Blue Stars",
+      "Green Gators",
+      "Yellow Tigers",
+      "Purple Pals",
+      "Orange Owls",
       "Black Panthers",
-      "White Eagles"
+      "White Wolves"
     ]
   },
   classroom: {
-    name: "Classroom Activities",
+    name: "Classroom Helpers",
     icon: "📚",
-    description: "Common classroom tasks and roles",
+    description: "Roles and fun duties in the classroom",
     items: [
       "Line Leader",
       "Door Holder",
       "Board Cleaner",
       "Paper Passer",
       "Calendar Helper",
-      "Attendance Taker",
+      "Attendance Buddy",
       "Light Monitor",
       "Plant Waterer"
     ]
   },
   family: {
-    name: "Family Chores",
+    name: "Family Fun Chores",
     icon: "🏠",
-    description: "Common household tasks",
+    description: "Simple chores for family time",
     items: [
-      "Dishes",
-      "Laundry",
-      "Vacuuming",
-      "Dusting",
-      "Taking Out Trash",
-      "Making Beds",
-      "Walking the Dog",
-      "Watering Plants"
+      "Help with Dishes",
+      "Laundry Assistant",
+      "Vacuuming Fun",
+      "Dusting Duty",
+      "Trash Helper",
+      "Bed Maker",
+      "Pet Walker",
+      "Plant Watering"
     ]
   },
   games: {
-    name: "Party Games",
+    name: "School Games",
     icon: "🎲",
-    description: "Popular party games",
+    description: "Classic and modern fun games",
     items: [
       "Charades",
-      "Pictionary",
-      "Truth or Dare",
+      "Drawing Game",
+      "Truth or Fun",
       "Musical Chairs",
       "Simon Says",
       "Scavenger Hunt",
-      "Trivia",
+      "Trivia Time",
       "Twenty Questions"
     ]
   },
   sports: {
-    name: "Sports",
+    name: "Play Time Sports",
     icon: "⚽",
-    description: "Popular sports activities",
+    description: "Fun sports activities for everyone",
     items: [
       "Soccer",
       "Basketball",
@@ -164,110 +164,110 @@ const wheelPresets = {
     ]
   },
   movies: {
-    name: "Movie Genres",
+    name: "Cartoon Movies",
     icon: "🎬",
-    description: "Different types of movies",
+    description: "Favorite cartoons and kids movies",
     items: [
-      "Action",
-      "Comedy",
-      "Drama",
-      "Horror",
-      "Sci-Fi",
-      "Romance",
-      "Documentary",
-      "Animation"
+      "Action Adventures",
+      "Funny Tales",
+      "Heartwarming Stories",
+      "Spooky Fun",
+      "Space Adventures",
+      "Love Stories",
+      "Nature Wonders",
+      "Animated Dreams"
     ]
   },
   office: {
-    name: "Office Tasks",
+    name: "Classroom Jobs",
     icon: "💼",
-    description: "Common workplace responsibilities",
+    description: "Simple classroom tasks for students",
     items: [
-      "Meeting Notes",
-      "Email Updates",
-      "Data Entry",
-      "Filing",
-      "Phone Calls",
-      "Scheduling",
-      "Research",
-      "Presentations"
+      "Note Sharing",
+      "Homework Helper",
+      "Organizing Books",
+      "Filing Papers",
+      "Phone Greetings",
+      "Schedule Reminder",
+      "Book Research",
+      "Presentation Prep"
     ]
   },
   meetings: {
-    name: "Meeting Roles",
+    name: "Team Roles",
     icon: "🗣️",
-    description: "Common meeting responsibilities",
+    description: "Fun roles during group work",
     items: [
-      "Facilitator",
-      "Timekeeper",
+      "Leader",
+      "Timer",
       "Note Taker",
       "Presenter",
-      "Tech Support",
-      "Q&A Monitor",
-      "Action Items Tracker",
-      "Follow-up Coordinator"
+      "Tech Buddy",
+      "Question Checker",
+      "Task Tracker",
+      "Follow-up Helper"
     ]
   },
   tasks: {
-    name: "Project Tasks",
+    name: "Classroom Projects",
     icon: "📋",
-    description: "Common project activities",
+    description: "Fun activities for classroom projects",
     items: [
-      "Planning",
-      "Research",
-      "Design",
-      "Development",
-      "Testing",
-      "Documentation",
-      "Review",
-      "Deployment"
+      "Planning Time",
+      "Research Fun",
+      "Creative Design",
+      "Building Tasks",
+      "Testing Ideas",
+      "Writing Notes",
+      "Review Time",
+      "Showcase"
     ]
   },
   holidays: {
-    name: "Holidays",
+    name: "Happy Holidays",
     icon: "🎄",
-    description: "Major holidays throughout the year",
+    description: "Fun celebrations and holidays",
     items: [
-      "New Year's",
-      "Valentine's Day",
-      "Easter",
-      "Halloween",
-      "Thanksgiving",
-      "Christmas",
-      "Independence Day",
-      "Labor Day"
+      "New Year's Party",
+      "Valentine's Fun",
+      "Easter Egg Hunt",
+      "Halloween Spook",
+      "Thanksgiving Feast",
+      "Christmas Joy",
+      "Independence Fest",
+      "Labor Day Fun"
     ]
   },
   birthdays: {
-    name: "Birthday Activities",
+    name: "Birthday Party",
     icon: "🎂",
-    description: "Fun birthday party activities",
+    description: "Exciting activities for birthday celebrations",
     items: [
       "Pin the Tail",
       "Balloon Pop",
       "Treasure Hunt",
       "Face Painting",
-      "Dance Contest",
-      "Piñata",
-      "Gift Opening",
-      "Cake Time"
+      "Dance Party",
+      "Piñata Smash",
+      "Gift Time",
+      "Cake Celebration"
     ]
   },
   rewards: {
-    name: "Rewards",
+    name: "Fun Rewards",
     icon: "🎁",
-    description: "Common prizes and rewards",
+    description: "Exciting prizes and treats",
     items: [
-      "Gift Card",
-      "Extra Break",
-      "Free Lunch",
+      "Fun Gift Card",
+      "Extra Playtime",
+      "Yummy Lunch",
       "Movie Tickets",
-      "Book of Choice",
+      "Book of Fun",
       "Special Treat",
-      "Recognition Award",
-      "Mystery Prize"
+      "Super Star Award",
+      "Mystery Surprise"
     ]
   }
 };
 
-export default wheelPresets; 
+export default wheelPresets;

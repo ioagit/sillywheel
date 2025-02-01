@@ -99,12 +99,7 @@ export default function SpinningWheel() {
         ((finalRotation + 270) % 360) / segmentAngle
       );
 
-      if (currentPreset === "farts") {
-        const soundIndex = wheelPresets.farts.soundIndices[winningIndex];
-        winSoundPlayer.playWinSound(soundIndex);
-      } else {
-        winSoundPlayer.playWinSound(selectedWinSound);
-      }
+      winSoundPlayer.playWinSound(selectedWinSound);
     }, spinAnimation.duration);
   };
 
@@ -130,10 +125,6 @@ export default function SpinningWheel() {
   const handlePresetSelect = (presetItems, presetKey) => {
     setNames(presetItems);
     setCurrentPreset(presetKey);
-
-    if (presetKey === "farts") {
-      setSelectedWinSound(0);
-    }
   };
 
   const getResponsiveSize = () => {
@@ -268,7 +259,7 @@ export default function SpinningWheel() {
                 <span className="relative z-10 group-hover:animate-pulse">
                   {isSpinning
                     ? "🎡 " + translations.spinningText
-                    : "✨ " + translations.spinButton}
+                    : "✨ Let’s Spin & Smile!"}
                 </span>
               </button>
             </div>
@@ -284,7 +275,7 @@ export default function SpinningWheel() {
                 <div className="bg-white/20 backdrop-blur-md rounded-lg p-4 group-hover:scale-[1.01] transition-transform">
                   <div className="flex justify-between items-center mb-4">
                     <h3 className="text-xl font-bold text-white">
-                      ✨ {translations.addParticipantsTitle}
+                      ✨ Welcome to the Fun Wheel!
                     </h3>
                     <button
                       onClick={() => setShowPresetList(true)}
