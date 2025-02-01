@@ -7,9 +7,11 @@
     "dev": "vite",
     "dev:company": "cross-env VITE_CONFIG=company vite",
     "dev:school": "cross-env VITE_CONFIG=school vite",
+    "dev:ruedaloca": "cross-env VITE_CONFIG=ruedaloca vite",
     "build": "vite build",
     "build:company": "cross-env VITE_CONFIG=company vite build",
     "build:school": "cross-env VITE_CONFIG=school vite build",
+    "build:ruedaloca": "cross-env VITE_CONFIG=ruedaloca vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
