@@ -226,7 +226,7 @@ export default function SpinningWheel() {
                         ? `transform ${spinAnimation.duration / 1000}s ${
                             spinAnimation.curve
                           }`
-                        : "none",
+                        : "transform 0.5s ease-out"
                     }}
                   >
                     {names.map((name, index) => {

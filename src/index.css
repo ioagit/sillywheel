@@ -103,3 +103,16 @@ body {
     transform: scale(0);
   }
 }
+
+/* Updated animation for adjusting the wheel */
+.animate-adjust {
+  animation: adjustAnimation 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Updated keyframes for adjustAnimation */
+@keyframes adjustAnimation {
+  0% { transform: scale(1) rotate(0deg); }
+  40% { transform: scale(1.03) rotate(5deg); }
+  60% { transform: scale(0.97) rotate(-5deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
