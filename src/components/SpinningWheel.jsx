@@ -33,6 +33,7 @@ export default function SpinningWheel() {
   const [winner, setWinner] = React.useState(null);
   const [winningIndex, setWinningIndex] = React.useState(null); // New state for winning index
   const [autoRemoveWinner, setAutoRemoveWinner] = React.useState(false); // Winner Gobbler toggle
+  const [wheelRenderKey, setWheelRenderKey] = React.useState(0); // New state for forcing re-render of the wheel
 
   const translations = siteConfig.translations[siteConfig.language];
 
@@ -109,13 +110,34 @@ export default function SpinningWheel() {
     }, spinAnimation.duration);
   };
 
+  // Updated handleWinnerClose to align rotation with n-1 segments covering entire wheel
   const handleWinnerClose = () => {
     if (autoRemoveWinner && winningIndex !== null) {
-      setNames(prevNames => {
-        const newNames = [...prevNames];
-        newNames.splice(winningIndex, 1);
-        return newNames;
-      });
+      const segmentEl = document.getElementById(`wheel-segment-${winningIndex}`);
+      if (segmentEl) {
+        segmentEl.classList.add("animate-remove");
+        const finalRotation = rotation % 360; // capture current final rotation
+        setTimeout(() => {
+          setNames(prevNames => {
+            const newNames = [...prevNames];
+            newNames.splice(winningIndex, 1);
+            const newCount = newNames.length;
+            if (newCount > 0) {
+              const newSegAngle = 360 / newCount;
+              // Use floor to align the wheel segments with boundaries covering full circle
+              const adjustedRotation = Math.floor(finalRotation / newSegAngle) * newSegAngle;
+              setRotation(adjustedRotation);
+            } else {
+              setRotation(0);
+            }
+            return newNames;
+          });
+          setWheelRenderKey(prev => prev + 1); // Force re-render of wheel segments
+          setWinner(null);
+          setWinningIndex(null);
+        }, 1000); // delay to match CSS animation duration
+        return;
+      }
     }
     setWinner(null);
     setWinningIndex(null);
@@ -194,6 +216,7 @@ export default function SpinningWheel() {
                   }}
                 >
                   <svg
+                    key={wheelRenderKey} // force complete re-render when wheelRenderKey changes
                     ref={wheelRef}
                     viewBox="-150 -150 300 300"
                     className="w-full h-full"
@@ -216,7 +239,7 @@ export default function SpinningWheel() {
                       const textPos = polarToCartesian(textRadius, midAngle);
 
                       return (
-                        <g key={index}>
+                        <g key={`${wheelRenderKey}-${index}`} id={`wheel-segment-${index}`}>
                           <path
                             d={createWheelSegment(startAngle, endAngle, radius)}
                             fill={getWheelColors(index)}
@@ -307,15 +330,24 @@ export default function SpinningWheel() {
                     <h3 className="text-xl font-bold text-white">
                       ✨ Welcome to the Fun Wheel!
                     </h3>
-                    <button
-                      onClick={() => setShowPresetList(true)}
-                      className="bg-white/20 text-white px-4 py-2 rounded-lg 
-                        hover:bg-white/30 transition-colors flex items-center gap-2
-                        hover:scale-105 transform"
-                    >
-                      <span className="animate-bounce-subtle">✨</span>
-                      <span>Magic Lists</span>
-                    </button>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => setShowPresetList(true)}
+                        className="bg-white/20 text-white px-4 py-2 rounded-lg 
+                          hover:bg-white/30 transition-colors flex items-center gap-2
+                          hover:scale-105 transform"
+                      >
+                        <span className="animate-bounce-subtle">✨</span>
+                        <span>Magic Lists</span>
+                      </button>
+                      {/* New Clear List button */}
+                      <button
+                        onClick={() => setNames([])}
+                        className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors"
+                      >
+                        Clear List
+                      </button>
+                    </div>
                   </div>
 
                   <form onSubmit={addName} className="space-y-4">
