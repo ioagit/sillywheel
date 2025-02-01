@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import siteConfig from "../config/siteConfig";
 import SpinningAudio from "../utils/audio";
 import { winSoundPlayer } from "../utils/winSounds";
@@ -12,7 +13,23 @@ import PresetListModal from "./PresetListModal";
 import ScoreBoard from './ScoreBoard';
 
 export default function SpinningWheel() {
-  const [names, setNames] = React.useState(siteConfig.defaultParticipants);
+  const { presetSlug } = useParams();
+
+  // If a valid preset is provided via URL, use its items; otherwise use default participants.
+  const [names, setNames] = React.useState(() => {
+    if (presetSlug && wheelPresets[presetSlug]) {
+      return wheelPresets[presetSlug].items;
+    }
+    return siteConfig.defaultParticipants;
+  });
+
+  // Update names if presetSlug changes
+  React.useEffect(() => {
+    if (presetSlug && wheelPresets[presetSlug]) {
+      setNames(wheelPresets[presetSlug].items);
+    }
+  }, [presetSlug]);
+
   const [rotation, setRotation] = React.useState(0);
   const [isSpinning, setIsSpinning] = React.useState(false);
   const [newName, setNewName] = React.useState("");

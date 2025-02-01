@@ -14,7 +14,7 @@ export default function PresetListModal({ onClose, onSelect, currentPreset }) {
           {Object.entries(wheelPresets).map(([slug, preset]) => (
             <Link
               key={slug}
-              to={`/preset/${slug}`}
+              to={`/${slug}`}
               onClick={() => {
                 onSelect && onSelect(preset.items, slug);
                 onClose();
