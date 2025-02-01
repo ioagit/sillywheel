@@ -1,5 +1,5 @@
 const wheelPresets = {
-  yesNo: {
+  "yes-no-fun": {
     name: "Yes or No Fun",
     emoji: "❓",
     items: [
@@ -11,7 +11,7 @@ const wheelPresets = {
       "💫 Try one more time!"
     ]
   },
-  numbers: {
+  "magic-numbers": {
     name: "Magic Numbers",
     emoji: "🔢",
     items: [
@@ -23,7 +23,7 @@ const wheelPresets = {
       "6️⃣ Six"
     ]
   },
-  animals: {
+  "animal-adventures": {
     name: "Cute Animals",
     emoji: "🦁",
     items: [
@@ -35,7 +35,7 @@ const wheelPresets = {
       "🦄 Magical Unicorn"
     ]
   },
-  food: {
+  "yummy-foodies": {
     name: "Yummy Foods",
     emoji: "🍕",
     items: [
@@ -47,7 +47,7 @@ const wheelPresets = {
       "🥗 Healthy Salad"
     ]
   },
-  activities: {
+  "action-adventures": {
     name: "Fun Activities",
     emoji: "🎮",
     items: [
@@ -59,7 +59,7 @@ const wheelPresets = {
       "🏃 Outdoor Play"
     ]
   },
-  custom: {
+  "custom-fun": {
     name: "My Fun List",
     emoji: "✨",
     items: [
@@ -71,7 +71,7 @@ const wheelPresets = {
       "🎯 Champion"
     ]
   },
-  farts: {
+  "silly-giggles": {
     name: "Silly Giggles",
     emoji: "💨",
     items: [
@@ -88,9 +88,9 @@ const wheelPresets = {
     ],
     soundIndices: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
   },
-  teams: {
+  "fun-teams": {
     name: "Classroom Teams",
-    icon: "👥",
+    emoji: "👥",
     description: "Fun team names for school projects",
     items: [
       "Red Rockets",
@@ -103,9 +103,9 @@ const wheelPresets = {
       "White Wolves"
     ]
   },
-  classroom: {
+  "classroom-helpers": {
     name: "Classroom Helpers",
-    icon: "📚",
+    emoji: "📚",
     description: "Roles and fun duties in the classroom",
     items: [
       "Line Leader",
@@ -118,9 +118,9 @@ const wheelPresets = {
       "Plant Waterer"
     ]
   },
-  family: {
+  "family-fun": {
     name: "Family Fun Chores",
-    icon: "🏠",
+    emoji: "🏠",
     description: "Simple chores for family time",
     items: [
       "Help with Dishes",
@@ -133,9 +133,9 @@ const wheelPresets = {
       "Plant Watering"
     ]
   },
-  games: {
+  "school-games": {
     name: "School Games",
-    icon: "🎲",
+    emoji: "🎲",
     description: "Classic and modern fun games",
     items: [
       "Charades",
@@ -148,9 +148,9 @@ const wheelPresets = {
       "Twenty Questions"
     ]
   },
-  sports: {
+  "play-time-sports": {
     name: "Play Time Sports",
-    icon: "⚽",
+    emoji: "⚽",
     description: "Fun sports activities for everyone",
     items: [
       "Soccer",
@@ -163,9 +163,9 @@ const wheelPresets = {
       "Cycling"
     ]
   },
-  movies: {
+  "cartoon-movies": {
     name: "Cartoon Movies",
-    icon: "🎬",
+    emoji: "🎬",
     description: "Favorite cartoons and kids movies",
     items: [
       "Action Adventures",
@@ -178,9 +178,9 @@ const wheelPresets = {
       "Animated Dreams"
     ]
   },
-  office: {
+  "classroom-jobs": {
     name: "Classroom Jobs",
-    icon: "💼",
+    emoji: "💼",
     description: "Simple classroom tasks for students",
     items: [
       "Note Sharing",
@@ -193,9 +193,9 @@ const wheelPresets = {
       "Presentation Prep"
     ]
   },
-  meetings: {
+  "team-roles-fun": {
     name: "Team Roles",
-    icon: "🗣️",
+    emoji: "🗣️",
     description: "Fun roles during group work",
     items: [
       "Leader",
@@ -208,9 +208,9 @@ const wheelPresets = {
       "Follow-up Helper"
     ]
   },
-  tasks: {
+  "classroom-projects": {
     name: "Classroom Projects",
-    icon: "📋",
+    emoji: "📋",
     description: "Fun activities for classroom projects",
     items: [
       "Planning Time",
@@ -223,9 +223,9 @@ const wheelPresets = {
       "Showcase"
     ]
   },
-  holidays: {
+  "happy-holidays": {
     name: "Happy Holidays",
-    icon: "🎄",
+    emoji: "🎄",
     description: "Fun celebrations and holidays",
     items: [
       "New Year's Party",
@@ -238,9 +238,9 @@ const wheelPresets = {
       "Labor Day Fun"
     ]
   },
-  birthdays: {
+  "birthday-party": {
     name: "Birthday Party",
-    icon: "🎂",
+    emoji: "🎂",
     description: "Exciting activities for birthday celebrations",
     items: [
       "Pin the Tail",
@@ -253,9 +253,9 @@ const wheelPresets = {
       "Cake Celebration"
     ]
   },
-  rewards: {
+  "fun-rewards": {
     name: "Fun Rewards",
-    icon: "🎁",
+    emoji: "🎁",
     description: "Exciting prizes and treats",
     items: [
       "Fun Gift Card",
