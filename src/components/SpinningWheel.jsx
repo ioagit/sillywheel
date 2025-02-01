@@ -30,7 +30,9 @@ export default function SpinningWheel() {
     duration: 5000,
     curve: "cubic-bezier(0.2, 0, 0.1, 1)",
   });
-  const [winner, setWinner] = React.useState(null); // New state for winner announcement
+  const [winner, setWinner] = React.useState(null);
+  const [winningIndex, setWinningIndex] = React.useState(null); // New state for winning index
+  const [autoRemoveWinner, setAutoRemoveWinner] = React.useState(false); // Winner Gobbler toggle
 
   const translations = siteConfig.translations[siteConfig.language];
 
@@ -99,11 +101,24 @@ export default function SpinningWheel() {
       const segmentAngle = 360 / names.length;
       // Calculate effective pointer angle (pointer is at top, i.e. 0° in global frame)
       const effectiveAngle = (360 - finalRotation) % 360;
-      const winningIndex = Math.floor(effectiveAngle / segmentAngle);
-      const winningName = names[winningIndex];
+      const winIndex = Math.floor(effectiveAngle / segmentAngle);
+      const winningName = names[winIndex];
       winSoundPlayer.playWinSound(selectedWinSound);
       setWinner(winningName); // Set winner to trigger the announcement overlay
+      setWinningIndex(winIndex); // Save the winning index for later removal
     }, spinAnimation.duration);
+  };
+
+  const handleWinnerClose = () => {
+    if (autoRemoveWinner && winningIndex !== null) {
+      setNames(prevNames => {
+        const newNames = [...prevNames];
+        newNames.splice(winningIndex, 1);
+        return newNames;
+      });
+    }
+    setWinner(null);
+    setWinningIndex(null);
   };
 
   const addName = (e) => {
@@ -247,24 +262,36 @@ export default function SpinningWheel() {
                 </div>
               </div>
 
-              <button
-                onClick={spinWheel}
-                disabled={isSpinning || names.length < 2}
-                className="bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xl font-bold 
-                  py-4 px-12 rounded-full shadow-lg 
-                  transform hover:scale-105 hover:rotate-1 active:scale-95
-                  disabled:opacity-50 transition-all duration-300
-                  animate-bounce-subtle
-                  relative overflow-hidden group
-                  before:absolute before:inset-0 before:bg-white/20 before:transform before:-skew-x-12 
-                  before:-translate-x-full hover:before:translate-x-full before:transition-transform before:duration-700"
-              >
-                <span className="relative z-10 group-hover:animate-pulse">
-                  {isSpinning
-                    ? "🎡 " + translations.spinningText
-                    : "✨ Let’s Spin & Smile!"}
-                </span>
-              </button>
+              <div className="flex flex-col items-center space-y-4">
+                <button
+                  onClick={spinWheel}
+                  disabled={isSpinning || names.length < 2}
+                  className="bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xl font-bold 
+                    py-4 px-12 rounded-full shadow-lg 
+                    transform hover:scale-105 hover:rotate-1 active:scale-95
+                    disabled:opacity-50 transition-all duration-300
+                    animate-bounce-subtle
+                    relative overflow-hidden group
+                    before:absolute before:inset-0 before:bg-white/20 before:transform before:-skew-x-12 
+                    before:-translate-x-full hover:before:translate-x-full before:transition-transform before:duration-700"
+                >
+                  <span className="relative z-10 group-hover:animate-pulse">
+                    {isSpinning
+                      ? "🎡 " + translations.spinningText
+                      : "✨ Let’s Spin & Smile!"}
+                  </span>
+                </button>
+                {/* Fun toggle for Winner Gobbler 🍽 */}
+                <label className="flex items-center space-x-2 mt-4">
+                  <input 
+                    type="checkbox" 
+                    checked={autoRemoveWinner} 
+                    onChange={() => setAutoRemoveWinner(prev => !prev)} 
+                    className="form-checkbox h-5 w-5 text-purple-600" 
+                  />
+                  <span className="text-white">Winner Gobbler 🍽</span>
+                </label>
+              </div>
             </div>
 
             <div
@@ -427,14 +454,14 @@ export default function SpinningWheel() {
         />
       )}
 
-      {/* New Winner Announcement Overlay */}
+      {/* Winner Announcement Overlay */}
       {winner && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-white rounded-2xl p-8 text-center shadow-xl">
             <h2 className="text-3xl font-bold text-purple-600 mb-4">Hooray!</h2>
             <p className="text-xl mb-6">Congratulations, {winner}! You're our lucky winner!</p>
             <button
-              onClick={() => setWinner(null)}
+              onClick={handleWinnerClose}
               className="bg-gradient-to-r from-green-400 to-emerald-500 text-white px-6 py-3 rounded-full font-bold hover:scale-105 transition-transform"
             >
               Yay!
