@@ -18,10 +18,20 @@ export default function PresetPage() {
         <meta name="description" content={`Enjoy the ${preset.name} preset on PickerWheelKids. ${preset.description || ''}`} />
         <link rel="canonical" href={`https://PickerWheelKids.com/${presetSlug}`} />
       </Helmet>
-      <div className="p-8">
-        <h1 className="text-3xl font-bold mb-4">{preset.name}</h1>
-        <p className="mb-6">{preset.description}</p>
-        {/* ...additional preset details... */}
+      <div className="p-8 text-center">
+        {/* Fun header with icons */}
+        <div className="text-6xl mb-4">
+          {preset.emoji}🎉
+        </div>
+        <h1 className="text-4xl font-extrabold mb-4">
+          <span className="mr-2">{preset.emoji}</span>
+          {preset.name}
+          <span className="ml-2">🎊</span>
+        </h1>
+        <p className="text-xl mb-6">
+          {preset.description} 🚀✨
+        </p>
+        {/* ...additional preset details and fun elements... */}
       </div>
     </>
   );

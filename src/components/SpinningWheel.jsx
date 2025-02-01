@@ -14,11 +14,12 @@ import ScoreBoard from './ScoreBoard';
 
 export default function SpinningWheel() {
   const { presetSlug } = useParams();
+  const preset = presetSlug && wheelPresets[presetSlug] ? wheelPresets[presetSlug] : null;
 
   // If a valid preset is provided via URL, use its items; otherwise use default participants.
   const [names, setNames] = React.useState(() => {
-    if (presetSlug && wheelPresets[presetSlug]) {
-      return wheelPresets[presetSlug].items;
+    if (preset) {
+      return preset.items;
     }
     return siteConfig.defaultParticipants;
   });
@@ -222,6 +223,14 @@ export default function SpinningWheel() {
       <Navbar onThemeClick={() => setShowThemeSelector(true)} />
 
       <main className="flex-grow p-8">
+        {preset && (
+          <section className="mb-8 text-center">
+            <h1 className="text-3xl font-bold text-white">{preset.name}</h1>
+            {preset.description && (
+              <p className="text-white/70">{preset.description}</p>
+            )}
+          </section>
+        )}
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12">
             <div className="flex flex-col items-center justify-center space-y-8">
