@@ -580,23 +580,25 @@ export default function SpinningWheel() {
       )}
 
       {/* New explanation panel added above the footer */}
-      <div className="mt-8 bg-white/10 backdrop-blur-md rounded-2xl p-6 shadow-2xl">
-        <h3 className="text-xl font-bold text-white mb-4">
-          What is PickerWheel Kids?
-        </h3>
-        <p className="text-white/80 mb-2">
-          PickerWheel Kids is a fun and interactive tool designed to add
-          excitement to every classroom or party.
-        </p>
-        <p className="text-white/80 mb-2">
-          How to Play: Simply add participants, spin the wheel, and let fortune
-          decide the winner.
-        </p>
-        <p className="text-white/80">
-          Footer Tools: Use the footer to choose audio styles, adjust the wheel
-          size, set spin speed, and select victory sounds for a personalized
-          experience.
-        </p>
+      <div className="max-w-xl mx-auto">
+        <div className="mt-8 bg-white/10 backdrop-blur-md rounded-2xl p-6 shadow-2xl">
+          <h3 className="text-xl font-bold text-white mb-4">
+            What is PickerWheel Kids?
+          </h3>
+          <p className="text-white/80 mb-2">
+            PickerWheel Kids is a fun and interactive tool designed to add
+            excitement to every classroom or party.
+          </p>
+          <p className="text-white/80 mb-2">
+            How to Play: Simply add participants, spin the wheel, and let
+            fortune decide the winner.
+          </p>
+          <p className="text-white/80">
+            Footer Tools: Use the footer to choose audio styles, adjust the
+            wheel size, set spin speed, and select victory sounds for a
+            personalized experience.
+          </p>
+        </div>
       </div>
 
       <Footer
