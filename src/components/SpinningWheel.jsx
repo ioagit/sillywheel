@@ -262,7 +262,8 @@ export default function SpinningWheel() {
                 <div className="absolute -bottom-3 -right-3 w-6 h-6 bg-purple-500 rounded-full animate-ping-slow opacity-75 delay-300"></div>
 
                 <div
-                  className="relative"
+                  className="relative cursor-pointer"
+                  onClick={!isSpinning ? spinWheel : undefined}
                   style={{
                     width:
                       wheelSize === "auto" ? getResponsiveSize() : wheelSize,
@@ -271,10 +272,10 @@ export default function SpinningWheel() {
                   }}
                 >
                   <svg
-                    key={wheelRenderKey} // force complete re-render when wheelRenderKey changes
+                    key={wheelRenderKey}
                     ref={wheelRef}
                     viewBox="-150 -150 300 300"
-                    className="w-full h-full"
+                    className="w-full h-full hover:scale-[1.02] transition-transform"
                     style={{
                       transform: `rotate(${rotation}deg)`,
                       transition: isSpinning
@@ -372,7 +373,7 @@ export default function SpinningWheel() {
                       disabled={keepScores}
                       className="form-checkbox h-5 w-5 text-purple-600"
                     />
-                    <span className="text-white">Winner Gobbler 🍽</span>
+                    <span className="text-white">Winner Out 🍽</span>
                   </label>
                   <label className="flex items-center space-x-2">
                     <input
