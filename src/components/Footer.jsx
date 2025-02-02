@@ -39,7 +39,7 @@ export default function Footer({
   return (
     <>
       <Helmet>
-        <title>{siteConfig.siteName} - Random Name Picker Wheel</title>
+        <title>{siteConfig.siteName} - Random Name Picker Wheel for Kids</title>
         <meta name="description" content={siteConfig.siteDescription} />
         <meta name="keywords" content={siteConfig.siteKeywords.join(', ')} />
         

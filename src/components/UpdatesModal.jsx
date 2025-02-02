@@ -72,7 +72,7 @@ export default function UpdatesModal({ onClose }) {
   return (
     <>
       <Helmet>
-        <title>Latest Updates - Random Name Picker Wheel Changelog</title>
+        <title>Latest Updates - Random Name Picker Wheel Kids Changelog</title>
         <meta name="description" content="Stay up to date with the latest features and improvements to our random name picker wheel. New themes, animations, sound effects, and more!" />
         
         {/* Primary Meta Tags */}
@@ -81,7 +81,7 @@ export default function UpdatesModal({ onClose }) {
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="article" />
-        <meta property="og:title" content="What's New - Random Name Picker Wheel Updates" />
+        <meta property="og:title" content="What's New - Random Name Picker Wheel Kids Updates" />
         <meta property="og:description" content="Discover the latest features and improvements in our random name picker wheel. Enhanced user experience with new themes and animations." />
         <meta property="article:section" content="Updates" />
         <meta property="article:tag" content="Feature Updates" />

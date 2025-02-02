@@ -52,7 +52,7 @@ export default function HowToUseModal({ onClose }) {
   return (
     <>
       <Helmet>
-        <title>How to Use Random Name Picker Wheel - Complete Guide</title>
+        <title>How to Use Random Name Picker Wheel Kids - Complete Guide</title>
         <meta name="description" content="Learn how to use our random name picker wheel for classroom activities, team building, decision making, and more. Comprehensive guide with tips and best practices." />
         
         {/* Primary Meta Tags */}
@@ -61,14 +61,14 @@ export default function HowToUseModal({ onClose }) {
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="article" />
-        <meta property="og:title" content="How to Use Random Name Picker Wheel - Complete Guide" />
+        <meta property="og:title" content="How to Use Random Name Picker Wheel Kids- Complete Guide" />
         <meta property="og:description" content="Master the random name picker wheel with our comprehensive guide. Perfect for teachers, team leaders, and event organizers." />
         <meta property="article:section" content="Tutorial" />
         <meta property="article:tag" content="Education Technology" />
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Random Name Picker Wheel Guide" />
+        <meta name="twitter:title" content="Random Name Picker Wheel Kids Guide" />
         <meta name="twitter:description" content="Complete guide to using our random name picker wheel for various activities and purposes." />
         
         {/* Schema.org markup for Google */}
@@ -76,7 +76,7 @@ export default function HowToUseModal({ onClose }) {
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "HowTo",
-            "name": "How to Use Random Name Picker Wheel",
+            "name": "How to Use Random Name Picker Wheel Kids",
             "description": "Complete guide to using the random name picker wheel for classroom activities, team building, and decision making.",
             "step": [
               {
@@ -97,7 +97,7 @@ export default function HowToUseModal({ onClose }) {
             ],
             "tool": {
               "@type": "Tool",
-              "name": "Random Name Picker Wheel",
+              "name": "Random Name Picker Wheel Kids",
               "description": "Interactive wheel for random selection and decision making"
             }
           })}

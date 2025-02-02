@@ -15,7 +15,7 @@ import {
 
 export default function ShareModal({ onClose }) {
   const shareUrl = window.location.href;
-  const title = "Random Name Picker Wheel - Free Online Tool";
+  const title = "Random Name Picker Wheel Kids - Free Online Tool";
   const description = "Check out this awesome random name picker wheel! Perfect for classroom activities, team building, and decision making.";
 
   const socialPlatforms = [
@@ -77,7 +77,7 @@ export default function ShareModal({ onClose }) {
   return (
     <>
       <Helmet>
-        <title>Share Random Name Picker Wheel</title>
+        <title>Share Random Name Picker Wheel Kids</title>
         <meta name="description" content="Share this random name picker wheel with your friends and colleagues. Perfect for teachers, event planners, and team leaders." />
         
         {/* Primary Meta Tags */}
@@ -85,12 +85,12 @@ export default function ShareModal({ onClose }) {
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Share Random Name Picker Wheel" />
+        <meta property="og:title" content="Share Random Name Picker Wheel Kids" />
         <meta property="og:description" content="Share this amazing tool with your network!" />
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Share Random Name Picker Wheel" />
+        <meta name="twitter:title" content="Share Random Name Picker Wheel Kids" />
         <meta name="twitter:description" content="Share this random name picker wheel with your network!" />
       </Helmet>
 
