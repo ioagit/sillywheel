@@ -9,7 +9,11 @@ const wheelPresets = {
       "❌ No thank you!",
       "🤔 Not sure yet",
       "💫 Try one more time!"
-    ]
+    ],
+    seoContent: {
+      title: "Decisions Made Fun with Yes or No",
+      content: "Explore a playful way to choose between yes and no. Perfect for games and classroom activities, this list sparks fun debate and decision making!"
+    }
   },
   "magic-numbers": {
     name: "Magic Numbers",
@@ -21,7 +25,11 @@ const wheelPresets = {
       "4️⃣ Four",
       "5️⃣ Five",
       "6️⃣ Six"
-    ]
+    ],
+    seoContent: {
+      title: "Unlock the Mysteries of Magic Numbers",
+      content: "Discover how numbers can be enchanting and educational. A magical journey perfect for playful learning and fun math games."
+    }
   },
   "animal-adventures": {
     name: "Cute Animals",
@@ -69,7 +77,11 @@ const wheelPresets = {
       "🎪 Star Performer",
       "⭐ Shining Star",
       "🎯 Champion"
-    ]
+    ],
+    seoContent: {
+      title: "Your Custom Fun Adventure",
+      content: "Craft your very own list of fun activities tailored to your imagination. Get inspired and share your creative ideas with friends!"
+    }
   },
   "silly-giggles": {
     name: "Silly Giggles",

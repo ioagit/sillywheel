@@ -10,11 +10,12 @@ import Confetti from "./Confetti";
 import { themes } from "../config/themes";
 import ThemeSelector from "./ThemeSelector";
 import PresetListModal from "./PresetListModal";
-import ScoreBoard from './ScoreBoard';
+import ScoreBoard from "./ScoreBoard";
 
 export default function SpinningWheel() {
   const { presetSlug } = useParams();
-  const preset = presetSlug && wheelPresets[presetSlug] ? wheelPresets[presetSlug] : null;
+  const preset =
+    presetSlug && wheelPresets[presetSlug] ? wheelPresets[presetSlug] : null;
 
   // If a valid preset is provided via URL, use its items; otherwise use default participants.
   const [names, setNames] = React.useState(() => {
@@ -135,33 +136,36 @@ export default function SpinningWheel() {
   // Updated handleWinnerClose to align rotation with n-1 segments covering entire wheel
   const handleWinnerClose = () => {
     if (keepScores && winner) {
-      setScores(prev => ({
+      setScores((prev) => ({
         ...prev,
-        [winner]: (prev[winner] || 0) + 1
+        [winner]: (prev[winner] || 0) + 1,
       }));
     }
-    
+
     if (autoRemoveWinner && winningIndex !== null) {
-      const segmentEl = document.getElementById(`wheel-segment-${winningIndex}`);
+      const segmentEl = document.getElementById(
+        `wheel-segment-${winningIndex}`
+      );
       if (segmentEl) {
         segmentEl.classList.add("animate-remove");
         const finalRotation = rotation % 360; // capture current final rotation
         setTimeout(() => {
-          setNames(prevNames => {
+          setNames((prevNames) => {
             const newNames = [...prevNames];
             newNames.splice(winningIndex, 1);
             const newCount = newNames.length;
             if (newCount > 0) {
               const newSegAngle = 360 / newCount;
               // Use floor to align the wheel segments with boundaries covering full circle
-              const adjustedRotation = Math.floor(finalRotation / newSegAngle) * newSegAngle;
+              const adjustedRotation =
+                Math.floor(finalRotation / newSegAngle) * newSegAngle;
               setRotation(adjustedRotation);
             } else {
               setRotation(0);
             }
             return newNames;
           });
-          setWheelRenderKey(prev => prev + 1); // Force re-render of wheel segments
+          setWheelRenderKey((prev) => prev + 1); // Force re-render of wheel segments
           setWinner(null);
           setWinningIndex(null);
         }, 1000); // delay to match CSS animation duration
@@ -263,7 +267,7 @@ export default function SpinningWheel() {
                         ? `transform ${spinAnimation.duration / 1000}s ${
                             spinAnimation.curve
                           }`
-                        : "transform 0.5s ease-out"
+                        : "transform 0.5s ease-out",
                     }}
                   >
                     {names.map((name, index) => {
@@ -276,7 +280,10 @@ export default function SpinningWheel() {
                       const textPos = polarToCartesian(textRadius, midAngle);
 
                       return (
-                        <g key={`${wheelRenderKey}-${index}`} id={`wheel-segment-${index}`}>
+                        <g
+                          key={`${wheelRenderKey}-${index}`}
+                          id={`wheel-segment-${index}`}
+                        >
                           <path
                             d={createWheelSegment(startAngle, endAngle, radius)}
                             fill={getWheelColors(index)}
@@ -344,30 +351,30 @@ export default function SpinningWheel() {
                 {/* Fun toggle for Winner Gobbler 🍽 */}
                 <div className="flex items-center space-x-4 mt-4">
                   <label className="flex items-center space-x-2">
-                    <input 
-                      type="checkbox" 
-                      checked={autoRemoveWinner} 
-                      onChange={() => setAutoRemoveWinner(prev => !prev)} 
+                    <input
+                      type="checkbox"
+                      checked={autoRemoveWinner}
+                      onChange={() => setAutoRemoveWinner((prev) => !prev)}
                       disabled={keepScores}
-                      className="form-checkbox h-5 w-5 text-purple-600" 
+                      className="form-checkbox h-5 w-5 text-purple-600"
                     />
                     <span className="text-white">Winner Gobbler 🍽</span>
                   </label>
                   <label className="flex items-center space-x-2">
-                    <input 
-                      type="checkbox" 
-                      checked={keepScores} 
+                    <input
+                      type="checkbox"
+                      checked={keepScores}
                       onChange={() => {
-                        setKeepScores(prev => !prev);
+                        setKeepScores((prev) => !prev);
                         if (!keepScores) setAutoRemoveWinner(false);
-                      }} 
-                      className="form-checkbox h-5 w-5 text-yellow-400" 
+                      }}
+                      className="form-checkbox h-5 w-5 text-yellow-400"
                     />
                     <span className="text-white">Keep Score 🏆</span>
                   </label>
                   {keepScores && Object.keys(scores).length > 0 && (
                     <button
-                      onClick={() => setShowScoreBoard(prev => !prev)}
+                      onClick={() => setShowScoreBoard((prev) => !prev)}
                       className="bg-gradient-to-r from-yellow-400 to-orange-400 
                         text-white px-3 py-1 rounded-full text-sm
                         hover:shadow-lg transition-all duration-300 transform hover:scale-105"
@@ -516,6 +523,27 @@ export default function SpinningWheel() {
             </div>
           </div>
         </div>
+
+        {preset && (
+          // SEO Content Section using preset.seoContent if present, with adjusted width
+          <div className="max-w-xl mx-auto">
+            <section className="seo-content bg-white/20 backdrop-blur-md p-6 mt-8 rounded-2xl text-center">
+              <h2 className="text-2xl font-bold text-white">
+                {preset.seoContent?.title || `Dive Deeper into ${preset.name}!`}
+              </h2>
+              <p className="text-white/80 mt-4">
+                {preset.seoContent?.content ||
+                  (preset.description
+                    ? preset.description
+                    : "Discover a world of fun!")}
+              </p>
+              <p className="text-white/80 mt-2">
+                Let your imagination run wild with engaging ideas and playful
+                challenges. Explore, learn, and celebrate creativity!
+              </p>
+            </section>
+          </div>
+        )}
       </main>
 
       <Footer
@@ -556,7 +584,9 @@ export default function SpinningWheel() {
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
           <div className="bg-white rounded-2xl p-8 text-center shadow-xl">
             <h2 className="text-3xl font-bold text-purple-600 mb-4">Hooray!</h2>
-            <p className="text-xl mb-6">Congratulations, {winner}! You're our lucky winner!</p>
+            <p className="text-xl mb-6">
+              Congratulations, {winner}! You're our lucky winner!
+            </p>
             <div className="flex items-center gap-4 justify-center">
               <button
                 onClick={handleWinnerClose}
@@ -570,8 +600,16 @@ export default function SpinningWheel() {
                 className="bg-gradient-to-r from-purple-400 to-pink-400 p-3 rounded-full
                   hover:shadow-lg transition-all duration-300 transform hover:scale-105"
               >
-                <svg viewBox="0 0 24 24" className="w-5 h-5 text-white" fill="none" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
+                <svg
+                  viewBox="0 0 24 24"
+                  className="w-5 h-5 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
                     d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"
                   />
                 </svg>
@@ -582,10 +620,7 @@ export default function SpinningWheel() {
       )}
 
       {showScoreBoard && keepScores && (
-        <ScoreBoard 
-          scores={scores} 
-          onClose={() => setShowScoreBoard(false)} 
-        />
+        <ScoreBoard scores={scores} onClose={() => setShowScoreBoard(false)} />
       )}
     </div>
   );
