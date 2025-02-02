@@ -220,6 +220,17 @@ export default function SpinningWheel() {
     return () => window.removeEventListener("resize", handleResize);
   }, [wheelSize]);
 
+  // New helper to shuffle the participants list
+  const shuffleParticipants = () => {
+    const shuffled = [...names];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    setNames(shuffled);
+    setWheelRenderKey(prev => prev + 1); // Force wheel update
+  };
+
   return (
     <div
       className={`min-h-screen flex flex-col bg-gradient-to-br ${currentTheme.background} animate-gradient-shift`}
@@ -409,7 +420,6 @@ export default function SpinningWheel() {
                         <span className="animate-bounce-subtle">✨</span>
                         <span>Magic Lists</span>
                       </button>
-                      {/* Replace the existing clear button */}
                       <button
                         onClick={() => setNames([])}
                         className="bg-gradient-to-r from-blue-400 to-purple-400 text-white px-4 py-2 
@@ -419,6 +429,7 @@ export default function SpinningWheel() {
                         <span>🌟</span>
                         <span>Start Fresh!</span>
                       </button>
+                      {/* Removed shuffle button from here */}
                     </div>
                   </div>
 
@@ -446,34 +457,40 @@ export default function SpinningWheel() {
                 </div>
 
                 <div className="max-h-96 overflow-y-auto overflow-x-hidden pr-2 custom-scrollbar">
-                  <div className="pt-2">
+                  <div className="pt-2 flex justify-between items-center">
                     <h3 className="text-xl font-bold text-white mb-4 sticky top-0 bg-white/10 backdrop-blur-md p-2 rounded-lg z-10">
                       👥 {translations.participantsListTitle}
                     </h3>
-                    <div className="space-y-2 mt-2">
-                      {names.map((name, index) => (
-                        <div
-                          key={index}
-                          className="flex items-center justify-between bg-white/10 p-3 rounded-lg
+                    <button
+                      onClick={shuffleParticipants}
+                      className="bg-gradient-to-r from-green-400 to-emerald-500 text-white px-3 py-1 rounded-full hover:shadow-lg transition-all duration-300 transform hover:scale-105"
+                    >
+                      <span>🔀 Shuffle</span>
+                    </button>
+                  </div>
+                  <div className="space-y-2 mt-2">
+                    {names.map((name, index) => (
+                      <div
+                        key={index}
+                        className="flex items-center justify-between bg-white/10 p-3 rounded-lg
                             backdrop-blur-sm border border-white/10
                             transform hover:scale-[1.02] hover:shadow-lg transition-all duration-200
                             group/item relative overflow-hidden
                             w-full"
-                        >
-                          <span className="font-medium text-white group-hover/item:text-white/90 transition-colors truncate mr-2">
-                            {name}
-                          </span>
-                          <button
-                            onClick={() => removeName(index)}
-                            className="text-white/70 hover:text-red-400 font-bold text-xl w-8 h-8 
+                      >
+                        <span className="font-medium text-white group-hover/item:text-white/90 transition-colors truncate mr-2">
+                          {name}
+                        </span>
+                        <button
+                          onClick={() => removeName(index)}
+                          className="text-white/70 hover:text-red-400 font-bold text-xl w-8 h-8 
                               rounded-full hover:bg-white/10 hover:rotate-90 transition-all duration-300
                               flex items-center justify-center flex-shrink-0"
-                          >
-                            ×
-                          </button>
-                        </div>
-                      ))}
-                    </div>
+                        >
+                          ×
+                        </button>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
