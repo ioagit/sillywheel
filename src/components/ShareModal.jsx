@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { 
   FaFacebook, 
@@ -13,7 +13,15 @@ import {
   FaShareAlt
 } from 'react-icons/fa';
 
-export default function ShareModal({ onClose }) {
+export default function ShareModal({ onClose, participants }) {
+  const [listName, setListName] = useState('');
+  const [listDesc, setListDesc] = useState('');
+  const [sharedLink, setSharedLink] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const generateRandomId = () => Math.random().toString(36).substr(2, 8);
+
+  
   const shareUrl = window.location.href;
   const title = "Random Name Picker Wheel Kids - Free Online Tool";
   const description = "Check out this awesome random name picker wheel! Perfect for classroom activities, team building, and decision making.";
@@ -157,8 +165,9 @@ export default function ShareModal({ onClose }) {
               Close
             </button>
           </div>
+
         </div>
       </div>
     </>
   );
-} 
+}

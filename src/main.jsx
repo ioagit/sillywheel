@@ -1,16 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import './index.css';
-import SpinningWheel from './components/SpinningWheel';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import "./index.css";
+import SpinningWheel from "./components/SpinningWheel";
+import SharedPreset from "./components/ShareListModal";
 
 ReactDOM.render(
-  <BrowserRouter>
+  <Router>
     <Routes>
       <Route path="/" element={<SpinningWheel />} />
       <Route path="/:presetSlug" element={<SpinningWheel />} />
-      {/* Removed any PresetPage route */}
+      <Route path="/s/:id" element={<SharedPreset />} />
     </Routes>
-  </BrowserRouter>,
+  </Router>,
   document.getElementById('root')
 );

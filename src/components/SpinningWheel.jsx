@@ -11,6 +11,8 @@ import { themes } from "../config/themes";
 import ThemeSelector from "./ThemeSelector";
 import PresetListModal from "./PresetListModal";
 import ScoreBoard from "./ScoreBoard";
+import ShareListModal from "./ShareListModal";
+import { useState } from "react";
 
 export default function SpinningWheel() {
   const { presetSlug } = useParams();
@@ -57,6 +59,7 @@ export default function SpinningWheel() {
   const [keepScores, setKeepScores] = React.useState(false);
   const [scores, setScores] = React.useState({});
   const [showScoreBoard, setShowScoreBoard] = React.useState(false);
+  const [showShareModal, setShowShareModal] = useState(false);
 
   const translations = siteConfig.translations[siteConfig.language];
 
@@ -228,7 +231,7 @@ export default function SpinningWheel() {
       [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
     setNames(shuffled);
-    setWheelRenderKey(prev => prev + 1); // Force wheel update
+    setWheelRenderKey((prev) => prev + 1); // Force wheel update
   };
 
   return (
@@ -356,7 +359,7 @@ export default function SpinningWheel() {
                   <span className="relative z-10 group-hover:animate-pulse">
                     {isSpinning
                       ? "🎡 " + translations.spinningText
-                      : "✨ Let’s Spin & Smile!"}
+                      : "✨ Let's Spin & Smile!"}
                   </span>
                 </button>
                 {/* Fun toggle for Winner Gobbler 🍽 */}
@@ -461,12 +464,20 @@ export default function SpinningWheel() {
                     <h3 className="text-xl font-bold text-white mb-4 sticky top-0 bg-white/10 backdrop-blur-md p-2 rounded-lg z-10">
                       👥 {translations.participantsListTitle}
                     </h3>
-                    <button
-                      onClick={shuffleParticipants}
-                      className="bg-gradient-to-r from-green-400 to-emerald-500 text-white px-3 py-1 rounded-full hover:shadow-lg transition-all duration-300 transform hover:scale-105"
-                    >
-                      <span>🔀 Shuffle</span>
-                    </button>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={shuffleParticipants}
+                        className="bg-gradient-to-r from-green-400 to-emerald-500 text-white px-3 py-1 rounded-full hover:shadow-lg transition-all duration-300 transform hover:scale-105"
+                      >
+                        <span>🔀 Shuffle</span>
+                      </button>
+                      <button
+                        onClick={() => setShowShareModal(true)}
+                        className="bg-gradient-to-r from-purple-400 to-pink-400 text-white px-3 py-1 rounded-full hover:shadow-lg transition-all duration-300 transform hover:scale-105"
+                      >
+                        <span>📤 Share List</span>
+                      </button>
+                    </div>
                   </div>
                   <div className="space-y-2 mt-2">
                     {names.map((name, index) => (
@@ -569,18 +580,24 @@ export default function SpinningWheel() {
 
       {/* New explanation panel added above the footer */}
       <div className="mt-8 bg-white/10 backdrop-blur-md rounded-2xl p-6 shadow-2xl">
-        <h3 className="text-xl font-bold text-white mb-4">What is PickerWheel Kids?</h3>
+        <h3 className="text-xl font-bold text-white mb-4">
+          What is PickerWheel Kids?
+        </h3>
         <p className="text-white/80 mb-2">
-          PickerWheel Kids is a fun and interactive tool designed to add excitement to every classroom or party.
+          PickerWheel Kids is a fun and interactive tool designed to add
+          excitement to every classroom or party.
         </p>
         <p className="text-white/80 mb-2">
-          How to Play: Simply add participants, spin the wheel, and let fortune decide the winner.
+          How to Play: Simply add participants, spin the wheel, and let fortune
+          decide the winner.
         </p>
         <p className="text-white/80">
-          Footer Tools: Use the footer to choose audio styles, adjust the wheel size, set spin speed, and select victory sounds for a personalized experience.
+          Footer Tools: Use the footer to choose audio styles, adjust the wheel
+          size, set spin speed, and select victory sounds for a personalized
+          experience.
         </p>
       </div>
-      
+
       <Footer
         audioType={audioType}
         onAudioTypeChange={(type) => {
@@ -631,7 +648,7 @@ export default function SpinningWheel() {
                 Yay!
               </button>
               <button
-                onClick={() => setShowShare(true)}
+                onClick={() => setShowShareModal(true)}
                 className="bg-gradient-to-r from-purple-400 to-pink-400 p-3 rounded-full
                   hover:shadow-lg transition-all duration-300 transform hover:scale-105"
               >
@@ -654,9 +671,11 @@ export default function SpinningWheel() {
         </div>
       )}
 
-      {showScoreBoard && keepScores && (
-        <ScoreBoard scores={scores} onClose={() => setShowScoreBoard(false)} />
-      )}
+      <ShareListModal
+        show={showShareModal}
+        onHide={() => setShowShareModal(false)}
+        listData={names}
+      />
     </div>
   );
 }

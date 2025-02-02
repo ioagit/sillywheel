@@ -1,13 +1,16 @@
 export async function onRequest(context) {
-  const { request, env, params } = context;
-  
+  const { request, params, env } = context;
+
   if (request.method !== "GET") {
     return new Response("Method Not Allowed", { status: 405 });
   }
 
   try {
+    // Extract the id from the URL parameters
     const { id } = params;
-    const targetUrl = `${env.TARGET_API_URL}/${id}`;
+    
+    // Construct the target URL using the environment variable and the id
+    const targetUrl = `${env.TARGET_API_URL}/api/data/${id}`;
     const apiKey = env.API_KEY;
 
     const response = await fetch(targetUrl, {
@@ -18,7 +21,7 @@ export async function onRequest(context) {
     });
 
     const data = await response.json();
-    
+
     return new Response(JSON.stringify(data), {
       status: response.status,
       headers: { "Content-Type": "application/json" },
