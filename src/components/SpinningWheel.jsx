@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import siteConfig from "../config/siteConfig";
 import SpinningAudio from "../utils/audio";
 import { winSoundPlayer } from "../utils/winSounds";
@@ -15,7 +15,9 @@ import ShareListModal from "./ShareListModal";
 import { useState } from "react";
 
 export default function SpinningWheel() {
-  const { presetSlug } = useParams();
+  const { presetSlug, id } = useParams();
+  const location = useLocation();
+  const isSharedList = location.pathname.startsWith("/s/");
   const preset =
     presetSlug && wheelPresets[presetSlug] ? wheelPresets[presetSlug] : null;
 
@@ -29,10 +31,39 @@ export default function SpinningWheel() {
 
   // Update names if presetSlug changes
   React.useEffect(() => {
-    if (presetSlug && wheelPresets[presetSlug]) {
+    if (!isSharedList && presetSlug && wheelPresets[presetSlug]) {
       setNames(wheelPresets[presetSlug].items);
     }
-  }, [presetSlug]);
+  }, [presetSlug, isSharedList]);
+
+  // Add effect to fetch shared list data
+  React.useEffect(() => {
+    const fetchSharedList = async () => {
+      if (isSharedList && id) {
+        try {
+          const response = await fetch(`/api/post/${id}`);
+          const data = await response.json();
+
+          if (!response.ok) {
+            throw new Error(data.error || "Failed to fetch shared list");
+          }
+
+          // Update the names list with the shared data
+          setNames(data.data);
+
+          // setup the page
+
+          // Optionally set other data from the shared list
+          document.title = `${data.name} - PickerWheel Kids`;
+        } catch (error) {
+          console.error("Error loading shared list:", error);
+          // Optionally show error to user
+        }
+      }
+    };
+
+    fetchSharedList();
+  }, [id, isSharedList]);
 
   const [rotation, setRotation] = React.useState(0);
   const [isSpinning, setIsSpinning] = React.useState(false);
@@ -554,14 +585,14 @@ export default function SpinningWheel() {
         </div>
 
         {preset && (
-          // SEO Content Section using preset.seoContent if present, with adjusted width
+          // SEO Content Section with adjusted width
           <div className="max-w-xl mx-auto">
             <section className="seo-content bg-white/20 backdrop-blur-md p-6 mt-8 rounded-2xl text-center">
               <h2 className="text-2xl font-bold text-white">
-                {preset.seoContent?.title || `Dive Deeper into ${preset.name}!`}
+                {preset.title || `Dive Deeper into ${preset.name}!`}
               </h2>
               <p className="text-white/80 mt-4">
-                {preset.seoContent?.content ||
+                {preset.content ||
                   (preset.description
                     ? preset.description
                     : "Discover a world of fun!")}

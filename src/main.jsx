@@ -10,8 +10,8 @@ ReactDOM.render(
     <Routes>
       <Route path="/" element={<SpinningWheel />} />
       <Route path="/:presetSlug" element={<SpinningWheel />} />
-      <Route path="/s/:id" element={<SharedPreset />} />
+      <Route path="/s/:id" element={<SpinningWheel />} />
     </Routes>
   </Router>,
-  document.getElementById('root')
+  document.getElementById("root")
 );

@@ -8,31 +8,26 @@ const wheelPresets = {
       "✅ Yes, please!",
       "❌ No thank you!",
       "🤔 Not sure yet",
-      "💫 Try one more time!"
+      "💫 Try one more time!",
     ],
-    seoContent: {
-      title: "Decisions Made Fun with Yes or No",
-      content: "Explore a playful way to choose between yes and no. Perfect for games and classroom activities, this list sparks fun debate and decision making!"
-    }
+
+    title: "Decisions Made Fun with Yes or No",
+    content:
+      "Explore a playful way to choose between yes and no. Perfect for games and classroom activities, this list sparks fun debate and decision making!",
   },
   "magic-numbers": {
     name: "Magic Numbers",
+    description: "Magic numbers for fun and learning",
     emoji: "🔢",
-    items: [
-      "1️⃣ One",
-      "2️⃣ Two",
-      "3️⃣ Three",
-      "4️⃣ Four",
-      "5️⃣ Five",
-      "6️⃣ Six"
-    ],
-    seoContent: {
-      title: "Unlock the Mysteries of Magic Numbers",
-      content: "Discover how numbers can be enchanting and educational. A magical journey perfect for playful learning and fun math games."
-    }
+    items: ["1️⃣ One", "2️⃣ Two", "3️⃣ Three", "4️⃣ Four", "5️⃣ Five", "6️⃣ Six"],
+
+    title: "Unlock the Mysteries of Magic Numbers",
+    content:
+      "Discover how numbers can be enchanting and educational. A magical journey perfect for playful learning and fun math games.",
   },
   "animal-adventures": {
     name: "Cute Animals",
+    description: "Cute animals for fun and learning",
     emoji: "🦁",
     items: [
       "🦁 Lion King",
@@ -40,11 +35,16 @@ const wheelPresets = {
       "🦒 Tall Giraffe",
       "🦊 Sneaky Fox",
       "🐼 Panda Bear",
-      "🦄 Magical Unicorn"
-    ]
+      "🦄 Magical Unicorn",
+    ],
+
+    title: "Cute Animals Adventure",
+    content:
+      "Explore the world of cute animals. Perfect for classroom activities and fun games.",
   },
   "yummy-foodies": {
     name: "Yummy Foods",
+    description: "Yummy foods for fun and learning",
     emoji: "🍕",
     items: [
       "🍕 Pizza Party",
@@ -52,11 +52,16 @@ const wheelPresets = {
       "🌮 Taco Time",
       "🍜 Noodle Fun",
       "🍣 Sushi Surprise",
-      "🥗 Healthy Salad"
-    ]
+      "🥗 Healthy Salad",
+    ],
+
+    title: "Yummy Foods Adventure",
+    content:
+      "Explore the world of yummy foods. Perfect for classroom activities and fun games.",
   },
   "action-adventures": {
     name: "Fun Activities",
+    description: "Fun activities for fun and learning",
     emoji: "🎮",
     items: [
       "🎮 Video Games",
@@ -64,11 +69,16 @@ const wheelPresets = {
       "📚 Story Time",
       "🎵 Sing-Along",
       "🎬 Movie Time",
-      "🏃 Outdoor Play"
-    ]
+      "🏃 Outdoor Play",
+    ],
+
+    title: "Fun Activities Adventure",
+    content:
+      "Explore the world of fun activities. Perfect for classroom activities and fun games.",
   },
   "custom-fun": {
     name: "My Fun List",
+    description: "Custom fun list for fun and learning",
     emoji: "✨",
     items: [
       "🎮 Game On",
@@ -76,15 +86,16 @@ const wheelPresets = {
       "🎵 Music Maker",
       "🎪 Star Performer",
       "⭐ Shining Star",
-      "🎯 Champion"
+      "🎯 Champion",
     ],
-    seoContent: {
-      title: "Your Custom Fun Adventure",
-      content: "Craft your very own list of fun activities tailored to your imagination. Get inspired and share your creative ideas with friends!"
-    }
+
+    title: "Your Custom Fun Adventure",
+    content:
+      "Craft your very own list of fun activities tailored to your imagination. Get inspired and share your creative ideas with friends!",
   },
   "silly-giggles": {
     name: "Silly Giggles",
+    description: "Silly giggles for fun and learning",
     emoji: "💨",
     items: [
       "💨 Giggle Puff",
@@ -96,9 +107,12 @@ const wheelPresets = {
       "🫧 Bubbly Burst",
       "⚡ Lightning Laugh",
       "🌬️ Silent Giggle",
-      "🎆 Sparkle Surprise"
+      "🎆 Sparkle Surprise",
     ],
-    soundIndices: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+    title: "Silly Giggles Adventure",
+    content:
+      "Explore the world of silly giggles. Perfect for classroom activities and fun games.",
   },
   "fun-teams": {
     name: "Classroom Teams",
@@ -112,8 +126,12 @@ const wheelPresets = {
       "Purple Pals",
       "Orange Owls",
       "Black Panthers",
-      "White Wolves"
-    ]
+      "White Wolves",
+    ],
+
+    title: "Classroom Teams Adventure",
+    content:
+      "Explore the world of classroom teams. Perfect for classroom activities and fun games.",
   },
   "classroom-helpers": {
     name: "Classroom Helpers",
@@ -127,8 +145,8 @@ const wheelPresets = {
       "Calendar Helper",
       "Attendance Buddy",
       "Light Monitor",
-      "Plant Waterer"
-    ]
+      "Plant Waterer",
+    ],
   },
   "family-fun": {
     name: "Family Fun Chores",
@@ -142,8 +160,12 @@ const wheelPresets = {
       "Trash Helper",
       "Bed Maker",
       "Pet Walker",
-      "Plant Watering"
-    ]
+      "Plant Watering",
+    ],
+
+    title: "Family Fun Chores Adventure",
+    content:
+      "Explore the world of family fun chores. Perfect for classroom activities and fun games.",
   },
   "school-games": {
     name: "School Games",
@@ -157,8 +179,12 @@ const wheelPresets = {
       "Simon Says",
       "Scavenger Hunt",
       "Trivia Time",
-      "Twenty Questions"
-    ]
+      "Twenty Questions",
+    ],
+
+    title: "School Games Adventure",
+    content:
+      "Explore the world of school games. Perfect for classroom activities and fun games.",
   },
   "play-time-sports": {
     name: "Play Time Sports",
@@ -172,8 +198,12 @@ const wheelPresets = {
       "Baseball",
       "Swimming",
       "Running",
-      "Cycling"
-    ]
+      "Cycling",
+    ],
+
+    title: "Play Time Sports Adventure",
+    content:
+      "Explore the world of play time sports. Perfect for classroom activities and fun games.",
   },
   "cartoon-movies": {
     name: "Cartoon Movies",
@@ -187,8 +217,12 @@ const wheelPresets = {
       "Space Adventures",
       "Love Stories",
       "Nature Wonders",
-      "Animated Dreams"
-    ]
+      "Animated Dreams",
+    ],
+
+    title: "Cartoon Movies Adventure",
+    content:
+      "Explore the world of cartoon movies. Perfect for classroom activities and fun games.",
   },
   "classroom-jobs": {
     name: "Classroom Jobs",
@@ -202,8 +236,12 @@ const wheelPresets = {
       "Phone Greetings",
       "Schedule Reminder",
       "Book Research",
-      "Presentation Prep"
-    ]
+      "Presentation Prep",
+    ],
+
+    title: "Classroom Jobs Adventure",
+    content:
+      "Explore the world of classroom jobs. Perfect for classroom activities and fun games.",
   },
   "team-roles-fun": {
     name: "Team Roles",
@@ -217,8 +255,12 @@ const wheelPresets = {
       "Tech Buddy",
       "Question Checker",
       "Task Tracker",
-      "Follow-up Helper"
-    ]
+      "Follow-up Helper",
+    ],
+
+    title: "Team Roles Adventure",
+    content:
+      "Explore the world of team roles. Perfect for classroom activities and fun games.",
   },
   "classroom-projects": {
     name: "Classroom Projects",
@@ -232,8 +274,12 @@ const wheelPresets = {
       "Testing Ideas",
       "Writing Notes",
       "Review Time",
-      "Showcase"
-    ]
+      "Showcase",
+    ],
+
+    title: "Classroom Projects Adventure",
+    content:
+      "Explore the world of classroom projects. Perfect for classroom activities and fun games.",
   },
   "happy-holidays": {
     name: "Happy Holidays",
@@ -247,8 +293,12 @@ const wheelPresets = {
       "Thanksgiving Feast",
       "Christmas Joy",
       "Independence Fest",
-      "Labor Day Fun"
-    ]
+      "Labor Day Fun",
+    ],
+
+    title: "Happy Holidays Adventure",
+    content:
+      "Explore the world of happy holidays. Perfect for classroom activities and fun games.",
   },
   "birthday-party": {
     name: "Birthday Party",
@@ -262,8 +312,12 @@ const wheelPresets = {
       "Dance Party",
       "Piñata Smash",
       "Gift Time",
-      "Cake Celebration"
-    ]
+      "Cake Celebration",
+    ],
+
+    title: "Birthday Party Adventure",
+    content:
+      "Explore the world of birthday party. Perfect for classroom activities and fun games.",
   },
   "fun-rewards": {
     name: "Fun Rewards",
@@ -277,9 +331,13 @@ const wheelPresets = {
       "Book of Fun",
       "Special Treat",
       "Super Star Award",
-      "Mystery Surprise"
-    ]
-  }
+      "Mystery Surprise",
+    ],
+
+    title: "Fun Rewards Adventure",
+    content:
+      "Explore the world of fun rewards. Perfect for classroom activities and fun games.",
+  },
 };
 
 export default wheelPresets;
