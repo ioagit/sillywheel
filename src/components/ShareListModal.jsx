@@ -31,7 +31,7 @@ const ShareListModal = ({ show, onHide, listData }) => {
     };
 
     try {
-      const response = await fetch("/api/preset/", {
+      const response = await fetch("/api/post", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
