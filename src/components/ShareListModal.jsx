@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { v4 as uuidv4 } from "uuid";
 import {
   FacebookShareButton,
   TwitterShareButton,
@@ -8,6 +7,16 @@ import {
   TwitterIcon,
   WhatsappIcon,
 } from "react-share";
+
+const generateShortId = () => {
+  const chars =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let result = "";
+  for (let i = 0; i < 6; i++) {
+    result += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return result;
+};
 
 const ShareListModal = ({ show, onHide, listData }) => {
   const [name, setName] = useState("My PickerWheel List");
@@ -18,14 +27,14 @@ const ShareListModal = ({ show, onHide, listData }) => {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const generateShareLink = async () => {
+  const handlePost = async () => {
     setIsLoading(true);
     setError("");
 
     const payload = {
-      id: uuidv4(),
+      id: generateShortId(),
       name,
-      des: description,
+      description,
       data: listData,
       site: window.location.hostname,
     };
@@ -62,7 +71,7 @@ const ShareListModal = ({ show, onHide, listData }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    generateShareLink();
+    handlePost();
   };
 
   if (!show) return null;

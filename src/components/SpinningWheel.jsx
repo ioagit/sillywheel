@@ -18,8 +18,14 @@ export default function SpinningWheel() {
   const { presetSlug, id } = useParams();
   const location = useLocation();
   const isSharedList = location.pathname.startsWith("/s/");
-  const preset =
-    presetSlug && wheelPresets[presetSlug] ? wheelPresets[presetSlug] : null;
+
+  // Change preset from const to state
+  const [preset, setPreset] = React.useState(() => {
+    if (presetSlug && wheelPresets[presetSlug]) {
+      return wheelPresets[presetSlug];
+    }
+    return null;
+  });
 
   // If a valid preset is provided via URL, use its items; otherwise use default participants.
   const [names, setNames] = React.useState(() => {
@@ -29,14 +35,15 @@ export default function SpinningWheel() {
     return siteConfig.defaultParticipants;
   });
 
-  // Update names if presetSlug changes
+  // Update preset and names when presetSlug changes
   React.useEffect(() => {
     if (!isSharedList && presetSlug && wheelPresets[presetSlug]) {
+      setPreset(wheelPresets[presetSlug]);
       setNames(wheelPresets[presetSlug].items);
     }
   }, [presetSlug, isSharedList]);
 
-  // Add effect to fetch shared list data
+  // Fetch shared list data
   React.useEffect(() => {
     const fetchSharedList = async () => {
       if (isSharedList && id) {
@@ -51,9 +58,15 @@ export default function SpinningWheel() {
           // Update the names list with the shared data
           setNames(data.data);
 
-          // setup the page
+          // Setup the preset from shared data
+          setPreset({
+            name: data.name,
+            description: data.description,
+            title: data.title,
+            content: data.content,
+            items: data.data,
+          });
 
-          // Optionally set other data from the shared list
           document.title = `${data.name} - PickerWheel Kids`;
         } catch (error) {
           console.error("Error loading shared list:", error);
