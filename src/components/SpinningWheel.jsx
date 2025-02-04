@@ -249,6 +249,7 @@ export default function SpinningWheel() {
 
   const getResponsiveSize = () => {
     const width = window.innerWidth;
+    if (width < 480) return 240; // Small mobile
     if (width < 640) return 280; // Mobile
     if (width < 768) return 340; // Tablet
     if (width < 1024) return 400; // Small desktop
@@ -294,8 +295,8 @@ export default function SpinningWheel() {
           </section>
         )}
         <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12">
-            <div className="flex flex-col items-center justify-center space-y-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12">
+            <div className="flex flex-col items-center justify-center space-y-4 md:space-y-8">
               <div
                 className={`relative bg-white/10 backdrop-blur-md p-8 rounded-2xl 
                   ${currentTheme.wheelShadow}
@@ -445,109 +446,80 @@ export default function SpinningWheel() {
               </div>
             </div>
 
-            <div
-              className={`bg-white/10 backdrop-blur-md rounded-2xl p-6 
-                ${currentTheme.panelShadow}
-                hover:${currentTheme.panelShadowHover}
-                transition-all duration-500 
-                group animate-float-delayed`}
-            >
-              <div className="space-y-6">
-                <div className="bg-white/20 backdrop-blur-md rounded-lg p-4 group-hover:scale-[1.01] transition-transform">
-                  <div className="flex justify-between items-center mb-4">
-                    <h3 className="text-xl font-bold text-white">
-                      ✨ The Fun Wheel!
-                    </h3>
-                    <div className="flex gap-2">
-                      <button
-                        onClick={() => setShowPresetList(true)}
-                        className="bg-white/20 text-white px-4 py-2 rounded-lg 
-                          hover:bg-white/30 transition-colors flex items-center gap-2
-                          hover:scale-105 transform"
-                      >
-                        <span className="animate-bounce-subtle">✨</span>
-                        <span>Magic Lists</span>
-                      </button>
-                      <button
-                        onClick={() => setNames([])}
-                        className="bg-gradient-to-r from-blue-400 to-purple-400 text-white px-4 py-2 
-                          rounded-full hover:shadow-lg transition-all duration-300 transform 
-                          hover:scale-105 flex items-center gap-2"
-                      >
-                        <span>🌟</span>
-                        <span>Start Fresh!</span>
-                      </button>
-                      {/* Removed shuffle button from here */}
-                    </div>
-                  </div>
-
-                  <form onSubmit={addName} className="space-y-4">
-                    <div className="flex gap-2">
-                      <input
-                        type="text"
-                        value={newName}
-                        onChange={(e) => setNewName(e.target.value)}
-                        placeholder={translations.inputPlaceholder}
-                        className="flex-1 px-4 py-2 bg-white/10 border-2 border-white/20 rounded-lg 
-                          focus:outline-none focus:border-white/40 text-white placeholder-white/50
-                          transition-colors"
-                      />
-                      <button
-                        type="submit"
-                        className="bg-gradient-to-r from-green-400 to-emerald-500 text-white 
-                          font-bold py-2 px-6 rounded-lg hover:scale-105 transform transition-all
-                          hover:shadow-lg hover:shadow-green-500/30"
-                      >
-                        {translations.addButtonText}
-                      </button>
-                    </div>
-                  </form>
+            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 md:p-6">
+              <div className="flex flex-wrap gap-2 justify-center md:justify-between items-center mb-4">
+                <h3 className="text-xl font-bold text-white w-full md:w-auto text-center md:text-left">
+                  ✨ The Fun Wheel!
+                </h3>
+                <div className="flex flex-wrap gap-2 justify-center">
+                  <button
+                    onClick={() => setShowPresetList(true)}
+                    className="text-sm md:text-base bg-white/20 text-white px-3 md:px-4 py-2 rounded-lg 
+                      hover:bg-white/30 transition-colors flex items-center gap-2
+                      hover:scale-105 transform"
+                  >
+                    <span className="animate-bounce-subtle">✨</span>
+                    <span className="hidden md:inline">Magic Lists</span>
+                    <span className="md:hidden">Lists</span>
+                  </button>
+                  <button
+                    onClick={() => setNames([])}
+                    className="text-sm md:text-base bg-gradient-to-r from-blue-400 to-purple-400 text-white 
+                      px-3 md:px-4 py-2 rounded-full hover:shadow-lg transition-all duration-300 
+                      transform hover:scale-105 flex items-center gap-2"
+                  >
+                    <span>🌟</span>
+                    <span className="hidden md:inline">Start Fresh!</span>
+                    <span className="md:hidden">Clear</span>
+                  </button>
                 </div>
+              </div>
 
-                <div className="max-h-96 overflow-y-auto overflow-x-hidden pr-2 custom-scrollbar">
-                  <div className="pt-2 flex justify-between items-center">
-                    <h3 className="text-xl font-bold text-white mb-4 sticky top-0 bg-white/10 backdrop-blur-md p-2 rounded-lg z-10">
-                      👥 {translations.participantsListTitle}
-                    </h3>
-                    <div className="flex gap-2">
+              <form onSubmit={addName} className="space-y-4 mb-4">
+                <div className="flex flex-col sm:flex-row gap-2">
+                  <input
+                    type="text"
+                    value={newName}
+                    onChange={(e) => setNewName(e.target.value)}
+                    placeholder={translations.inputPlaceholder}
+                    className="flex-1 px-4 py-2 bg-white/10 border-2 border-white/20 rounded-lg 
+                      focus:outline-none focus:border-white/40 text-white placeholder-white/50
+                      transition-colors"
+                  />
+                  <button
+                    type="submit"
+                    className="bg-gradient-to-r from-green-400 to-emerald-500 text-white 
+                      font-bold py-2 px-6 rounded-lg hover:scale-105 transform transition-all
+                      hover:shadow-lg hover:shadow-green-500/30 whitespace-nowrap"
+                  >
+                    {translations.addButtonText}
+                  </button>
+                </div>
+              </form>
+
+              <div className="max-h-[50vh] overflow-y-auto overflow-x-hidden pr-2 custom-scrollbar">
+                <div className="space-y-2">
+                  {names.map((name, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center justify-between bg-white/10 p-3 rounded-lg
+                        backdrop-blur-sm border border-white/10
+                        transform hover:scale-[1.02] hover:shadow-lg transition-all duration-200
+                        group/item relative overflow-hidden"
+                    >
+                      <span className="font-medium text-white group-hover/item:text-white/90 transition-colors truncate mr-2">
+                        {name}
+                      </span>
                       <button
-                        onClick={shuffleParticipants}
-                        className="bg-gradient-to-r from-green-400 to-emerald-500 text-white px-3 py-1 rounded-full hover:shadow-lg transition-all duration-300 transform hover:scale-105"
+                        onClick={() => removeName(index)}
+                        className="text-white/70 hover:text-red-400 font-bold text-xl w-8 h-8 
+                          rounded-full hover:bg-white/10 hover:rotate-90 transition-all duration-300
+                          flex items-center justify-center flex-shrink-0"
                       >
-                        <span>🔀 Shuffle</span>
-                      </button>
-                      <button
-                        onClick={() => setShowShareModal(true)}
-                        className="bg-gradient-to-r from-purple-400 to-pink-400 text-white px-3 py-1 rounded-full hover:shadow-lg transition-all duration-300 transform hover:scale-105"
-                      >
-                        <span>📤 Share List</span>
+                        ×
                       </button>
                     </div>
-                  </div>
-                  <div className="space-y-2 mt-2">
-                    {names.map((name, index) => (
-                      <div
-                        key={index}
-                        className="flex items-center justify-between bg-white/10 p-3 rounded-lg
-                            backdrop-blur-sm border border-white/10
-                            transform hover:scale-[1.02] hover:shadow-lg transition-all duration-200
-                            group/item relative overflow-hidden
-                            w-full"
-                      >
-                        <span className="font-medium text-white group-hover/item:text-white/90 transition-colors truncate mr-2">
-                          {name}
-                        </span>
-                        <button
-                          onClick={() => removeName(index)}
-                          className="text-white/70 hover:text-red-400 font-bold text-xl w-8 h-8 
-                              rounded-full hover:bg-white/10 hover:rotate-90 transition-all duration-300
-                              flex items-center justify-center flex-shrink-0"
-                        >
-                          ×
-                        </button>
-                      </div>
-                    ))}
-                  </div>
+                  ))}
                 </div>
               </div>
             </div>

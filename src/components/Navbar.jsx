@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import siteConfig from "../config/siteConfig";
 import ShareModal from './ShareModal';
 
-export default function Navbar({ onThemeClick }) {
+const Navbar = ({ onThemeClick }) => {
   const [showShare, setShowShare] = React.useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const translations = siteConfig.translations[siteConfig.language];
 
   return (
     <>
-      <nav className="bg-black/20 backdrop-blur-md">
+      <nav className="bg-white/10 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
@@ -25,7 +26,9 @@ export default function Navbar({ onThemeClick }) {
                 </div>
               </div>
             </div>
-            <div className="flex items-center gap-2">
+
+            {/* Desktop menu */}
+            <div className="hidden md:flex items-center space-x-4">
               <button
                 onClick={() => setShowShare(true)}
                 className="bg-gradient-to-r from-purple-400 to-pink-400 hover:from-purple-500 hover:to-pink-500 
@@ -42,20 +45,79 @@ export default function Navbar({ onThemeClick }) {
               </button>
               <button
                 onClick={onThemeClick}
-                className="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg 
-                  transition-colors flex items-center gap-2"
+                className="text-white px-3 py-2 rounded-md hover:bg-white/10"
               >
-                <span>🎨</span>
-                {translations.themeButton}
+                🎨 Themes
+              </button>
+              <a
+                href="/"
+                className="text-white px-3 py-2 rounded-md hover:bg-white/10"
+              >
+                🏠 Home
+              </a>
+            </div>
+
+            {/* Mobile menu button */}
+            <div className="md:hidden">
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="text-white p-2"
+              >
+                <svg
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  {isMenuOpen ? (
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  ) : (
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4 6h16M4 12h16M4 18h16"
+                    />
+                  )}
+                </svg>
               </button>
             </div>
           </div>
         </div>
       </nav>
 
+      {/* Mobile menu */}
+      <div className={`${isMenuOpen ? 'block' : 'hidden'} md:hidden`}>
+        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          <button
+            onClick={() => {
+              onThemeClick();
+              setIsMenuOpen(false);
+            }}
+            className="text-white block px-3 py-2 rounded-md text-base font-medium w-full text-left hover:bg-white/10"
+          >
+            🎨 Themes
+          </button>
+          <a
+            href="/"
+            className="text-white block px-3 py-2 rounded-md text-base font-medium hover:bg-white/10"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            🏠 Home
+          </a>
+        </div>
+      </div>
+
       {showShare && (
         <ShareModal onClose={() => setShowShare(false)} />
       )}
     </>
   );
-}
+};
+
+export default Navbar;
