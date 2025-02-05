@@ -286,7 +286,7 @@ export default function SpinningWheel() {
       <Navbar onThemeClick={() => setShowThemeSelector(true)} />
 
       <main className="flex-grow p-8">
-        {preset && (
+        {preset ? (
           <section className="mb-8 text-center">
             <h1 className="text-3xl font-bold text-white">
               Picker Wheel for {preset.name}
@@ -294,6 +294,19 @@ export default function SpinningWheel() {
             {preset.description && (
               <p className="text-white/70">{preset.description}</p>
             )}
+          </section>
+        ) : (
+          <section className="mb-8 text-center">
+            <h1
+              className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 
+              bg-clip-text text-transparent animate-gradient"
+            >
+              PickerWheel Kids - Make Learning Fun & Fair! 🎡
+            </h1>
+            <p className="text-white/70 mt-2">
+              Create exciting moments in your classroom or party with our
+              interactive spinning wheel!
+            </p>
           </section>
         )}
         <div className="max-w-7xl mx-auto">
