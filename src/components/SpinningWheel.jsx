@@ -301,10 +301,14 @@ export default function SpinningWheel() {
                 className={`relative bg-white/10 backdrop-blur-md p-8 rounded-2xl 
                   ${currentTheme.wheelShadow}
                   hover:${currentTheme.wheelShadowHover} transition-all duration-500 
-                  animate-float group`}
+                  animate-float group overflow-hidden`}
               >
-                <div className="absolute -top-3 -left-3 w-6 h-6 bg-pink-500 rounded-full animate-ping-slow opacity-75"></div>
-                <div className="absolute -bottom-3 -right-3 w-6 h-6 bg-purple-500 rounded-full animate-ping-slow opacity-75 delay-300"></div>
+                <div className="absolute -top-2 -left-2 w-4 h-4 md:w-6 md:h-6 
+                  bg-pink-500 rounded-full animate-ping-slow opacity-75"
+                ></div>
+                <div className="absolute -bottom-2 -right-2 w-4 h-4 md:w-6 md:h-6 
+                  bg-purple-500 rounded-full animate-ping-slow opacity-75 delay-300"
+                ></div>
 
                 <div
                   className="relative cursor-pointer"
