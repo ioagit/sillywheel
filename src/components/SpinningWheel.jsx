@@ -288,7 +288,9 @@ export default function SpinningWheel() {
       <main className="flex-grow p-8">
         {preset && (
           <section className="mb-8 text-center">
-            <h1 className="text-3xl font-bold text-white">{preset.name}</h1>
+            <h1 className="text-3xl font-bold text-white">
+              Picker Wheel for {preset.name}
+            </h1>
             {preset.description && (
               <p className="text-white/70">{preset.description}</p>
             )}
@@ -303,10 +305,12 @@ export default function SpinningWheel() {
                   hover:${currentTheme.wheelShadowHover} transition-all duration-500 
                   animate-float group overflow-hidden`}
               >
-                <div className="absolute -top-2 -left-2 w-4 h-4 md:w-6 md:h-6 
+                <div
+                  className="absolute -top-2 -left-2 w-4 h-4 md:w-6 md:h-6 
                   bg-pink-500 rounded-full animate-ping-slow opacity-75"
                 ></div>
-                <div className="absolute -bottom-2 -right-2 w-4 h-4 md:w-6 md:h-6 
+                <div
+                  className="absolute -bottom-2 -right-2 w-4 h-4 md:w-6 md:h-6 
                   bg-purple-500 rounded-full animate-ping-slow opacity-75 delay-300"
                 ></div>
 
