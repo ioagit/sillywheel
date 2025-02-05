@@ -502,19 +502,21 @@ export default function SpinningWheel() {
                   {names.map((name, index) => (
                     <div
                       key={index}
-                      className="flex items-center justify-between bg-white/10 p-3 rounded-lg
-                        backdrop-blur-sm border border-white/10
+                      className="flex items-center justify-between bg-black/20 p-3 rounded-lg
+                        backdrop-blur-sm border border-white/20
                         transform hover:scale-[1.02] hover:shadow-lg transition-all duration-200
                         group/item relative overflow-hidden"
                     >
-                      <span className="font-medium text-white group-hover/item:text-white/90 transition-colors truncate mr-2">
+                      <span className="font-medium text-white/90 group-hover/item:text-white transition-colors truncate mr-2">
                         {name}
                       </span>
                       <button
                         onClick={() => removeName(index)}
-                        className="text-white/70 hover:text-red-400 font-bold text-xl w-8 h-8 
-                          rounded-full hover:bg-white/10 hover:rotate-90 transition-all duration-300
-                          flex items-center justify-center flex-shrink-0"
+                        className="text-white/90 hover:text-red-400 font-bold text-xl w-8 h-8 
+                          rounded-full hover:bg-black/20 hover:rotate-90 transition-all duration-300
+                          flex items-center justify-center flex-shrink-0
+                          bg-black/10"
+                        aria-label="Remove participant"
                       >
                         ×
                       </button>
