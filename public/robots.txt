@@ -1,0 +1,12 @@
+# robots.txt for PickerWheelKids.com
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://pickerwheelkids.com/sitemap.xml
+
+# Disallow shared wheel URLs as they are dynamic
+Disallow: /s/
+
+# Rate limiting
+Crawl-delay: 1 
