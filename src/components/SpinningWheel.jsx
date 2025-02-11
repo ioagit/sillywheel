@@ -615,7 +615,15 @@ export default function SpinningWheel() {
       </main>
 
       {showScoreBoard && keepScores && (
-        <ScoreBoard scores={scores} onClose={() => setShowScoreBoard(false)} />
+        <ScoreBoard
+          scores={scores}
+          onClose={() => setShowScoreBoard(false)}
+          onClearScores={() => {
+            if (window.confirm("Are you sure you want to clear all scores?")) {
+              setScores({});
+            }
+          }}
+        />
       )}
 
       {/* New explanation panel added above the footer */}
