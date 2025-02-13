@@ -347,8 +347,8 @@ export default function SpinningWheel() {
                     : "font-sans"
                 }`}
               >
-                SillyWheel.com - Spin the Silly Wheel for laughs, chaos, and totally fair
-                mayhem!
+                SillyWheel.com - Spin the Silly Wheel for laughs, chaos, and
+                totally fair mayhem!
               </h1>
               <p
                 className={`text-lg 
@@ -601,41 +601,128 @@ export default function SpinningWheel() {
           </div>
 
           <div className="mt-8 bg-white/10 backdrop-blur-md rounded-2xl p-6 shadow-2xl">
-            <div className="mt-4 flex justify-center gap-2">
-              {Object.entries(audioTypes).map(([key, type]) => (
-                <button
-                  key={type.id}
-                  onClick={() => {
-                    setAudioType(key);
-                  }}
-                  className={`px-4 py-2 rounded-lg ${
-                    audioType === key
-                      ? "bg-purple-600 text-white"
-                      : "bg-gray-200 text-gray-700"
-                  }`}
-                >
-                  {type.name}
-                </button>
-              ))}
+            <div className="mb-6">
+              <h3
+                className={`text-xl font-bold mb-4 text-center 
+                ${currentTheme.customStyles?.text || "text-white"}`}
+              >
+                🎵 Wheel Sound Effects
+              </h3>
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2">
+                {Object.entries(audioTypes).map(([key, type]) => (
+                  <button
+                    key={type.id}
+                    onClick={() => {
+                      setAudioType(key);
+                    }}
+                    className={`px-4 py-3 rounded-lg transition-all duration-200 flex flex-col items-center gap-2
+                      ${
+                        currentTheme.customStyles?.button ||
+                        "bg-white/10 hover:bg-white/20"
+                      } 
+                      ${
+                        audioType === key
+                          ? `ring-2 ${
+                              currentTheme.customStyles?.border ||
+                              "ring-purple-500"
+                            } scale-[1.02]`
+                          : "hover:scale-[1.02]"
+                      }`}
+                  >
+                    <span className="text-2xl">{type.name.split(" ")[0]}</span>
+                    <span
+                      className={`text-sm font-medium ${
+                        currentTheme.customStyles?.text || "text-white"
+                      }`}
+                    >
+                      {type.name.split(" ").slice(1).join(" ")}
+                      {key === "none" && " (Default)"}
+                    </span>
+                    <span
+                      className={`text-xs ${
+                        currentTheme.customStyles?.muted || "text-white/60"
+                      }`}
+                    >
+                      {type.description}
+                    </span>
+                  </button>
+                ))}
+              </div>
             </div>
 
             <div className="mt-8">
-              <h3 className="text-xl font-bold text-center text-white mb-4">
-                🏆 Victory Sound
+              <h3
+                className={`text-xl font-bold mb-4 text-center 
+                ${currentTheme.customStyles?.text || "text-white"}`}
+              >
+                🏆 Victory Sound Effects
               </h3>
-              <div className="flex flex-wrap justify-center gap-2 max-w-2xl mx-auto">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
+                <button
+                  onClick={() => setSelectedWinSound(0)}
+                  className={`px-4 py-3 rounded-lg transition-all duration-200 flex flex-col items-center gap-2
+                    ${
+                      currentTheme.customStyles?.button ||
+                      "bg-white/10 hover:bg-white/20"
+                    } 
+                    ${
+                      selectedWinSound === 0
+                        ? `ring-2 ${
+                            currentTheme.customStyles?.border ||
+                            "ring-purple-500"
+                          } scale-[1.02]`
+                        : "hover:scale-[1.02]"
+                    }`}
+                >
+                  <span className="text-2xl">🤫</span>
+                  <span
+                    className={`text-sm font-medium ${
+                      currentTheme.customStyles?.text || "text-white"
+                    }`}
+                  >
+                    Silent Mode (Default)
+                  </span>
+                  <span
+                    className={`text-xs ${
+                      currentTheme.customStyles?.muted || "text-white/60"
+                    }`}
+                  >
+                    No victory sound
+                  </span>
+                </button>
                 {winSounds.map((sound) => (
                   <button
                     key={sound.id}
                     onClick={() => setSelectedWinSound(sound.id)}
-                    className={`px-4 py-2 rounded-lg flex items-center gap-2 ${
-                      selectedWinSound === sound.id
-                        ? "bg-purple-600 text-white"
-                        : "bg-white text-gray-700"
-                    }`}
+                    className={`px-4 py-3 rounded-lg transition-all duration-200 flex flex-col items-center gap-2
+                      ${
+                        currentTheme.customStyles?.button ||
+                        "bg-white/10 hover:bg-white/20"
+                      } 
+                      ${
+                        selectedWinSound === sound.id
+                          ? `ring-2 ${
+                              currentTheme.customStyles?.border ||
+                              "ring-purple-500"
+                            } scale-[1.02]`
+                          : "hover:scale-[1.02]"
+                      }`}
                   >
-                    <span>{sound.emoji}</span>
-                    <span>{sound.name}</span>
+                    <span className="text-2xl">{sound.emoji}</span>
+                    <span
+                      className={`text-sm font-medium ${
+                        currentTheme.customStyles?.text || "text-white"
+                      }`}
+                    >
+                      {sound.name}
+                    </span>
+                    <span
+                      className={`text-xs ${
+                        currentTheme.customStyles?.muted || "text-white/60"
+                      }`}
+                    >
+                      {sound.description}
+                    </span>
                   </button>
                 ))}
               </div>

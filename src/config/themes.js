@@ -1,6 +1,14 @@
 export const themes = [
   {
     id: "default",
+    name: "Deep Space",
+    background: "from-slate-950 via-violet-950 to-indigo-950",
+    wheelShadow: "shadow-lg shadow-violet-500/20",
+    wheelShadowHover: "shadow-xl shadow-violet-400/30",
+    accent: "#a78bfa",
+  },
+  {
+    id: "purple-dream",
     name: "Purple Dream",
     background: "from-indigo-500 via-purple-500 to-pink-500",
     wheelShadow: "shadow-[0_0_40px_rgba(192,38,211,0.3)]",
@@ -94,14 +102,6 @@ export const themes = [
     wheelShadow: "shadow-lg shadow-cyan-500/20",
     wheelShadowHover: "shadow-xl shadow-cyan-400/30",
     accent: "#22d3ee",
-  },
-  {
-    id: "deep-space",
-    name: "Deep Space",
-    background: "from-slate-950 via-violet-950 to-indigo-950",
-    wheelShadow: "shadow-lg shadow-violet-500/20",
-    wheelShadowHover: "shadow-xl shadow-violet-400/30",
-    accent: "#a78bfa",
   },
   {
     id: "ember-dark",
