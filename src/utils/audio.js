@@ -113,7 +113,7 @@ class SpinningAudio {
 
       const elapsed = Date.now() - startTime;
       const progress = Math.min(elapsed / this.duration, 1);
-      
+
       // Stop earlier to avoid trailing beeps
       if (elapsed >= this.duration - 300) {
         this.stop();
@@ -122,17 +122,19 @@ class SpinningAudio {
 
       // Smoother fade out
       if (elapsed > this.fadeOutStart) {
-        const fadeProgress = (elapsed - this.fadeOutStart) / (this.duration - this.fadeOutStart);
+        const fadeProgress =
+          (elapsed - this.fadeOutStart) / (this.duration - this.fadeOutStart);
         // Exponential fade out for smoother transition
         this.gainNode.gain.value = this.volume * Math.pow(1 - fadeProgress, 2);
       }
 
       // Adjusted slowdown curve
-      this.tickRate = 20 + (380 * Math.pow(progress, 1.5)); // More gradual slowdown
+      this.tickRate = 20 + 380 * Math.pow(progress, 1.5); // More gradual slowdown
 
       this.play();
 
-      if (progress < 0.95) { // Stop scheduling new sounds a bit earlier
+      if (progress < 0.95) {
+        // Stop scheduling new sounds a bit earlier
         this.tickInterval = setTimeout(playTick, this.tickRate);
       } else {
         this.stop();
