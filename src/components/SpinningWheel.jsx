@@ -328,7 +328,10 @@ export default function SpinningWheel() {
     <div
       className={`min-h-screen bg-gradient-to-br ${currentTheme.background}`}
     >
-      <Navbar onThemeClick={() => setShowThemeSelector(true)} />
+      <Navbar 
+        onThemeClick={() => setShowThemeSelector(true)} 
+        currentTheme={currentTheme} 
+      />
 
       <main className="flex-grow p-8">
         <div className="relative pt-20 pb-12 px-4">

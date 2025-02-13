@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import siteConfig from "../config/siteConfig";
 import ShareModal from "./ShareModal";
+import { Link } from "react-router-dom";
 
-const Navbar = ({ onThemeClick }) => {
+const Navbar = ({ onThemeClick, currentTheme }) => {
   const [showShare, setShowShare] = React.useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showQR, setShowQR] = useState(false);
+  const [showHowTo, setShowHowTo] = React.useState(false);
   const translations = siteConfig.translations[siteConfig.language];
 
   const QRCodeModal = () => (
@@ -60,23 +62,36 @@ const Navbar = ({ onThemeClick }) => {
 
   return (
     <>
-      <nav className="bg-white/10 backdrop-blur-md border-b border-white/10">
+      <nav
+        className={`${
+          currentTheme.customStyles?.navbar || "bg-white/10"
+        } backdrop-blur-md border-b ${
+          currentTheme.customStyles?.border || "border-white/10"
+        }`}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
-              <a href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-                <h1 className="text-2xl font-bold">
-                  <span className="text-white">Silly</span>
-                  <span className="text-purple-300">Wheel</span>
-                </h1>
-              </a>
+              <Link
+                to="/"
+                className={`text-xl font-bold ${
+                  currentTheme.customStyles?.text || "text-white"
+                } ${currentTheme.customStyles?.glow || ""} ${
+                  currentTheme.id === "hacker" ? "font-mono" : ""
+                }`}
+              >
+                SillyWheel.com
+              </Link>
             </div>
 
             {/* Desktop menu */}
             <div className="hidden md:flex items-center space-x-4">
               <button
                 onClick={() => setShowQR(true)}
-                className="text-white px-3 py-2 rounded-md hover:bg-white/10 flex items-center gap-2"
+                className={`px-4 py-2 rounded-lg ${
+                  currentTheme.customStyles?.button ||
+                  "bg-white/10 hover:bg-white/20 text-white"
+                }`}
               >
                 <svg
                   className="w-6 h-6"
@@ -95,10 +110,13 @@ const Navbar = ({ onThemeClick }) => {
               </button>
               <button
                 onClick={() => setShowShare(true)}
-                className="bg-gradient-to-r from-purple-400 to-pink-400 hover:from-purple-500 hover:to-pink-500 
+                className={`bg-gradient-to-r from-purple-400 to-pink-400 hover:from-purple-500 hover:to-pink-500 
                   text-white px-4 py-2 rounded-full shadow-lg hover:shadow-xl
                   transition-all duration-300 transform hover:scale-105
-                  flex items-center gap-2"
+                  flex items-center gap-2 ${
+                    currentTheme.customStyles?.button ||
+                    "bg-white/10 hover:bg-white/20 text-white"
+                  }`}
               >
                 <svg
                   viewBox="0 0 24 24"
@@ -116,16 +134,33 @@ const Navbar = ({ onThemeClick }) => {
                 <span className="font-medium">Share the Magic! ✨</span>
               </button>
               <button
-                onClick={onThemeClick}
-                className="text-white px-3 py-2 rounded-md hover:bg-white/10"
+                onClick={() => setShowHowTo(true)}
+                className={`px-4 py-2 rounded-lg ${
+                  currentTheme.customStyles?.button ||
+                  "bg-white/10 hover:bg-white/20 text-white"
+                }`}
               >
-                🎨 Themes
+                How to Use
+              </button>
+              <button
+                onClick={onThemeClick}
+                className={`px-4 py-2 rounded-lg ${
+                  currentTheme.customStyles?.button ||
+                  "bg-white/10 hover:bg-white/20 text-white"
+                }`}
+              >
+                Themes
               </button>
               <a
-                href="/"
-                className="text-white px-3 py-2 rounded-md hover:bg-white/10"
+                href="https://github.com/yourusername/sillywheel"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`px-4 py-2 rounded-lg ${
+                  currentTheme.customStyles?.button ||
+                  "bg-white/10 hover:bg-white/20 text-white"
+                }`}
               >
-                🏠 Home
+                GitHub
               </a>
             </div>
 
@@ -184,6 +219,15 @@ const Navbar = ({ onThemeClick }) => {
           >
             🎨 Themes
           </button>
+          <button
+            onClick={() => {
+              setShowHowTo(true);
+              setIsMenuOpen(false);
+            }}
+            className="text-white block px-3 py-2 rounded-md text-base font-medium w-full text-left hover:bg-white/10"
+          >
+            How to Use
+          </button>
           <a
             href="/"
             className="text-white block px-3 py-2 rounded-md text-base font-medium w-full text-left hover:bg-white/10"
@@ -197,6 +241,31 @@ const Navbar = ({ onThemeClick }) => {
       {showShare && <ShareModal onClose={() => setShowShare(false)} />}
 
       {showQR && <QRCodeModal />}
+
+      {showHowTo && (
+        <div
+          className="fixed inset-0 bg-black/70 backdrop-blur-md flex items-center justify-center z-50"
+          onClick={() => setShowHowTo(false)}
+        >
+          <div
+            className={`${
+              currentTheme.customStyles?.modal || "bg-slate-900/90"
+            } rounded-2xl p-8 max-w-2xl w-full mx-4 ${
+              currentTheme.customStyles?.border || "border border-white/10"
+            } shadow-2xl`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h2
+              className={`text-2xl font-bold mb-4 ${
+                currentTheme.customStyles?.text || "text-white"
+              }`}
+            >
+              How to Use SillyWheel
+            </h2>
+            {/* ... rest of modal content with theme styles ... */}
+          </div>
+        </div>
+      )}
     </>
   );
 };
