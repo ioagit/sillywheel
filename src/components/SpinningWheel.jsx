@@ -684,24 +684,33 @@ export default function SpinningWheel() {
 
       {/* Update the winner announcement overlay */}
       {winner && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl p-8 text-center shadow-xl">
-            <h2 className="text-3xl font-bold text-purple-600 mb-4">Hooray!</h2>
-            <p className="text-xl mb-6">
-              Congratulations, {winner}! You're our lucky winner!
-            </p>
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-md flex items-center justify-center z-50">
+          <div
+            className="bg-slate-900/90 rounded-2xl p-8 max-w-md w-full mx-4 
+            border border-white/10 shadow-2xl text-center transform animate-modal-in"
+          >
+            <h2 className="text-3xl font-bold text-white mb-4">
+              🎉 Congratulations!
+            </h2>
+            <div className="bg-white/10 rounded-xl p-4 mb-6">
+              <p className="text-2xl font-bold text-purple-300 break-words">
+                {winner}
+              </p>
+            </div>
             <div className="flex items-center gap-4 justify-center">
               <button
                 onClick={handleWinnerClose}
-                className="bg-gradient-to-r from-green-400 to-emerald-500 text-white 
-                  px-6 py-3 rounded-full font-bold hover:scale-105 transition-transform"
+                className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white 
+                  px-6 py-3 rounded-lg font-semibold hover:scale-105 
+                  transition-all duration-300 shadow-lg hover:shadow-purple-500/25"
               >
-                Yay!
+                Continue
               </button>
               <button
                 onClick={() => setShowShareModal(true)}
-                className="bg-gradient-to-r from-purple-400 to-pink-400 p-3 rounded-full
-                  hover:shadow-lg transition-all duration-300 transform hover:scale-105"
+                className="bg-white/10 border border-white/20 p-3 rounded-lg
+                  hover:bg-white/20 transition-all duration-300 group"
+                aria-label="Share result"
               >
                 <svg
                   viewBox="0 0 24 24"
