@@ -304,8 +304,9 @@ export default function SpinningWheel() {
               SillyWheel.com - Make Learning silly and fun & Fair! 🎡
             </h1>
             <p className="text-white/70 mt-2">
-              Create exciting moments in your classroom or party with our
-              interactive spinning wheel!
+              Add some fun and randomness to your events with SillyWheel.com—the
+              ultimate interactive spinning wheel for wild decisions, crazy
+              challenges, and unexpected surprises!
             </p>
           </section>
         )}
