@@ -1,14 +1,14 @@
-import React from 'react';
+import React from "react";
 import { winSoundPlayer } from "../utils/winSounds";
-import { spinningAudio } from '../utils/audio'; // Import the shared instance
+import { spinningAudio } from "../utils/audio";
 
 export default function VolumeControlModal({ onClose }) {
-  const [wheelVolume, setWheelVolume] = React.useState(0.5);
+  const [wheelVolume, setWheelVolume] = React.useState(spinningAudio.volume);
   const [victoryVolume, setVictoryVolume] = React.useState(0.5);
 
   const handleWheelVolumeChange = (value) => {
     setWheelVolume(value);
-    spinningAudio.setVolume(value); // Use the instance method
+    spinningAudio.setVolume(value);
   };
 
   const handleVictoryVolumeChange = (value) => {
@@ -18,7 +18,7 @@ export default function VolumeControlModal({ onClose }) {
   };
 
   const playTestSound = (type) => {
-    if (type === 'wheel') {
+    if (type === "wheel") {
       // Play a short click sound
       const ctx = new (window.AudioContext || window.webkitAudioContext)();
       const osc = ctx.createOscillator();
@@ -36,22 +36,25 @@ export default function VolumeControlModal({ onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50"
+    <div
+      className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50"
       onClick={onClose}
     >
-      <div 
+      <div
         className="bg-white/10 backdrop-blur-md rounded-2xl p-6 max-w-md w-full mx-4 shadow-2xl"
-        onClick={e => e.stopPropagation()}
+        onClick={(e) => e.stopPropagation()}
       >
         <h2 className="text-2xl font-bold text-white mb-2">Volume Control</h2>
-        <p className="text-white/80 mb-6">Adjust the sound levels for wheel spinning and victory sounds</p>
+        <p className="text-white/80 mb-6">
+          Adjust the sound levels for wheel spinning and victory sounds
+        </p>
 
         <div className="space-y-6">
           <div>
             <div className="flex justify-between items-center mb-2">
               <label className="text-white font-medium">Wheel Sound</label>
               <button
-                onClick={() => playTestSound('wheel')}
+                onClick={() => playTestSound("wheel")}
                 className="p-2 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-all"
               >
                 🔊 Test
@@ -63,7 +66,9 @@ export default function VolumeControlModal({ onClose }) {
               max="1"
               step="0.1"
               value={wheelVolume}
-              onChange={(e) => handleWheelVolumeChange(parseFloat(e.target.value))}
+              onChange={(e) =>
+                handleWheelVolumeChange(parseFloat(e.target.value))
+              }
               className="w-full accent-purple-500"
             />
           </div>
@@ -72,7 +77,7 @@ export default function VolumeControlModal({ onClose }) {
             <div className="flex justify-between items-center mb-2">
               <label className="text-white font-medium">Victory Sound</label>
               <button
-                onClick={() => playTestSound('victory')}
+                onClick={() => playTestSound("victory")}
                 className="p-2 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-all"
               >
                 🔊 Test
@@ -84,7 +89,9 @@ export default function VolumeControlModal({ onClose }) {
               max="1"
               step="0.1"
               value={victoryVolume}
-              onChange={(e) => handleVictoryVolumeChange(parseFloat(e.target.value))}
+              onChange={(e) =>
+                handleVictoryVolumeChange(parseFloat(e.target.value))
+              }
               className="w-full accent-purple-500"
             />
           </div>
@@ -100,4 +107,4 @@ export default function VolumeControlModal({ onClose }) {
       </div>
     </div>
   );
-} 
+}

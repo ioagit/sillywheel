@@ -70,268 +70,195 @@ class WheelAudio {
 export const wheelAudio = new WheelAudio();
 
 class SpinningAudio {
-  constructor(type = "mechanical") {
-    this.audioContext = new (window.AudioContext ||
-      window.webkitAudioContext)();
+  constructor() {
+    this.type = "none";
+    this.audioContext = null;
+    this.gainNode = null;
     this.oscillator = null;
-    this.gainNode = this.audioContext.createGain(); // Main gain node
-    this.gainNode.connect(this.audioContext.destination);
-    this.gainNode.gain.value = 0.7; // Modified: increased gain for a fun sound
-    this.type = type;
+    this.isPlaying = false;
+    this.volume = 0.5;
     this.tickInterval = null;
-    this.startTime = 0;
-    this.duration = 5000;
+    this.tickRate = 10;
+  }
+
+  init() {
+    if (!this.audioContext) {
+      this.audioContext = new (window.AudioContext ||
+        window.webkitAudioContext)();
+      this.gainNode = this.audioContext.createGain();
+      this.gainNode.gain.value = this.volume;
+      this.gainNode.connect(this.audioContext.destination);
+    }
   }
 
   setVolume(value) {
+    this.volume = value;
     if (this.gainNode) {
       this.gainNode.gain.value = value;
     }
   }
 
-  getTickRate(progress) {
-    const startRate = 5; // Keep fast start
-    const endRate = 200; // Reduced end rate for better sync
+  start() {
+    this.init();
+    if (this.type === "none") return;
 
-    // Adjusted curve to match wheel deceleration
-    const p = Math.pow(progress, 1.2); // Steeper curve at the end
-    return startRate + (endRate - startRate) * p;
-  }
+    this.isPlaying = true;
+    this.tickRate = 10; // Start fast
 
-  calculateProgress(currentTime) {
-    const t = currentTime / this.duration;
-    // Match the wheel's new cubic-bezier curve
-    const p1 = 0.2,
-      p2 = 0.1; // Match the wheel's control points
-
-    // Adjusted curve for better end sync
-    return t * (p1 + t * (1 - p1 - p2 + t * (1 + p2 - p1)));
-  }
-
-  getFrequency(progress, startFreq, endFreq) {
-    return startFreq + (endFreq - startFreq) * progress;
-  }
-
-  start(segmentCount, totalRotation) {
-    switch (this.type) {
-      case "mechanical":
-        this.playMechanicalTicks();
-        break;
-      case "electronic":
-        this.playElectronicBeeps();
-        break;
-      case "casino":
-        this.playRatchetSound();
-        break;
-      case "toy":
-        this.playMusicalTones();
-        break;
-      default:
-        this.playMechanicalTicks();
-    }
-  }
-
-  createTickSound(frequency, duration = 0.05) {
-    const osc = this.audioContext.createOscillator();
-    const soundGain = this.audioContext.createGain();
-
-    // Set playful oscillator type
-    osc.type = "triangle"; // Modified: changed to triangle for a fun tone
-
-    // Connect through main gain node for volume control
-    osc.connect(soundGain);
-    soundGain.connect(this.gainNode);
-
-    osc.frequency.setValueAtTime(frequency, this.audioContext.currentTime);
-    soundGain.gain.setValueAtTime(0.2, this.audioContext.currentTime);
-    soundGain.gain.exponentialRampToValueAtTime(
-      0.01,
-      this.audioContext.currentTime + duration
-    );
-
-    osc.start();
-    osc.stop(this.audioContext.currentTime + duration);
-  }
-
-  playMechanicalTicks() {
-    this.startTime = Date.now();
-    const startFreq = 2000;
-    const endFreq = 200;
-
-    const tick = () => {
-      const currentTime = Date.now() - this.startTime;
-      if (currentTime >= this.duration) {
-        return;
-      }
-
-      const progress = this.calculateProgress(currentTime);
-      const tickRate = this.getTickRate(progress);
-      const baseFreq = this.getFrequency(progress, startFreq, endFreq);
-
-      this.createTickSound(baseFreq + Math.random() * 100);
-      this.tickInterval = setTimeout(tick, tickRate);
+    const playTick = () => {
+      if (!this.isPlaying) return;
+      this.play();
+      this.tickInterval = setTimeout(playTick, this.tickRate);
+      this.tickRate = Math.min(200, this.tickRate * 1.1); // Gradually slow down
     };
 
-    tick();
-  }
-
-  playElectronicBeeps() {
-    this.startTime = Date.now();
-    const startFreq = 1500;
-    const endFreq = 200;
-
-    const beep = () => {
-      const currentTime = Date.now() - this.startTime;
-      if (currentTime >= this.duration) {
-        return;
-      }
-
-      const progress = this.calculateProgress(currentTime);
-      const interval = this.getTickRate(progress);
-      const freq = this.getFrequency(progress, startFreq, endFreq);
-
-      const osc = this.audioContext.createOscillator();
-      // Set playful oscillator type
-      osc.type = "triangle"; // Modified: changed from default for a fun sound
-      const soundGain = this.audioContext.createGain();
-      const filter = this.audioContext.createBiquadFilter();
-
-      filter.type = "bandpass";
-      filter.frequency.setValueAtTime(
-        freq * 1.5,
-        this.audioContext.currentTime
-      );
-
-      osc.frequency.setValueAtTime(freq, this.audioContext.currentTime);
-
-      osc.connect(filter);
-      filter.connect(soundGain);
-      soundGain.connect(this.gainNode);
-
-      soundGain.gain.setValueAtTime(0.15, this.audioContext.currentTime);
-      soundGain.gain.exponentialRampToValueAtTime(
-        0.01,
-        this.audioContext.currentTime + 0.1
-      );
-
-      osc.start();
-      osc.stop(this.audioContext.currentTime + 0.1);
-
-      this.tickInterval = setTimeout(beep, interval);
-    };
-
-    beep();
-  }
-
-  playRatchetSound() {
-    this.startTime = Date.now();
-
-    const click = () => {
-      const currentTime = Date.now() - this.startTime;
-      if (currentTime >= this.duration) {
-        return;
-      }
-
-      const progress = this.calculateProgress(currentTime);
-      const clickRate = this.getTickRate(progress);
-
-      const bufferSize = this.audioContext.sampleRate * 0.03;
-      const buffer = this.audioContext.createBuffer(
-        1,
-        bufferSize,
-        this.audioContext.sampleRate
-      );
-      const data = buffer.getChannelData(0);
-
-      for (let i = 0; i < bufferSize; i++) {
-        data[i] = Math.random() * 2 - 1;
-      }
-
-      const noise = this.audioContext.createBufferSource();
-      const soundGain = this.audioContext.createGain();
-      const filter = this.audioContext.createBiquadFilter();
-
-      noise.buffer = buffer;
-      filter.type = "bandpass";
-      filter.frequency.value = 2000 - progress * 1000;
-      filter.Q.value = 5;
-
-      noise.connect(filter);
-      filter.connect(soundGain);
-      soundGain.connect(this.gainNode);
-
-      soundGain.gain.setValueAtTime(
-        0.15 * (1 - progress * 0.5),
-        this.audioContext.currentTime
-      );
-      soundGain.gain.exponentialRampToValueAtTime(
-        0.01,
-        this.audioContext.currentTime + 0.03
-      );
-
-      noise.start();
-      this.tickInterval = setTimeout(click, clickRate);
-    };
-
-    click();
-  }
-
-  playMusicalTones() {
-    this.startTime = Date.now();
-    // Modified: updated notes to a playful, kid-friendly scale (C5, D5, E5, F5, G5, A5)
-    const notes = [523.25, 587.33, 659.25, 698.46, 783.99, 880.00];
-    let noteIndex = 0;
-
-    const playNote = () => {
-      const currentTime = Date.now() - this.startTime;
-      if (currentTime >= this.duration) {
-        return;
-      }
-
-      const progress = this.calculateProgress(currentTime);
-      const interval = this.getTickRate(progress);
-
-      const osc = this.audioContext.createOscillator();
-      const soundGain = this.audioContext.createGain();
-
-      osc.type = "sine";
-      osc.frequency.setValueAtTime(
-        notes[noteIndex],
-        this.audioContext.currentTime
-      );
-
-      osc.connect(soundGain);
-      soundGain.connect(this.gainNode);
-
-      soundGain.gain.setValueAtTime(
-        0.2 * (1 - progress * 0.5),
-        this.audioContext.currentTime
-      );
-      soundGain.gain.exponentialRampToValueAtTime(
-        0.01,
-        this.audioContext.currentTime + 0.2
-      );
-
-      osc.start();
-      osc.stop(this.audioContext.currentTime + 0.2);
-
-      noteIndex = (noteIndex + 1) % notes.length;
-      this.tickInterval = setTimeout(playNote, interval);
-    };
-
-    playNote();
+    playTick();
   }
 
   stop() {
+    this.isPlaying = false;
     if (this.tickInterval) {
       clearTimeout(this.tickInterval);
       this.tickInterval = null;
     }
+    if (this.oscillator) {
+      this.oscillator.stop();
+      this.oscillator.disconnect();
+      this.oscillator = null;
+    }
+  }
+
+  play() {
+    this.init();
+    if (this.type === "none") return;
+
+    const sounds = {
+      tick: () => {
+        // Bouncy Boop - Playful bouncing sound
+        this.oscillator = this.audioContext.createOscillator();
+        this.oscillator.type = "sine";
+        this.oscillator.frequency.setValueAtTime(
+          880,
+          this.audioContext.currentTime
+        );
+        this.oscillator.frequency.exponentialRampToValueAtTime(
+          440,
+          this.audioContext.currentTime + 0.1
+        );
+      },
+      slot: () => {
+        // Lucky Ducky - Quacking slot machine effect
+        this.oscillator = this.audioContext.createOscillator();
+        this.oscillator.type = "square";
+        this.oscillator.frequency.setValueAtTime(
+          587.33,
+          this.audioContext.currentTime
+        );
+        this.oscillator.frequency.exponentialRampToValueAtTime(
+          880,
+          this.audioContext.currentTime + 0.05
+        );
+      },
+      drum: () => {
+        // Rhythm Riot - Drum-like sound
+        this.oscillator = this.audioContext.createOscillator();
+        this.oscillator.type = "triangle";
+        this.oscillator.frequency.setValueAtTime(
+          100,
+          this.audioContext.currentTime
+        );
+        this.oscillator.frequency.exponentialRampToValueAtTime(
+          50,
+          this.audioContext.currentTime + 0.1
+        );
+      },
+      bell: () => {
+        // Ding Dong Delight - Bell-like sound
+        this.oscillator = this.audioContext.createOscillator();
+        this.oscillator.type = "sine";
+        this.oscillator.frequency.setValueAtTime(
+          1046.5,
+          this.audioContext.currentTime
+        );
+        this.oscillator.frequency.exponentialRampToValueAtTime(
+          523.25,
+          this.audioContext.currentTime + 0.2
+        );
+      },
+      arcade: () => {
+        // Pixel Party - 8-bit style sound
+        this.oscillator = this.audioContext.createOscillator();
+        this.oscillator.type = "square";
+        this.oscillator.frequency.setValueAtTime(
+          440,
+          this.audioContext.currentTime
+        );
+        this.oscillator.frequency.setValueAtTime(
+          880,
+          this.audioContext.currentTime + 0.05
+        );
+        this.oscillator.frequency.setValueAtTime(
+          440,
+          this.audioContext.currentTime + 0.1
+        );
+      },
+      magic: () => {
+        // Sparkle Spells - Magical sparkly sound
+        this.oscillator = this.audioContext.createOscillator();
+        this.oscillator.type = "sine";
+        this.oscillator.frequency.setValueAtTime(
+          1174.66,
+          this.audioContext.currentTime
+        );
+        this.oscillator.frequency.exponentialRampToValueAtTime(
+          2349.32,
+          this.audioContext.currentTime + 0.1
+        );
+      },
+      party: () => {
+        // Confetti Chaos - Party horn sound
+        this.oscillator = this.audioContext.createOscillator();
+        this.oscillator.type = "sawtooth";
+        this.oscillator.frequency.setValueAtTime(
+          440,
+          this.audioContext.currentTime
+        );
+        this.oscillator.frequency.linearRampToValueAtTime(
+          880,
+          this.audioContext.currentTime + 0.1
+        );
+      },
+      space: () => {
+        // UFO Disco - Space-age sound
+        this.oscillator = this.audioContext.createOscillator();
+        this.oscillator.type = "sine";
+        this.oscillator.frequency.setValueAtTime(
+          440,
+          this.audioContext.currentTime
+        );
+        this.oscillator.frequency.exponentialRampToValueAtTime(
+          880,
+          this.audioContext.currentTime + 0.2
+        );
+        this.oscillator.frequency.exponentialRampToValueAtTime(
+          440,
+          this.audioContext.currentTime + 0.4
+        );
+      },
+    };
+
+    if (sounds[this.type]) {
+      sounds[this.type]();
+      this.oscillator.connect(this.gainNode);
+      this.oscillator.start();
+      this.oscillator.stop(this.audioContext.currentTime + 0.1);
+      this.isPlaying = true;
+    }
   }
 }
 
-// Create a single instance to share across components
+// Create and export a single instance
 export const spinningAudio = new SpinningAudio();
 
-// Export the class for new instances if needed
-export default SpinningAudio;
+// For backward compatibility
+export default spinningAudio;

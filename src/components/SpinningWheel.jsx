@@ -1,7 +1,8 @@
 import React from "react";
 import { useParams, useLocation } from "react-router-dom";
 import siteConfig from "../config/siteConfig";
-import SpinningAudio from "../utils/audio";
+import { spinningAudio } from "../utils/audio";
+import { wheelAudio } from "../utils/wheelAudio";
 import { winSoundPlayer } from "../utils/winSounds";
 import wheelPresets from "../config/wheelPresets";
 import Navbar from "./Navbar";
@@ -83,7 +84,6 @@ export default function SpinningWheel() {
   const [newName, setNewName] = React.useState("");
   const wheelRef = React.useRef(null);
   const [audioType, setAudioType] = React.useState(siteConfig.audio.type);
-  const [spinningAudio] = React.useState(() => new SpinningAudio(audioType));
   const [selectedWinSound, setSelectedWinSound] = React.useState(0);
   const winSounds = winSoundPlayer.getSoundsList();
   const [showPresetList, setShowPresetList] = React.useState(false);
@@ -235,12 +235,53 @@ export default function SpinningWheel() {
     setNames(names.filter((_, index) => index !== indexToRemove));
   };
 
-  const audioTypes = [
-    { id: "mechanical", label: "⚙️ Mechanical" },
-    { id: "electronic", label: "🤖 Electronic" },
-    { id: "casino", label: "🎰 Casino" },
-    { id: "toy", label: "🎪 Toy" },
-  ];
+  const audioTypes = {
+    none: {
+      id: "none",
+      name: "🤫 Silent Ninja",
+      description: "Sneaky and silent mode",
+    },
+    tick: {
+      id: "tick",
+      name: "🎵 Bouncy Boop",
+      description: "Classic bouncy sound effects",
+    },
+    slot: {
+      id: "slot",
+      name: "🎰 Lucky Ducky",
+      description: "Quacking good slot machine sounds",
+    },
+    drum: {
+      id: "drum",
+      name: "🥁 Rhythm Riot",
+      description: "Drum-tastic excitement builder",
+    },
+    bell: {
+      id: "bell",
+      name: "🔔 Ding Dong Delight",
+      description: "Jingly bell happiness",
+    },
+    arcade: {
+      id: "arcade",
+      name: "👾 Pixel Party",
+      description: "Old school gaming goodness",
+    },
+    magic: {
+      id: "magic",
+      name: "✨ Sparkle Spells",
+      description: "Magical whooshes and tingles",
+    },
+    party: {
+      id: "party",
+      name: "🎉 Confetti Chaos",
+      description: "Party time sound explosion",
+    },
+    space: {
+      id: "space",
+      name: "🛸 UFO Disco",
+      description: "Intergalactic sound waves",
+    },
+  };
 
   const handlePresetSelect = (presetItems, presetKey) => {
     setNames(presetItems);
@@ -279,6 +320,10 @@ export default function SpinningWheel() {
     setWheelRenderKey((prev) => prev + 1); // Force wheel update
   };
 
+  React.useEffect(() => {
+    spinningAudio.type = audioType;
+  }, [audioType]);
+
   return (
     <div
       className={`min-h-screen flex flex-col bg-gradient-to-br ${currentTheme.background} animate-gradient-shift`}
@@ -301,7 +346,7 @@ export default function SpinningWheel() {
               className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 
               bg-clip-text text-transparent animate-gradient"
             >
-              SillyWheel.com - Make Learning silly and fun & Fair! 🎡
+              SillyWheel.com - Spin for laughs, chaos, and totally fair mayhem!
             </h1>
             <p className="text-white/70 mt-2">
               Add some fun and randomness to your events with SillyWheel.com—the
@@ -551,20 +596,19 @@ export default function SpinningWheel() {
 
           <div className="mt-8 bg-white/10 backdrop-blur-md rounded-2xl p-6 shadow-2xl">
             <div className="mt-4 flex justify-center gap-2">
-              {audioTypes.map((type) => (
+              {Object.entries(audioTypes).map(([key, type]) => (
                 <button
                   key={type.id}
                   onClick={() => {
-                    setAudioType(type.id);
-                    spinningAudio.type = type.id;
+                    setAudioType(key);
                   }}
                   className={`px-4 py-2 rounded-lg ${
-                    audioType === type.id
+                    audioType === key
                       ? "bg-purple-600 text-white"
                       : "bg-gray-200 text-gray-700"
                   }`}
                 >
-                  {type.label}
+                  {type.name}
                 </button>
               ))}
             </div>
@@ -715,7 +759,6 @@ export default function SpinningWheel() {
         audioType={audioType}
         onAudioTypeChange={(type) => {
           setAudioType(type);
-          spinningAudio.type = type;
         }}
         selectedWinSound={selectedWinSound}
         onWinSoundChange={setSelectedWinSound}
