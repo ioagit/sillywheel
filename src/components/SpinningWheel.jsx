@@ -326,35 +326,38 @@ export default function SpinningWheel() {
 
   return (
     <div
-      className={`min-h-screen flex flex-col bg-gradient-to-br ${currentTheme.background} animate-gradient-shift`}
+      className={`min-h-screen bg-gradient-to-br ${currentTheme.background}`}
     >
       <Navbar onThemeClick={() => setShowThemeSelector(true)} />
 
       <main className="flex-grow p-8">
-        {preset ? (
-          <section className="mb-8 text-center">
-            <h1 className="text-3xl font-bold text-white">
-              Picker Wheel for {preset.name}
-            </h1>
-            {preset.description && (
-              <p className="text-white/70">{preset.description}</p>
-            )}
-          </section>
-        ) : (
-          <section className="mb-8 text-center">
-            <h1
-              className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 
-              bg-clip-text text-transparent animate-gradient"
-            >
-              SillyWheel.com - Spin for laughs, chaos, and totally fair mayhem!
-            </h1>
-            <p className="text-white/70 mt-2">
-              Add some fun and randomness to your events with SillyWheel.com—the
-              ultimate interactive spinning wheel for wild decisions, crazy
-              challenges, and unexpected surprises!
-            </p>
-          </section>
-        )}
+        <div className="relative pt-20 pb-12 px-4">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center">
+              <h1
+                className={`text-4xl sm:text-6xl font-bold mb-8 
+                ${currentTheme.customStyles?.text || "text-white"} 
+                ${currentTheme.customStyles?.glow || ""} 
+                ${
+                  currentTheme.id === "hacker"
+                    ? "font-mono tracking-tight"
+                    : "font-sans"
+                }`}
+              >
+                SillyWheel.com - Spin for laughs, chaos, and totally fair
+                mayhem!
+              </h1>
+              <p
+                className={`text-lg 
+                ${currentTheme.customStyles?.muted || "text-white/70"} 
+                ${currentTheme.id === "hacker" ? "font-mono" : "font-sans"}`}
+              >
+                Add names, spin the wheel, and let randomness decide! Perfect
+                for picking winners, making decisions, or just having fun.
+              </p>
+            </div>
+          </div>
+        </div>
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12">
             <div className="flex flex-col items-center justify-center space-y-4 md:space-y-8">
