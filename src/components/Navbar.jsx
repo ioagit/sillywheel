@@ -110,17 +110,20 @@ const Navbar = ({ onThemeClick, currentTheme }) => {
               </button>
               <button
                 onClick={() => setShowShare(true)}
-                className={`bg-gradient-to-r from-purple-400 to-pink-400 hover:from-purple-500 hover:to-pink-500 
-                  text-white px-4 py-2 rounded-full shadow-lg hover:shadow-xl
-                  transition-all duration-300 transform hover:scale-105
-                  flex items-center gap-2 ${
-                    currentTheme.customStyles?.button ||
-                    "bg-white/10 hover:bg-white/20 text-white"
-                  }`}
+                className={`px-4 py-2 rounded-lg flex items-center gap-2 
+                  ${currentTheme.id === 'hacker' 
+                    ? `${currentTheme.customStyles?.button} border-2` 
+                    : 'bg-gradient-to-r from-purple-400 to-pink-400 hover:from-purple-500 hover:to-pink-500 text-white'
+                  }
+                  shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105`}
               >
                 <svg
                   viewBox="0 0 24 24"
-                  className="w-5 h-5"
+                  className={`w-5 h-5 ${
+                    currentTheme.id === 'hacker' 
+                      ? currentTheme.customStyles?.text 
+                      : 'text-white'
+                  }`}
                   fill="none"
                   stroke="currentColor"
                 >
@@ -131,7 +134,13 @@ const Navbar = ({ onThemeClick, currentTheme }) => {
                     d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"
                   />
                 </svg>
-                <span className="font-medium">Share the Magic! ✨</span>
+                <span className={`font-medium ${
+                  currentTheme.id === 'hacker' 
+                    ? `${currentTheme.customStyles?.text} font-mono` 
+                    : 'text-white'
+                }`}>
+                  Share the Magic! ✨
+                </span>
               </button>
               <button
                 onClick={() => setShowHowTo(true)}
@@ -238,34 +247,63 @@ const Navbar = ({ onThemeClick, currentTheme }) => {
         </div>
       </div>
 
-      {showShare && <ShareModal onClose={() => setShowShare(false)} />}
-
-      {showQR && <QRCodeModal />}
-
       {showHowTo && (
         <div
           className="fixed inset-0 bg-black/70 backdrop-blur-md flex items-center justify-center z-50"
           onClick={() => setShowHowTo(false)}
         >
           <div
-            className={`${
-              currentTheme.customStyles?.modal || "bg-slate-900/90"
-            } rounded-2xl p-8 max-w-2xl w-full mx-4 ${
-              currentTheme.customStyles?.border || "border border-white/10"
-            } shadow-2xl`}
+            className={`${currentTheme.customStyles?.modal || 'bg-slate-900/90'} 
+              rounded-2xl p-8 max-w-2xl w-full mx-4 
+              ${currentTheme.customStyles?.border || 'border border-white/10'} 
+              shadow-2xl`}
             onClick={(e) => e.stopPropagation()}
           >
-            <h2
-              className={`text-2xl font-bold mb-4 ${
-                currentTheme.customStyles?.text || "text-white"
-              }`}
+            <h2 className={`text-2xl font-bold mb-4 
+              ${currentTheme.customStyles?.text || 'text-white'}
+              ${currentTheme.id === 'hacker' ? 'font-mono' : ''}`}
             >
               How to Use SillyWheel
             </h2>
-            {/* ... rest of modal content with theme styles ... */}
+            <div className={`space-y-4 ${
+              currentTheme.customStyles?.muted || 'text-white/70'
+            }`}>
+              <p>
+                1. Add names to the wheel by typing them in the input field and pressing Enter or clicking Add.
+              </p>
+              <p>
+                2. Click the "Spin the Silly Wheel!" button to start the spin animation.
+              </p>
+              <p>
+                3. Wait for the wheel to stop to see who's the lucky winner!
+              </p>
+              <p>
+                Additional Features:
+              </p>
+              <ul className="list-disc list-inside space-y-2 ml-4">
+                <li>Use "Winner Out" to automatically remove winners</li>
+                <li>Enable "Keep Score" to track multiple spins</li>
+                <li>Choose different sound effects for spinning</li>
+                <li>Select victory sounds for winners</li>
+                <li>Adjust wheel size and spin speed</li>
+              </ul>
+            </div>
+            <button
+              onClick={() => setShowHowTo(false)}
+              className={`mt-6 w-full py-2 px-4 rounded-lg 
+                ${currentTheme.customStyles?.button || 'bg-white/10 hover:bg-white/20'} 
+                ${currentTheme.customStyles?.text || 'text-white'} 
+                transition-colors duration-200`}
+            >
+              Got it!
+            </button>
           </div>
         </div>
       )}
+
+      {showShare && <ShareModal onClose={() => setShowShare(false)} />}
+
+      {showQR && <QRCodeModal />}
     </>
   );
 };

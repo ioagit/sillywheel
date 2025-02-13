@@ -328,9 +328,9 @@ export default function SpinningWheel() {
     <div
       className={`min-h-screen bg-gradient-to-br ${currentTheme.background}`}
     >
-      <Navbar 
-        onThemeClick={() => setShowThemeSelector(true)} 
-        currentTheme={currentTheme} 
+      <Navbar
+        onThemeClick={() => setShowThemeSelector(true)}
+        currentTheme={currentTheme}
       />
 
       <main className="flex-grow p-8">
@@ -347,7 +347,7 @@ export default function SpinningWheel() {
                     : "font-sans"
                 }`}
               >
-                SillyWheel.com - Spin for laughs, chaos, and totally fair
+                SillyWheel.com - Spin the Silly Wheel for laughs, chaos, and totally fair
                 mayhem!
               </h1>
               <p
