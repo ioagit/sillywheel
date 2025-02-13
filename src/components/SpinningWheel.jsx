@@ -649,6 +649,68 @@ export default function SpinningWheel() {
         </div>
       </div>
 
+      {/* Preset List Section */}
+      <div className="max-w-7xl mx-auto px-4 py-16">
+        <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/10">
+          <h2 className="text-2xl font-bold text-white mb-6">
+            ✨ All Magic Presets
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {Object.entries(wheelPresets).map(([key, preset]) => (
+              <a
+                key={key}
+                href={`/${key}`}
+                className="group bg-white/5 hover:bg-white/10 rounded-xl p-6 
+                  transition-all duration-300 border border-white/10 hover:border-white/20"
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-2xl group-hover:scale-110 transition-transform">
+                    {preset.emoji}
+                  </span>
+                  <h3 className="text-lg font-semibold text-white">
+                    {preset.name}
+                  </h3>
+                </div>
+                <p className="text-sm text-white/70 line-clamp-2 mb-4">
+                  {preset.content}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {preset.items.slice(0, 3).map((item, index) => (
+                    <span
+                      key={index}
+                      className="text-xs px-2 py-1 rounded-full bg-black/20 text-white/60"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                  {preset.items.length > 3 && (
+                    <span className="text-xs px-2 py-1 rounded-full bg-purple-500/20 text-purple-300">
+                      +{preset.items.length - 3} more
+                    </span>
+                  )}
+                </div>
+                <div className="mt-4 text-sm text-purple-300 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <span>Try this preset</span>
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M13 7l5 5m0 0l-5 5m5-5H6"
+                    />
+                  </svg>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+
       <Footer
         audioType={audioType}
         onAudioTypeChange={(type) => {
