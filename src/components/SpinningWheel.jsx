@@ -427,7 +427,7 @@ export default function SpinningWheel() {
                   <span className="relative z-10 group-hover:animate-pulse">
                     {isSpinning
                       ? "🎡 " + translations.spinningText
-                      : "✨ Let's Spin & Smile!"}
+                      : "✨ Spin the Silly Wheel!"}
                   </span>
                 </button>
                 {/* silly and fun toggle for Winner Gobbler 🍽 */}
