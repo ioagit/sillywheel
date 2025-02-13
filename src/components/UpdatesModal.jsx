@@ -1,5 +1,5 @@
-import React from 'react';
-import { Helmet } from 'react-helmet';
+import React from "react";
+import { Helmet } from "react-helmet";
 
 export default function UpdatesModal({ onClose }) {
   const updates = [
@@ -13,15 +13,18 @@ export default function UpdatesModal({ onClose }) {
         "Complete UI redesign with modern glass morphism",
         "New animation system for smoother transitions",
         "Enhanced accessibility features",
-        "Improved mobile responsiveness"
+        "Improved mobile responsiveness",
       ],
       changes: [
-        { type: "feature", text: "Added customizable themes and color schemes" },
+        {
+          type: "feature",
+          text: "Added customizable themes and color schemes",
+        },
         { type: "feature", text: "Introduced new victory sound effects" },
         { type: "feature", text: "Added Magic Lists preset system" },
         { type: "improvement", text: "Optimized wheel spinning performance" },
-        { type: "improvement", text: "Enhanced sound control system" }
-      ]
+        { type: "improvement", text: "Enhanced sound control system" },
+      ],
     },
     {
       version: "1.5.0",
@@ -32,14 +35,14 @@ export default function UpdatesModal({ onClose }) {
       highlights: [
         "New animation speed controls",
         "Adjustable wheel size options",
-        "Improved sound effects system"
+        "Improved sound effects system",
       ],
       changes: [
         { type: "feature", text: "Added multiple spinning animation speeds" },
         { type: "feature", text: "Introduced responsive wheel sizing" },
         { type: "improvement", text: "Enhanced audio playback quality" },
-        { type: "fix", text: "Fixed mobile touch interaction issues" }
-      ]
+        { type: "fix", text: "Fixed mobile touch interaction issues" },
+      ],
     },
     {
       version: "1.2.0",
@@ -50,74 +53,99 @@ export default function UpdatesModal({ onClose }) {
       highlights: [
         "Faster wheel spinning",
         "Reduced memory usage",
-        "Smoother animations"
+        "Smoother animations",
       ],
       changes: [
         { type: "improvement", text: "Optimized rendering performance" },
         { type: "improvement", text: "Reduced initial load time" },
-        { type: "fix", text: "Fixed memory leak in animation system" }
-      ]
-    }
+        { type: "fix", text: "Fixed memory leak in animation system" },
+      ],
+    },
   ];
 
   const getChangeIcon = (type) => {
     switch (type) {
-      case "feature": return "🎯";
-      case "improvement": return "⚡";
-      case "fix": return "🔧";
-      default: return "✨";
+      case "feature":
+        return "🎯";
+      case "improvement":
+        return "⚡";
+      case "fix":
+        return "🔧";
+      default:
+        return "✨";
     }
   };
 
   return (
     <>
       <Helmet>
-        <title>Latest Updates - Random Name Picker Wheel Kids Changelog</title>
-        <meta name="description" content="Stay up to date with the latest features and improvements to our random name picker wheel. New themes, animations, sound effects, and more!" />
-        
+        <title>Latest Updates - Random Name Silly Wheel Changelog</title>
+        <meta
+          name="description"
+          content="Stay up to date with the latest features and improvements to our random name picker wheel. New themes, animations, sound effects, and more!"
+        />
+
         {/* Primary Meta Tags */}
-        <meta name="keywords" content="wheel updates, new features, random picker updates, wheel spinner changelog, name picker improvements, classroom tool updates" />
+        <meta
+          name="keywords"
+          content="wheel updates, new features, random picker updates, wheel spinner changelog, name picker improvements, classroom tool updates"
+        />
         <meta name="author" content="Wheel of Names" />
-        
+
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="article" />
-        <meta property="og:title" content="What's New - Random Name Picker Wheel Kids Updates" />
-        <meta property="og:description" content="Discover the latest features and improvements in our random name picker wheel. Enhanced user experience with new themes and animations." />
+        <meta
+          property="og:title"
+          content="What's New - Random Name Silly Wheel Updates"
+        />
+        <meta
+          property="og:description"
+          content="Discover the latest features and improvements in our random name picker wheel. Enhanced user experience with new themes and animations."
+        />
         <meta property="article:section" content="Updates" />
         <meta property="article:tag" content="Feature Updates" />
-        
+
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Random Name Picker Wheel - Latest Updates" />
-        <meta name="twitter:description" content="Check out what's new in our random name picker wheel. Regular updates for better user experience." />
-        
+        <meta
+          name="twitter:title"
+          content="Random Name Picker Wheel - Latest Updates"
+        />
+        <meta
+          name="twitter:description"
+          content="Check out what's new in our random name picker wheel. Regular updates for better user experience."
+        />
+
         {/* Schema.org markup for Google */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
-            "name": "Random Name Picker Wheel",
-            "applicationCategory": "WebApplication",
-            "operatingSystem": "Any",
-            "offers": {
+            name: "Random Name Picker Wheel",
+            applicationCategory: "WebApplication",
+            operatingSystem: "Any",
+            offers: {
               "@type": "Offer",
-              "price": "0"
+              price: "0",
             },
-            "releaseNotes": {
+            releaseNotes: {
               "@type": "CreativeWork",
-              "name": "Version History",
-              "text": updates.map(u => `Version ${u.version}: ${u.title}`).join(", ")
-            }
+              name: "Version History",
+              text: updates
+                .map((u) => `Version ${u.version}: ${u.title}`)
+                .join(", "),
+            },
           })}
         </script>
       </Helmet>
 
-      <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50"
+      <div
+        className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50"
         onClick={onClose}
       >
-        <div 
+        <div
           className="bg-white/10 backdrop-blur-md rounded-2xl p-6 max-w-4xl w-full mx-4 shadow-2xl max-h-[90vh] overflow-y-auto custom-scrollbar"
-          onClick={e => e.stopPropagation()}
+          onClick={(e) => e.stopPropagation()}
         >
           <h2 className="text-3xl font-bold text-white mb-2 flex items-center gap-3">
             <span className="text-4xl">🔄</span>
@@ -129,7 +157,10 @@ export default function UpdatesModal({ onClose }) {
 
           <div className="space-y-8">
             {updates.map((update) => (
-              <div key={update.version} className="bg-white/5 rounded-xl p-6 space-y-4">
+              <div
+                key={update.version}
+                className="bg-white/5 rounded-xl p-6 space-y-4"
+              >
                 <div className="flex items-start justify-between">
                   <div>
                     <div className="flex items-center gap-2 mb-1">
@@ -142,11 +173,15 @@ export default function UpdatesModal({ onClose }) {
                       Version {update.version} • {update.date}
                     </div>
                   </div>
-                  <span className={`px-3 py-1 rounded-full text-sm ${
-                    update.type === 'major' ? 'bg-purple-500/20 text-purple-200' :
-                    update.type === 'feature' ? 'bg-green-500/20 text-green-200' :
-                    'bg-blue-500/20 text-blue-200'
-                  }`}>
+                  <span
+                    className={`px-3 py-1 rounded-full text-sm ${
+                      update.type === "major"
+                        ? "bg-purple-500/20 text-purple-200"
+                        : update.type === "feature"
+                        ? "bg-green-500/20 text-green-200"
+                        : "bg-blue-500/20 text-blue-200"
+                    }`}
+                  >
                     {update.type}
                   </span>
                 </div>
@@ -161,8 +196,13 @@ export default function UpdatesModal({ onClose }) {
 
                 <ul className="space-y-2 mt-4">
                   {update.changes.map((change, index) => (
-                    <li key={index} className="flex items-start gap-2 text-white/80">
-                      <span className="text-lg">{getChangeIcon(change.type)}</span>
+                    <li
+                      key={index}
+                      className="flex items-start gap-2 text-white/80"
+                    >
+                      <span className="text-lg">
+                        {getChangeIcon(change.type)}
+                      </span>
                       <span>{change.text}</span>
                     </li>
                   ))}
@@ -184,4 +224,4 @@ export default function UpdatesModal({ onClose }) {
       </div>
     </>
   );
-} 
+}

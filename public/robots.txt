@@ -1,9 +1,9 @@
-# robots.txt for PickerWheelKids.com
+# robots.txt for sillywheel.com
 User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://pickerwheelkids.com/sitemap.xml
+Sitemap: https://sillywheel.com/sitemap.xml
 
 # Disallow shared wheel URLs as they are dynamic
 Disallow: /s/

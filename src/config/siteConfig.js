@@ -3,7 +3,7 @@ const siteConfig = __APP_CONFIG__;
 
 export default {
   ...siteConfig,
-  siteName: "Picker Wheel Kids",
+  siteName: "Silly Wheel",
   siteDescription:
     "A fun and interactive random name or anything you want picker wheel. Perfect for choosing random winners, making decisions, or selecting participants in a fun way.",
   siteKeywords: [

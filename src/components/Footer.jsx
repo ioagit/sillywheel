@@ -1,18 +1,18 @@
-import React from 'react';
-import { Helmet } from 'react-helmet';
-import siteConfig from '../config/siteConfig';
-import WheelSoundsModal from './WheelSoundsModal';
-import VictorySoundModal from './VictorySoundModal';
-import VolumeControlModal from './VolumeControlModal';
-import WheelSizeModal from './WheelSizeModal';
-import AnimationSpeedModal from './AnimationSpeedModal';
-import PresetListModal from './PresetListModal';
-import HowToUseModal from './HowToUseModal';
-import UpdatesModal from './UpdatesModal';
-import ComingSoonModal from './ComingSoonModal';
+import React from "react";
+import { Helmet } from "react-helmet";
+import siteConfig from "../config/siteConfig";
+import WheelSoundsModal from "./WheelSoundsModal";
+import VictorySoundModal from "./VictorySoundModal";
+import VolumeControlModal from "./VolumeControlModal";
+import WheelSizeModal from "./WheelSizeModal";
+import AnimationSpeedModal from "./AnimationSpeedModal";
+import PresetListModal from "./PresetListModal";
+import HowToUseModal from "./HowToUseModal";
+import UpdatesModal from "./UpdatesModal";
+import ComingSoonModal from "./ComingSoonModal";
 
-export default function Footer({ 
-  audioType, 
+export default function Footer({
+  audioType,
   onAudioTypeChange,
   selectedWinSound,
   onWinSoundChange,
@@ -21,11 +21,12 @@ export default function Footer({
   currentSpeed,
   onSpeedChange,
   currentPreset,
-  onPresetSelect
+  onPresetSelect,
 }) {
   const currentYear = new Date().getFullYear();
   const [showWheelSoundsModal, setShowWheelSoundsModal] = React.useState(false);
-  const [showVictorySoundModal, setShowVictorySoundModal] = React.useState(false);
+  const [showVictorySoundModal, setShowVictorySoundModal] =
+    React.useState(false);
   const [showVolumeControl, setShowVolumeControl] = React.useState(false);
   const [showWheelSize, setShowWheelSize] = React.useState(false);
   const [showAnimationSpeed, setShowAnimationSpeed] = React.useState(false);
@@ -41,8 +42,8 @@ export default function Footer({
       <Helmet>
         <title>{siteConfig.siteName} - Random Name Picker Wheel for Kids</title>
         <meta name="description" content={siteConfig.siteDescription} />
-        <meta name="keywords" content={siteConfig.siteKeywords.join(', ')} />
-        
+        <meta name="keywords" content={siteConfig.siteKeywords.join(", ")} />
+
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content={window.location.href} />
@@ -61,43 +62,49 @@ export default function Footer({
         <meta name="robots" content="index, follow" />
         <meta name="author" content={siteConfig.author} />
         <link rel="canonical" href={window.location.href} />
-        
+
         {/* Schema.org markup */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebApplication",
-            "name": siteConfig.siteName,
-            "description": siteConfig.siteDescription,
-            "url": window.location.href,
-            "applicationCategory": "Utility",
-            "operatingSystem": "Any",
-            "offers": {
+            name: siteConfig.siteName,
+            description: siteConfig.siteDescription,
+            url: window.location.href,
+            applicationCategory: "Utility",
+            operatingSystem: "Any",
+            offers: {
               "@type": "Offer",
-              "price": "0",
-              "priceCurrency": "USD"
-            }
+              price: "0",
+              priceCurrency: "USD",
+            },
           })}
         </script>
 
         {/* Add specific meta tags for sound control */}
-        <meta name="description" content="Customize your wheel experience with volume controls for spinning and victory sounds. Adjust the wheel size to perfectly fit your screen." />
-        <meta name="keywords" content="volume control, wheel size, customization, sound effects, accessibility, user preferences" />
-        
+        <meta
+          name="description"
+          content="Customize your wheel experience with volume controls for spinning and victory sounds. Adjust the wheel size to perfectly fit your screen."
+        />
+        <meta
+          name="keywords"
+          content="volume control, wheel size, customization, sound effects, accessibility, user preferences"
+        />
+
         {/* Schema.org markup for controls */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebApplication",
-            "name": "Wheel of Names Sound Controls",
-            "applicationCategory": "Customization",
-            "featureList": [
+            name: "Wheel of Names Sound Controls",
+            applicationCategory: "Customization",
+            featureList: [
               "Volume control for wheel sounds",
               "Volume control for victory sounds",
               "Adjustable wheel size",
               "Sound testing capability",
-              "Responsive design"
-            ]
+              "Responsive design",
+            ],
           })}
         </script>
       </Helmet>
@@ -110,19 +117,19 @@ export default function Footer({
                 <span className="text-xl mr-2">🎵</span>Sound Effects
               </h3>
               <div className="space-y-2">
-                <button 
+                <button
                   onClick={() => setShowWheelSoundsModal(true)}
                   className="footer-button"
                 >
                   <span className="text-lg mr-2">🔊</span>Wheel Sounds
                 </button>
-                <button 
+                <button
                   onClick={() => setShowVictorySoundModal(true)}
                   className="footer-button"
                 >
                   <span className="text-lg mr-2">🏆</span>Victory Sounds
                 </button>
-                <button 
+                <button
                   onClick={() => setShowVolumeControl(true)}
                   className="footer-button"
                 >
@@ -130,7 +137,7 @@ export default function Footer({
                 </button>
               </div>
             </div>
-            
+
             <div className="bg-white/5 backdrop-blur-md p-4 rounded-xl hover:bg-white/10 transition-colors">
               <h3 className="footer-heading">
                 <span className="text-xl mr-2">🎨</span>Customization
@@ -139,13 +146,13 @@ export default function Footer({
                 <button className="footer-button">
                   <span className="text-lg mr-2">🎯</span>Color Themes
                 </button>
-                <button 
+                <button
                   onClick={() => setShowWheelSize(true)}
                   className="footer-button"
                 >
                   <span className="text-lg mr-2">📏</span>Wheel Size
                 </button>
-                <button 
+                <button
                   onClick={() => setShowAnimationSpeed(true)}
                   className="footer-button"
                 >
@@ -153,25 +160,25 @@ export default function Footer({
                 </button>
               </div>
             </div>
-            
+
             <div className="bg-white/5 backdrop-blur-md p-4 rounded-xl hover:bg-white/10 transition-colors">
               <h3 className="footer-heading">
                 <span className="text-xl mr-2">📋</span>Presets
               </h3>
               <div className="space-y-2">
-                <button 
+                <button
                   onClick={() => setShowPresetList(true)}
                   className="footer-button"
                 >
                   <span className="text-lg mr-2">✨</span>Magic Lists
                 </button>
-                <button 
+                <button
                   onClick={() => setShowSaveCurrent(true)}
                   className="footer-button"
                 >
                   <span className="text-lg mr-2">💾</span>Save Current
                 </button>
-                <button 
+                <button
                   onClick={() => setShowExportList(true)}
                   className="footer-button"
                 >
@@ -179,25 +186,25 @@ export default function Footer({
                 </button>
               </div>
             </div>
-            
+
             <div className="bg-white/5 backdrop-blur-md p-4 rounded-xl hover:bg-white/10 transition-colors">
               <h3 className="footer-heading">
                 <span className="text-xl mr-2">ℹ️</span>About
               </h3>
               <div className="space-y-2">
-                <button 
+                <button
                   onClick={() => setShowHowToUse(true)}
                   className="footer-button"
                 >
                   <span className="text-lg mr-2">📖</span>How to Use
                 </button>
-                <button 
+                <button
                   onClick={() => setShowUpdates(true)}
                   className="footer-button"
                 >
                   <span className="text-lg mr-2">🔄</span>Updates
                 </button>
-                <button 
+                <button
                   onClick={() => setShowContact(true)}
                   className="footer-button"
                 >
@@ -206,10 +213,10 @@ export default function Footer({
               </div>
             </div>
           </div>
-          
+
           <div className="mt-8 pt-8 border-t border-white/10 text-center">
             <p className="text-white/60 hover:text-white/80 transition-colors">
-              © {currentYear} PickerWheelKids.com. All rights reserved.
+              © {currentYear} sillywheel.com. All rights reserved.
             </p>
           </div>
         </div>
@@ -232,9 +239,7 @@ export default function Footer({
       )}
 
       {showVolumeControl && (
-        <VolumeControlModal
-          onClose={() => setShowVolumeControl(false)}
-        />
+        <VolumeControlModal onClose={() => setShowVolumeControl(false)} />
       )}
 
       {showWheelSize && (
@@ -261,17 +266,9 @@ export default function Footer({
         />
       )}
 
-      {showHowToUse && (
-        <HowToUseModal
-          onClose={() => setShowHowToUse(false)}
-        />
-      )}
+      {showHowToUse && <HowToUseModal onClose={() => setShowHowToUse(false)} />}
 
-      {showUpdates && (
-        <UpdatesModal
-          onClose={() => setShowUpdates(false)}
-        />
-      )}
+      {showUpdates && <UpdatesModal onClose={() => setShowUpdates(false)} />}
 
       {showSaveCurrent && (
         <ComingSoonModal
@@ -288,11 +285,8 @@ export default function Footer({
       )}
 
       {showContact && (
-        <ComingSoonModal
-          type="contact"
-          onClose={() => setShowContact(false)}
-        />
+        <ComingSoonModal type="contact" onClose={() => setShowContact(false)} />
       )}
     </>
   );
-} 
+}

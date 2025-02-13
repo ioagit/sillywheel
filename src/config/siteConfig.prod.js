@@ -1,7 +1,7 @@
 const siteConfig = {
-  siteName: "Picker Wheel Kids",
+  siteName: "Silly Wheel",
   language: "en", // Spanish version
   // ... rest of the configuration
 };
 
-export default siteConfig; 
+export default siteConfig;

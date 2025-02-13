@@ -21,7 +21,7 @@ const generateShortId = () => {
 const ShareListModal = ({ show, onHide, listData }) => {
   const [name, setName] = useState("My PickerWheel List");
   const [description, setDescription] = useState(
-    "A fun list created with PickerWheel Kids!"
+    "A silly and fun list created with SillyWheel.com!"
   );
   const [shareLink, setShareLink] = useState("");
   const [error, setError] = useState("");
@@ -52,7 +52,7 @@ const ShareListModal = ({ show, onHide, listData }) => {
         throw new Error("Failed to save list");
       }
 
-      const shareUrl = `http://pickerwheelkids.com/s/${payload.id}`;
+      const shareUrl = `http://sillywheel.com/s/${payload.id}`;
       setShareLink(shareUrl);
     } catch (err) {
       setError("Failed to create shareable link. Please try again.");
@@ -65,7 +65,7 @@ const ShareListModal = ({ show, onHide, listData }) => {
     setShareLink("");
     setError("");
     setName("My PickerWheel List");
-    setDescription("A fun list created with PickerWheel Kids!");
+    setDescription("A silly and fun list created with SillyWheel.com!");
     onHide();
   };
 
@@ -80,7 +80,7 @@ const ShareListModal = ({ show, onHide, listData }) => {
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
       <div className="bg-gradient-to-br from-white to-purple-50 rounded-2xl w-full max-w-md shadow-2xl transform transition-all">
         <div className="relative">
-          {/* Fun decorative elements */}
+          {/* silly and fun decorative elements */}
           <div className="absolute -top-4 -left-4 w-8 h-8 bg-pink-400 rounded-full animate-bounce-slow opacity-75"></div>
           <div className="absolute -top-4 -right-4 w-8 h-8 bg-purple-400 rounded-full animate-bounce-slow opacity-75 delay-150"></div>
 
@@ -88,7 +88,7 @@ const ShareListModal = ({ show, onHide, listData }) => {
           <div className="flex flex-col items-center pt-8 px-6 pb-4">
             <h2 className="text-2xl font-bold text-center mb-2">
               <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                Time to Share the Fun! 🎉
+                Time to Share the silly and fun! 🎉
               </span>
             </h2>
             <p className="text-gray-600 text-center text-sm mb-4">

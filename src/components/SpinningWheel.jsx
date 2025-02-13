@@ -67,7 +67,7 @@ export default function SpinningWheel() {
             items: data.data,
           });
 
-          document.title = `${data.name} - PickerWheel Kids`;
+          document.title = `${data.name} - SillyWheel.com`;
         } catch (error) {
           console.error("Error loading shared list:", error);
           // Optionally show error to user
@@ -301,7 +301,7 @@ export default function SpinningWheel() {
               className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 
               bg-clip-text text-transparent animate-gradient"
             >
-              PickerWheel Kids - Make Learning Fun & Fair! 🎡
+              SillyWheel.com - Make Learning silly and fun & Fair! 🎡
             </h1>
             <p className="text-white/70 mt-2">
               Create exciting moments in your classroom or party with our
@@ -429,7 +429,7 @@ export default function SpinningWheel() {
                       : "✨ Let's Spin & Smile!"}
                   </span>
                 </button>
-                {/* Fun toggle for Winner Gobbler 🍽 */}
+                {/* silly and fun toggle for Winner Gobbler 🍽 */}
                 <div className="flex items-center space-x-4 mt-4">
                   <label className="flex items-center space-x-2">
                     <input
@@ -470,7 +470,7 @@ export default function SpinningWheel() {
             <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 md:p-6">
               <div className="flex flex-wrap gap-2 justify-center md:justify-between items-center mb-4">
                 <h3 className="text-xl font-bold text-white w-full md:w-auto text-center md:text-left">
-                  ✨ The Fun Wheel!
+                  ✨ The silly and fun Wheel!
                 </h3>
                 <div className="flex flex-wrap gap-2 justify-center">
                   <button
@@ -630,11 +630,11 @@ export default function SpinningWheel() {
       <div className="max-w-xl mx-auto">
         <div className="mt-8 bg-white/10 backdrop-blur-md rounded-2xl p-6 shadow-2xl">
           <h3 className="text-xl font-bold text-white mb-4">
-            What is PickerWheel Kids?
+            What is SillyWheel.com?
           </h3>
           <p className="text-white/80 mb-2">
-            PickerWheel Kids is a fun and interactive tool designed to add
-            excitement to every classroom or party.
+            SillyWheel.com is a silly and fun and interactive tool designed to
+            add excitement to every classroom or party.
           </p>
           <p className="text-white/80 mb-2">
             How to Play: Simply add participants, spin the wheel, and let
