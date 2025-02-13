@@ -84,7 +84,7 @@ export default function SpinningWheel() {
   const [newName, setNewName] = React.useState("");
   const wheelRef = React.useRef(null);
   const [audioType, setAudioType] = React.useState(siteConfig.audio.type);
-  const [selectedWinSound, setSelectedWinSound] = React.useState(0);
+  const [selectedWinSound, setSelectedWinSound] = React.useState(null);
   const winSounds = winSoundPlayer.getSoundsList();
   const [showPresetList, setShowPresetList] = React.useState(false);
   const [currentPreset, setCurrentPreset] = React.useState(null);
@@ -659,14 +659,14 @@ export default function SpinningWheel() {
               </h3>
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
                 <button
-                  onClick={() => setSelectedWinSound(0)}
+                  onClick={() => setSelectedWinSound(null)}
                   className={`px-4 py-3 rounded-lg transition-all duration-200 flex flex-col items-center gap-2
                     ${
                       currentTheme.customStyles?.button ||
                       "bg-white/10 hover:bg-white/20"
                     } 
                     ${
-                      selectedWinSound === 0
+                      selectedWinSound === null
                         ? `ring-2 ${
                             currentTheme.customStyles?.border ||
                             "ring-purple-500"
