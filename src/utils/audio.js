@@ -79,6 +79,8 @@ class SpinningAudio {
     this.volume = 0.5;
     this.tickInterval = null;
     this.tickRate = 10;
+    this.duration = 4800; // Slightly shorter than wheel duration
+    this.fadeOutStart = 4000; // Start fading earlier
   }
 
   init() {
@@ -103,13 +105,38 @@ class SpinningAudio {
     if (this.type === "none") return;
 
     this.isPlaying = true;
-    this.tickRate = 10; // Start fast
+    this.tickRate = 20; // Start a bit slower
+    const startTime = Date.now();
 
     const playTick = () => {
       if (!this.isPlaying) return;
+
+      const elapsed = Date.now() - startTime;
+      const progress = Math.min(elapsed / this.duration, 1);
+      
+      // Stop earlier to avoid trailing beeps
+      if (elapsed >= this.duration - 300) {
+        this.stop();
+        return;
+      }
+
+      // Smoother fade out
+      if (elapsed > this.fadeOutStart) {
+        const fadeProgress = (elapsed - this.fadeOutStart) / (this.duration - this.fadeOutStart);
+        // Exponential fade out for smoother transition
+        this.gainNode.gain.value = this.volume * Math.pow(1 - fadeProgress, 2);
+      }
+
+      // Adjusted slowdown curve
+      this.tickRate = 20 + (380 * Math.pow(progress, 1.5)); // More gradual slowdown
+
       this.play();
-      this.tickInterval = setTimeout(playTick, this.tickRate);
-      this.tickRate = Math.min(200, this.tickRate * 1.1); // Gradually slow down
+
+      if (progress < 0.95) { // Stop scheduling new sounds a bit earlier
+        this.tickInterval = setTimeout(playTick, this.tickRate);
+      } else {
+        this.stop();
+      }
     };
 
     playTick();
@@ -125,6 +152,10 @@ class SpinningAudio {
       this.oscillator.stop();
       this.oscillator.disconnect();
       this.oscillator = null;
+    }
+    // Reset volume to original value
+    if (this.gainNode) {
+      this.gainNode.gain.value = this.volume;
     }
   }
 
