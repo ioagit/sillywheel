@@ -179,4 +179,28 @@ export const themes = [
     accent: "#9333ea",
     isDark: false,
   },
+  {
+    id: "hacker",
+    name: "Hacker Mode",
+    background: "from-black via-green-950 to-black",
+    wheelShadow: "shadow-[0_0_40px_rgba(34,197,94,0.2)]",
+    wheelShadowHover: "shadow-[0_0_60px_rgba(34,197,94,0.3)]",
+    panelShadow: "shadow-[0_0_40px_rgba(34,197,94,0.15)]",
+    panelShadowHover: "shadow-[0_0_60px_rgba(34,197,94,0.25)]",
+    accent: "#22c55e",
+    isDark: true,
+    customStyles: {
+      text: "text-green-500",
+      border: "border-green-500/20",
+      input:
+        "bg-black/50 border-green-500/20 text-green-500 placeholder-green-500/50",
+      button: "bg-green-500/10 hover:bg-green-500/20 text-green-500",
+      panel: "bg-black/80 border-green-500/20",
+      highlight: "text-green-400",
+      muted: "text-green-500/70",
+      hover: "hover:text-green-400 hover:border-green-400/30",
+      gradient: "from-green-500 to-emerald-400",
+      selection: "bg-green-500/20",
+    },
+  },
 ];
