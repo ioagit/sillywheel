@@ -14,6 +14,7 @@ export default {
         "ping-slow": "ping 3s cubic-bezier(0, 0, 0.2, 1) infinite",
         "spin-slow": "spin 8s linear infinite",
         gradient: "gradient 3s ease infinite",
+        "gradient-x": "gradient-x 3s ease infinite",
       },
       keyframes: {
         bounceSoft: {
@@ -40,6 +41,16 @@ export default {
           "50%": { transform: "translateY(-10px)" },
         },
         gradient: {
+          "0%, 100%": {
+            "background-size": "200% 200%",
+            "background-position": "left center",
+          },
+          "50%": {
+            "background-size": "200% 200%",
+            "background-position": "right center",
+          },
+        },
+        "gradient-x": {
           "0%, 100%": {
             "background-size": "200% 200%",
             "background-position": "left center",

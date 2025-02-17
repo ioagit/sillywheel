@@ -62,146 +62,59 @@ const Navbar = ({ onThemeClick, currentTheme }) => {
 
   return (
     <>
-      <nav
-        className={`${
-          currentTheme.customStyles?.navbar || "bg-white/10"
-        } backdrop-blur-md border-b ${
-          currentTheme.customStyles?.border || "border-white/10"
-        }`}
-      >
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/20 backdrop-blur-md border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center">
-              <Link
-                to="/"
-                className={`text-xl font-bold ${
-                  currentTheme.customStyles?.text || "text-white"
-                } ${currentTheme.customStyles?.glow || ""} ${
-                  currentTheme.id === "hacker" ? "font-mono" : ""
-                }`}
-              >
-                SillyWheel.com
-              </Link>
-            </div>
-
-            {/* Desktop menu */}
-            <div className="hidden md:flex items-center space-x-4">
-              <button
-                onClick={() => setShowQR(true)}
-                className={`px-4 py-2 rounded-lg ${
-                  currentTheme.customStyles?.button ||
-                  "bg-white/10 hover:bg-white/20 text-white"
-                }`}
-              >
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 4v1m6 11h2m-6 0h-2m0 0H8m4 0h4m-4-8a3 3 0 100 6 3 3 0 000-6z"
-                  />
-                </svg>
-                <span className="hidden sm:inline">Scan QR</span>
-              </button>
-              <button
-                onClick={() => setShowShare(true)}
-                className={`px-4 py-2 rounded-lg flex items-center gap-2 
-                  ${currentTheme.id === 'hacker' 
-                    ? `${currentTheme.customStyles?.button} border-2` 
-                    : 'bg-gradient-to-r from-purple-400 to-pink-400 hover:from-purple-500 hover:to-pink-500 text-white'
-                  }
-                  shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105`}
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  className={`w-5 h-5 ${
-                    currentTheme.id === 'hacker' 
-                      ? currentTheme.customStyles?.text 
-                      : 'text-white'
-                  }`}
-                  fill="none"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"
-                  />
-                </svg>
-                <span className={`font-medium ${
-                  currentTheme.id === 'hacker' 
-                    ? `${currentTheme.customStyles?.text} font-mono` 
-                    : 'text-white'
-                }`}>
-                  Share the Magic! ✨
-                </span>
-              </button>
-              <button
-                onClick={() => setShowHowTo(true)}
-                className={`px-4 py-2 rounded-lg ${
-                  currentTheme.customStyles?.button ||
-                  "bg-white/10 hover:bg-white/20 text-white"
-                }`}
-              >
-                How to Use
-              </button>
-              <button
-                onClick={onThemeClick}
-                className={`px-4 py-2 rounded-lg ${
-                  currentTheme.customStyles?.button ||
-                  "bg-white/10 hover:bg-white/20 text-white"
-                }`}
-              >
-                Themes
-              </button>
-              <a
-                href="https://github.com/yourusername/sillywheel"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`px-4 py-2 rounded-lg ${
-                  currentTheme.customStyles?.button ||
-                  "bg-white/10 hover:bg-white/20 text-white"
-                }`}
-              >
-                GitHub
+          <div className="flex justify-between h-16">
+            <div className="flex-1 flex items-center justify-between">
+              <a href="/" className="flex items-center group">
+                <div className="relative">
+                  <span
+                    className="text-2xl md:text-3xl font-extrabold bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 
+                    text-transparent bg-clip-text animate-gradient-x relative z-10 group-hover:opacity-0 transition-opacity duration-300"
+                  >
+                    SillyWheel.com
+                  </span>
+                  <span
+                    className="absolute inset-0 text-2xl md:text-3xl font-extrabold text-transparent bg-clip-text 
+                    bg-gradient-to-r from-blue-400 via-green-500 to-yellow-500 animate-gradient-x opacity-0 
+                    group-hover:opacity-100 transition-opacity duration-300"
+                  >
+                    SillyWheel.com
+                  </span>
+                  <span
+                    className="absolute -inset-x-2 -inset-y-1 bg-white/10 rounded-lg blur-lg group-hover:bg-white/20 
+                    transition-all duration-300 group-hover:scale-110"
+                  ></span>
+                </div>
+                <div className="ml-2 text-lg text-white/60">✨</div>
               </a>
-            </div>
-
-            {/* Mobile menu button */}
-            <div className="md:hidden">
-              <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-white p-2"
-              >
-                <svg
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
+              <div className="flex items-center space-x-4">
+                <button
+                  onClick={() => setShowShare(true)}
+                  className="hidden md:flex items-center gap-2 px-4 py-2 
+                    bg-gradient-to-r from-purple-500/20 to-pink-500/20 
+                    hover:from-purple-500/30 hover:to-pink-500/30
+                    text-white rounded-lg transition-all duration-300
+                    border border-white/10 hover:border-white/20
+                    transform hover:scale-105 group"
                 >
-                  {isMenuOpen ? (
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  ) : (
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M4 6h16M4 12h16M4 18h16"
-                    />
-                  )}
-                </svg>
-              </button>
+                  <span className="text-lg group-hover:scale-110 transition-transform">
+                    ✨
+                  </span>
+                  <span className="text-sm font-medium">Share the Magic</span>
+                </button>
+                <button
+                  onClick={onThemeClick}
+                  className="p-2 rounded-lg bg-white/5 hover:bg-white/10 
+                    transition-colors relative group overflow-hidden"
+                >
+                  <span className="relative z-10 text-white">🎨</span>
+                  <div
+                    className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 
+                    opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  ></div>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -253,33 +166,38 @@ const Navbar = ({ onThemeClick, currentTheme }) => {
           onClick={() => setShowHowTo(false)}
         >
           <div
-            className={`${currentTheme.customStyles?.modal || 'bg-slate-900/90'} 
+            className={`${
+              currentTheme.customStyles?.modal || "bg-slate-900/90"
+            } 
               rounded-2xl p-8 max-w-2xl w-full mx-4 
-              ${currentTheme.customStyles?.border || 'border border-white/10'} 
+              ${currentTheme.customStyles?.border || "border border-white/10"} 
               shadow-2xl`}
             onClick={(e) => e.stopPropagation()}
           >
-            <h2 className={`text-2xl font-bold mb-4 
-              ${currentTheme.customStyles?.text || 'text-white'}
-              ${currentTheme.id === 'hacker' ? 'font-mono' : ''}`}
+            <h2
+              className={`text-2xl font-bold mb-4 
+              ${currentTheme.customStyles?.text || "text-white"}
+              ${currentTheme.id === "hacker" ? "font-mono" : ""}`}
             >
               How to Use SillyWheel
             </h2>
-            <div className={`space-y-4 ${
-              currentTheme.customStyles?.muted || 'text-white/70'
-            }`}>
+            <div
+              className={`space-y-4 ${
+                currentTheme.customStyles?.muted || "text-white/70"
+              }`}
+            >
               <p>
-                1. Add names to the wheel by typing them in the input field and pressing Enter or clicking Add.
+                1. Add names to the wheel by typing them in the input field and
+                pressing Enter or clicking Add.
               </p>
               <p>
-                2. Click the "Spin the Silly Wheel!" button to start the spin animation.
+                2. Click the "Spin the Silly Wheel!" button to start the spin
+                animation.
               </p>
               <p>
                 3. Wait for the wheel to stop to see who's the lucky winner!
               </p>
-              <p>
-                Additional Features:
-              </p>
+              <p>Additional Features:</p>
               <ul className="list-disc list-inside space-y-2 ml-4">
                 <li>Use "Winner Out" to automatically remove winners</li>
                 <li>Enable "Keep Score" to track multiple spins</li>
@@ -291,8 +209,11 @@ const Navbar = ({ onThemeClick, currentTheme }) => {
             <button
               onClick={() => setShowHowTo(false)}
               className={`mt-6 w-full py-2 px-4 rounded-lg 
-                ${currentTheme.customStyles?.button || 'bg-white/10 hover:bg-white/20'} 
-                ${currentTheme.customStyles?.text || 'text-white'} 
+                ${
+                  currentTheme.customStyles?.button ||
+                  "bg-white/10 hover:bg-white/20"
+                } 
+                ${currentTheme.customStyles?.text || "text-white"} 
                 transition-colors duration-200`}
             >
               Got it!
