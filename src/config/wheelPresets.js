@@ -12,9 +12,10 @@ const wheelPresets = {
       "🌈 Rainbow Hunt",
       "🦩 Bird Party",
     ],
-    title: "Professional Excuse Generator",
+    title:
+      "The Silly Picker Wheel of Professional Excuses | Creative Late Excuses Generator",
     content:
-      "Need a creative way to explain why you're late? We've got you covered with these totally believable excuses!",
+      "Need a creative way to explain why you're late? Our Silly Picker Wheel of Excuses generates hilarious and totally unbelievable excuses! Perfect for lightening the mood and adding humor to those awkward late arrival moments. Disclaimer: Use these excuses at your own risk - results may vary, and we can't guarantee your boss will believe the 'time vortex' excuse!",
   },
   "random-chaos": {
     name: "Chaos Picker",
@@ -29,9 +30,9 @@ const wheelPresets = {
       "🤹 Juggle This",
       "🎪 Act Silly",
     ],
-    title: "Random Chaos Generator",
+    title: "The Silly Picker Wheel of Random Chaos | Fun Party Game Generator",
     content:
-      "Spice up your day with these totally reasonable and not-at-all embarrassing tasks!",
+      "Transform any gathering into an unforgettable experience with our Silly Picker Wheel of Random Chaos! Perfect for parties, team building, or just adding spontaneous fun to your day. Each spin brings a new challenge that's guaranteed to create laughter and memorable moments. Great for ice-breakers, party games, and turning boring meetings into adventures!",
   },
   "food-crimes": {
     name: "Food Crimes",
@@ -46,9 +47,10 @@ const wheelPresets = {
       "🥪 Banana Sand",
       "🥛 Spicy Milk",
     ],
-    title: "Food Crime Generator",
+    title:
+      "The Silly Picker Wheel of Food Crimes | Bizarre Food Combinations Generator",
     content:
-      "Warning: These food combinations may be illegal in some countries!",
+      "Dare to explore the world's most questionable food combinations with our Silly Picker Wheel of Food Crimes! Perfect for adventurous eaters, party challenges, or just shocking your friends. These combinations might be illegal in some countries (and probably should be in all of them). Warning: Some food combinations may cause raised eyebrows, shocked expressions, and uncontrollable laughter!",
   },
   "pet-thoughts": {
     name: "Pet Thoughts",
@@ -63,9 +65,10 @@ const wheelPresets = {
       "🐢 Run Race",
       "🦎 Learn Math",
     ],
-    title: "Pet Mind Reader",
+    title:
+      "The Silly Picker Wheel of Pet Thoughts | Funny Pet Mind Reader Game",
     content:
-      "Ever wonder what your pets are really thinking? Probably these things!",
+      "Ever wondered what's going on in your pet's mind? Our Silly Picker Wheel of Pet Thoughts reveals the hilarious secret life of pets! Perfect for pet lovers, veterinary waiting rooms, or amusing animal-themed parties. These whimsical pet thoughts will have you looking at your furry friends in a whole new way. Warning: May cause excessive giggling and pet conspiracy theories!",
   },
   "bad-ideas": {
     name: "Bad Ideas",
@@ -80,9 +83,9 @@ const wheelPresets = {
       "🎰 All In",
       "🎭 Tell Truth",
     ],
-    title: "Bad Idea Generator",
+    title: "The Silly Picker Wheel of Bad Ideas | Humorous Decision Generator",
     content:
-      "Disclaimer: We are not responsible for any consequences of using these suggestions!",
+      "Welcome to the Silly Picker Wheel of Bad Ideas, where common sense comes to die! Perfect for comedy nights, party games, or when you need a reminder of what NOT to do. Each spin brings a hilariously terrible suggestion that's guaranteed to make you question life choices. Remember: These are meant to be jokes - please don't actually try these at home!",
   },
   "office-chaos": {
     name: "Office Chaos",
@@ -97,9 +100,9 @@ const wheelPresets = {
       "🖥️ Flip Screen",
       "📊 Comic Sans",
     ],
-    title: "Office Mayhem",
+    title: "The Silly Picker Wheel of Office Pranks | Workplace Fun Generator",
     content:
-      "Warning: Use these ideas at your own risk. Results may vary, promotions unlikely.",
+      "Bring some controlled chaos to your workplace with the Silly Picker Wheel of Office Pranks! Perfect for April Fools' Day, office parties, or brightening up the mundane workday. These harmless office shenanigans will add a dash of fun to your workplace while keeping things professional(ish). Note: Best used in offices with a good sense of humor - results may vary in more serious environments!",
   },
   "weird-sports": {
     name: "Weird Sports",
@@ -114,9 +117,10 @@ const wheelPresets = {
       "🧘 Speed Yoga",
       "🎪 Desk Rodeo",
     ],
-    title: "Alternative Olympics",
+    title:
+      "The Silly Picker Wheel of Weird Sports | Funny Sports Activities Generator",
     content:
-      "Who needs real sports when you can invent your own ridiculous competitions?",
+      "Dive into a world of hilarious and unconventional sports with our Silly Picker Wheel! Perfect for party games, indoor recess, or adding excitement to physical education. These wacky sports alternatives will get everyone moving and laughing. Great for team building, ice breakers, and creating unforgettable moments of fun exercise!",
   },
   "monday-mood": {
     name: "Monday Moods",
@@ -131,8 +135,10 @@ const wheelPresets = {
       "😶 No Talk",
       "🫠 Melting",
     ],
-    title: "Monday Mood Picker",
-    content: "Accurately describing your Monday morning state of mind!",
+    title:
+      "The Silly Picker Wheel of Monday Moods | Funny Start-of-Week Mood Generator",
+    content:
+      "Turn Monday blues into Monday muse with our Silly Picker Wheel of Moods! Perfect for office ice-breakers, classroom morning routines, or just adding humor to the start of your week. These relatable Monday states will have everyone nodding in agreement and laughing together. Great for social media posts, team meetings, or anyone needing a mood lift!",
   },
   "yes-no-fun": {
     name: "Yes or No Fun",
@@ -146,9 +152,10 @@ const wheelPresets = {
       "💫 Try one more time!",
     ],
 
-    title: "Decisions Made Fun with Yes or No",
+    title:
+      "The Silly Picker Wheel of Yes or No | Fun Decision Making Generator",
     content:
-      "Explore a playful way to choose between yes and no. Perfect for games and classroom activities, this list sparks fun debate and decision making!",
+      "Make decisions more fun with our Silly Picker Wheel of Yes or No answers! Perfect for classroom activities, party games, or any situation where you need a playful way to make choices. This entertaining decision-maker adds excitement to simple yes/no questions while encouraging participation and discussion. Great for teaching probability, decision-making skills, and adding an element of chance to any activity!",
   },
   "magic-numbers": {
     name: "Magic Numbers",
@@ -156,9 +163,10 @@ const wheelPresets = {
     emoji: "🔢",
     items: ["1️⃣ One", "2️⃣ Two", "3️⃣ Three", "4️⃣ Four", "5️⃣ Five", "6️⃣ Six"],
 
-    title: "Unlock the Mysteries of Magic Numbers",
+    title:
+      "The Silly Picker Wheel of Magic Numbers | Fun Math Learning Generator",
     content:
-      "Discover how numbers can be enchanting and educational. A magical journey perfect for playful learning and fun math games.",
+      "Transform number learning into magical fun with our Silly Picker Wheel of Magic Numbers! Perfect for elementary education, math games, and making numbers exciting for young learners. Each spin brings a new number adventure, helping children develop number recognition and counting skills while having fun. Ideal for teachers, parents, and anyone looking to make math more engaging!",
   },
   "animal-adventures": {
     name: "Cute Animals",
@@ -173,9 +181,10 @@ const wheelPresets = {
       "🦄 Magical Unicorn",
     ],
 
-    title: "Cute Animals Adventure",
+    title:
+      "The Silly Picker Wheel of Animal Adventures | Fun Animal Learning Generator",
     content:
-      "Explore the world of cute animals. Perfect for classroom activities and fun games.",
+      "Embark on wild adventures with our Silly Picker Wheel of Cute Animals! Perfect for early learning, story time, and animal-themed activities. Each spin introduces children to different animals in a fun and engaging way, sparking imagination and fostering love for wildlife. Great for educators, parents, and animal enthusiasts looking to make learning about animals more interactive and enjoyable!",
   },
   "yummy-foodies": {
     name: "Yummy Foods",
@@ -190,9 +199,10 @@ const wheelPresets = {
       "🥗 Healthy Salad",
     ],
 
-    title: "Yummy Foods Adventure",
+    title:
+      "The Silly Picker Wheel of Yummy Foods | Fun Food Discovery Generator",
     content:
-      "Explore the world of yummy foods. Perfect for classroom activities and fun games.",
+      "Explore delicious adventures with our Silly Picker Wheel of Yummy Foods! Perfect for meal planning, cooking classes, and food education. Each spin introduces exciting food choices that make eating fun and encourage trying new things. Great for picky eaters, family dinner decisions, and teaching about different food groups in an entertaining way!",
   },
   "action-adventures": {
     name: "Fun Activities",
@@ -207,9 +217,10 @@ const wheelPresets = {
       "🏃 Outdoor Play",
     ],
 
-    title: "Fun Activities Adventure",
+    title:
+      "The Silly Picker Wheel of Fun Activities | Interactive Entertainment Generator",
     content:
-      "Explore the world of fun activities. Perfect for classroom activities and fun games.",
+      "Discover exciting new ways to have fun with our Silly Picker Wheel of Activities! Perfect for family game nights, classroom breaks, or any time you need inspiration for entertainment. Each spin suggests an engaging activity that brings people together and creates memorable moments. Ideal for parents, teachers, and anyone looking to add variety to their daily routine!",
   },
   "custom-fun": {
     name: "My Fun List",
@@ -264,9 +275,9 @@ const wheelPresets = {
       "White Wolves",
     ],
 
-    title: "Classroom Teams Adventure",
+    title: "The Silly Picker Wheel of Team Names | Classroom Team Generator",
     content:
-      "Explore the world of classroom teams. Perfect for classroom activities and fun games.",
+      "Create exciting and memorable team names for your classroom with our Silly Picker Wheel! Perfect for teachers, group activities, and educational games. These fun team names help build team spirit, encourage collaboration, and make learning more engaging. Great for all grade levels, school projects, and educational competitions!",
   },
   "classroom-helpers": {
     name: "Classroom Helpers",
