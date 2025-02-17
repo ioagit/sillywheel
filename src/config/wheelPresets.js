@@ -234,10 +234,10 @@ const wheelPresets = {
       "⭐ Shining Star",
       "🎯 Champion",
     ],
-
-    title: "Your Custom Fun Adventure",
+    title:
+      "The Silly Picker Wheel of Custom Activities | Personal Fun List Generator",
     content:
-      "Craft your very own list of fun activities tailored to your imagination. Get inspired and share your creative ideas with friends!",
+      "Create your own magical collection of activities with our Silly Picker Wheel Custom List maker! Perfect for personalizing your experience, creating themed activities, or designing your own unique challenges. This customizable wheel lets you build the perfect list for any occasion. Great for teachers creating lesson plans, party planners organizing events, or anyone wanting to add their personal touch to the fun!",
   },
   "silly-giggles": {
     name: "Silly Giggles",
@@ -255,10 +255,9 @@ const wheelPresets = {
       "🌬️ Silent Giggle",
       "🎆 Sparkle Surprise",
     ],
-
-    title: "Silly Giggles Adventure",
+    title: "The Silly Picker Wheel of Giggles | Funny Sound Effects Generator",
     content:
-      "Explore the world of silly giggles. Perfect for classroom activities and fun games.",
+      "Get ready for endless laughter with our Silly Picker Wheel of Giggles! Perfect for kids' parties, classroom fun breaks, or anywhere you need some comic relief. Each spin delivers a hilarious sound effect that will have everyone laughing. Great for ice-breakers, party games, and creating memorable silly moments. Warning: May cause uncontrollable fits of giggles!",
   },
   "fun-teams": {
     name: "Classroom Teams",
@@ -293,6 +292,10 @@ const wheelPresets = {
       "Light Monitor",
       "Plant Waterer",
     ],
+    title:
+      "The Silly Picker Wheel of Classroom Helpers | Student Role Generator",
+    content:
+      "Make classroom management fun with our Silly Picker Wheel of Classroom Helpers! Perfect for fairly assigning classroom responsibilities and creating an organized learning environment. Each spin gives students exciting opportunities to help and learn leadership skills. Ideal for teachers looking to maintain classroom structure while keeping students engaged and excited about helping!",
   },
   "family-fun": {
     name: "Family Fun Chores",
@@ -308,10 +311,10 @@ const wheelPresets = {
       "Pet Walker",
       "Plant Watering",
     ],
-
-    title: "Family Fun Chores Adventure",
+    title:
+      "The Silly Picker Wheel of Family Chores | Fun Household Task Generator",
     content:
-      "Explore the world of family fun chores. Perfect for classroom activities and fun games.",
+      "Transform everyday chores into exciting family activities with our Silly Picker Wheel! Perfect for parents looking to make housework more engaging and teaching responsibility in a fun way. Each spin turns mundane tasks into mini-adventures, making cleaning and organizing an enjoyable family experience. Great for establishing routines, teaching life skills, and bringing the family together!",
   },
   "school-games": {
     name: "School Games",
@@ -327,10 +330,10 @@ const wheelPresets = {
       "Trivia Time",
       "Twenty Questions",
     ],
-
-    title: "School Games Adventure",
+    title:
+      "The Silly Picker Wheel of School Games | Educational Fun Activities Generator",
     content:
-      "Explore the world of school games. Perfect for classroom activities and fun games.",
+      "Bring excitement to learning with our Silly Picker Wheel of School Games! Perfect for teachers, after-school programs, and educational events. Each spin suggests an engaging activity that combines fun with learning objectives. Ideal for brain breaks, reward time, or making any lesson more interactive and memorable. Great for all grade levels and subjects!",
   },
   "play-time-sports": {
     name: "Play Time Sports",
@@ -346,10 +349,10 @@ const wheelPresets = {
       "Running",
       "Cycling",
     ],
-
-    title: "Play Time Sports Adventure",
+    title:
+      "The Silly Picker Wheel of Sports Activities | Physical Fun Generator",
     content:
-      "Explore the world of play time sports. Perfect for classroom activities and fun games.",
+      "Get active and have fun with our Silly Picker Wheel of Sports Activities! Perfect for PE classes, recess, or family outdoor time. Each spin suggests an exciting sport that promotes movement, teamwork, and healthy competition. Great for physical education teachers, sports coaches, and parents looking to encourage active play and develop athletic skills!",
   },
   "cartoon-movies": {
     name: "Cartoon Movies",
@@ -365,10 +368,10 @@ const wheelPresets = {
       "Nature Wonders",
       "Animated Dreams",
     ],
-
-    title: "Cartoon Movies Adventure",
+    title:
+      "The Silly Picker Wheel of Cartoon Movies | Family Entertainment Generator",
     content:
-      "Explore the world of cartoon movies. Perfect for classroom activities and fun games.",
+      "Discover delightful animated adventures with our Silly Picker Wheel of Cartoon Movies! Perfect for family movie nights, classroom rewards, or kids' parties. Each spin suggests an entertaining cartoon that brings joy and imagination to viewers of all ages. Great for parents, teachers, and anyone looking to find the perfect animated feature for their next viewing!",
   },
   "classroom-jobs": {
     name: "Classroom Jobs",
