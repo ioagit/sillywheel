@@ -347,8 +347,8 @@ export default function SpinningWheel() {
                     : "font-sans"
                 }`}
               >
-                SillyWheel.com - Spin the Silly Wheel for laughs, chaos, and
-                totally fair mayhem!
+                Spin the Silly Picker Wheel for Names, Food Crimes, Excuses,
+                Chaos, Bad Ideas and more!
               </h1>
               <p
                 className={`text-lg 
