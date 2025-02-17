@@ -347,16 +347,16 @@ export default function SpinningWheel() {
                     : "font-sans"
                 }`}
               >
-                Spin the Silly Picker Wheel for Names, Food Crimes, Excuses,
-                Chaos, Bad Ideas and more!
+                {preset?.title ||
+                  "Spin the Silly Picker Wheel for Names, Food Crimes, Excuses, Chaos, Bad Ideas and more!"}
               </h1>
               <p
                 className={`text-lg 
                 ${currentTheme.customStyles?.muted || "text-white/70"} 
                 ${currentTheme.id === "hacker" ? "font-mono" : "font-sans"}`}
               >
-                Add names, spin the wheel, and let randomness decide! Perfect
-                for picking winners, making decisions, or just having fun.
+                {preset?.content ||
+                  "Add names, spin the wheel, and let randomness decide! Perfect for picking winners, making decisions, or just having fun."}
               </p>
             </div>
           </div>
