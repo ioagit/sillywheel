@@ -614,7 +614,7 @@ export default function SpinningWheel() {
               </div>
               <svg
                 className={`w-6 h-6 text-white/70 transform transition-transform duration-300
-                  ${showSettings ? 'rotate-180' : ''}`}
+                  ${showSettings ? "rotate-180" : ""}`}
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -627,12 +627,22 @@ export default function SpinningWheel() {
                 />
               </svg>
             </button>
-            
-            <div className={`bg-white/10 backdrop-blur-md rounded-b-2xl shadow-2xl overflow-hidden transition-all duration-300
-              ${showSettings ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'}`}>
+
+            <div
+              className={`bg-white/10 backdrop-blur-md rounded-b-2xl shadow-2xl overflow-hidden transition-all duration-300
+              ${
+                showSettings
+                  ? "max-h-[1000px] opacity-100"
+                  : "max-h-0 opacity-0"
+              }`}
+            >
               <div className="p-6">
                 <div className="mb-6">
-                  <h3 className={`text-xl font-bold mb-4 text-center ${currentTheme.customStyles?.text || "text-white"}`}>
+                  <h3
+                    className={`text-xl font-bold mb-4 text-center ${
+                      currentTheme.customStyles?.text || "text-white"
+                    }`}
+                  >
                     🎵 Wheel Sound Effects
                   </h3>
                   <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2">
@@ -656,7 +666,9 @@ export default function SpinningWheel() {
                               : "hover:scale-[1.02]"
                           }`}
                       >
-                        <span className="text-2xl">{type.name.split(" ")[0]}</span>
+                        <span className="text-2xl">
+                          {type.name.split(" ")[0]}
+                        </span>
                         <span
                           className={`text-sm font-medium ${
                             currentTheme.customStyles?.text || "text-white"
@@ -678,7 +690,11 @@ export default function SpinningWheel() {
                 </div>
 
                 <div className="mt-8">
-                  <h3 className={`text-xl font-bold mb-4 text-center ${currentTheme.customStyles?.text || "text-white"}`}>
+                  <h3
+                    className={`text-xl font-bold mb-4 text-center ${
+                      currentTheme.customStyles?.text || "text-white"
+                    }`}
+                  >
                     🏆 Victory Sound Effects
                   </h3>
                   <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">

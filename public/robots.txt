@@ -9,4 +9,4 @@ Sitemap: https://sillywheel.com/sitemap.xml
 Disallow: /s/
 
 # Rate limiting
-Crawl-delay: 1 
+Crawl-delay: 1
